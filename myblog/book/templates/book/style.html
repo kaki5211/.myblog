@@ -1,0 +1,264 @@
+
+<style>
+    <!-- ヘッダー固定 & 追従 -->
+    #header_menu{
+      display: block; 
+      position: fixed; /*ポジションを固定する*/
+      top: 0px; /*一番上に設置*/
+      left: 0px;
+      z-index: 9999;  /*どの要素よりも上にくるように*/
+      background-color: rgba(110,169,36,0.78); /*メニューバー背景色*/
+      width: 100%; /*横幅を100%に*/
+      padding: 0 auto;
+      }
+      #header_menu a {
+      float: left; /*メニューを横並びにする*/
+      font-size: 16px;
+      color: #FFF;
+      padding: 10px;
+      }
+      #header_menu a:after { /*floatでデザインが崩れないように*/
+      display:block;
+      clear: both;
+      content:"";
+      }
+  
+  
+      #my-letter-spacing-title {
+        letter-spacing: 2px!important;
+     }
+  
+     .my-font-weight-title {
+        font-weight: 600!important;
+    }
+  
+    .text-white {
+      color: #FFFFFF!important;
+    }
+
+    .text-h6_5 {
+      font-size: 1rem!important;
+    }
+  
+    .my-w-100 {
+      width: 100%;
+    }
+
+  </style>
+  
+  
+  
+  <style>
+  
+    .custom-caption {
+      text-align: center;
+      padding: 12px;
+      color: white;
+      background-color: rgba(0, 0, 0, .3);
+  }
+  
+  .my-bg-color {
+    background-color: #f5f8f5!important;
+    /* #FEFFFE; */
+  }
+  
+  .my-bg-color-glay {
+    background-color: #455045!important;
+    /* #FEFFFE; */
+  }
+  
+  
+  
+  
+  
+  .my-text-color-glay {
+    color: #9A9!important
+  }
+  
+  .my-text-color-title {
+    color: #2b302b!important
+  }
+  
+  .my-text-color {
+    color: #455045!important
+  }
+
+  .v-application a {
+    color: #455045
+  }
+
+  .my-text-color-light-glay {
+    color: #f5f8f5!important;
+  }
+  
+  
+  
+  
+  .window-height-max-10 {
+    max-height: 10vh;
+  }
+  
+  .height-max-10 {
+    max-height: 10%;
+  }
+  
+  .flex-wrap-nowrap {
+  flex-wrap: nowrap;
+  }
+  
+  .my-container-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  object-fit: cover;
+  overflow:hidden;
+  height: 100%;
+  }
+  
+  .my-container-max-width {
+  max-width:1300px;
+  margin:0 auto;
+  }
+  
+  .my-header-container * {
+  min-height: 10vh;
+  max-height: 100px;
+  }
+  
+  
+  .text-h1_5 {
+  font-size: 5rem;
+  {% comment %} font-weight: 300; {% endcomment %}
+  line-height: 5rem;
+  letter-spacing: -0.011975em;
+  }
+  
+  
+  .my-carousel-under {
+    justify-content: flex-end;
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+  }
+  
+  #my-letter-spacing-3 {
+    letter-spacing: 3px!important;
+  }
+  
+  #my-letter-spacing-5 {
+    letter-spacing: 5px!important;
+  }
+  
+  .flex-child-right {
+    {% comment %} width: 42px; {% endcomment %}
+    margin-right: 0!important;
+    margin-left: auto!important;
+  }
+  
+  .my-border-width {
+    border-width: 0.1em!important;
+  }
+
+  .my-contents-title {
+    padding: 0em 0.25em;/*上下 左右の余白*/
+    background: transparent;/*背景透明に*/
+    border-left: solid 5px #455045;/*左線*/
+  } 
+
+  .my-contents-sub-title {
+    padding: 0em 0.25em;/*上下 左右の余白*/
+    background: transparent;/*背景透明に*/
+    border-bottom: solid 2px #455045;/*左線*/
+  }
+
+
+  .my-border-color {
+    border-color: #455045!important;
+  }
+
+  .my-border {
+    border: thin solid rgba(0,0,0,.12);
+  }
+
+  .my-border-solid-medium {
+    border: medium solid rgba(0,0,0,.12);
+  }
+
+
+  blockquote {
+    position: relative;
+    padding: 40px 10px 10px 15px;
+    box-sizing: border-box;
+    font-style: italic;
+    color: #455045;
+    background: #f5f8f5;
+    /* background: teal-light; */
+}
+
+blockquote:before{
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    content: "“";
+    font-family: sans-serif;
+    color: #455045;
+    font-size: 90px;
+    line-height: 1;
+}
+
+{% comment %} blockquote figcaption:after{
+  display: inline-block;
+  position: absolute;
+  bottom: -100;
+  right: 0;
+  content: "“";
+  font-family: sans-serif;
+  color: #455045;
+  font-size: 90px;
+  line-height: 1;
+} {% endcomment %}
+
+blockquote p {
+    padding: 0;
+    margin: 10px 0;
+    line-height: 1.7;
+}
+
+blockquote cite {
+    display: block;
+    text-align: right;
+    color: #888888;
+    font-size: 0.9em;
+}
+
+.blockquote-footer {
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+  font-size: 0.875em;
+  color: #6c757d;
+}
+.blockquote-footer::before {
+  content: "\2014\00A0";
+}
+
+
+  {% comment %} 
+  
+  .v-btn--icon.v-size--small {
+    height: 20px;
+    width: 20px;
+  }
+  
+  .v-btn--fab.v-size--default .v-icon, .v-btn--fab.v-size--small .v-icon, .v-btn--icon.v-size--default .v-icon, .v-btn--icon.v-size--small .v-icon {
+    font-size: 12px;
+  }
+  
+  
+   {% endcomment %}
+  
+  
+  
+  </style>
+  

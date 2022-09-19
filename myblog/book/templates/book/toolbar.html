@@ -1,0 +1,66 @@
+<div id="header_menu">
+    <v-toolbar
+    color="#f5f8f5"
+    flat
+    height="74px"
+    tile
+    elevation="3"
+    {% comment %} src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg" {% endcomment %}
+    >
+      <v-toolbar-title onclick="location.href='{% url "book:top" %}'" style="cursor:pointer" id="my-letter-spacing-title" class="my-font-weight-title text-h5 my-text-color-title">BOOK I.C.</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn icon fab xlarge dark class="my-text-color" href="https://twitter.com/BOOK_IC">
+        <v-icon size="32" >mdi-twitter</v-icon>
+      </v-btn>
+      <v-btn icon fab xlarge dark class="my-text-color me-5" href="https://www.instagram.com/BOOK_I.C/">
+        <v-icon size="32" >mdi-instagram</v-icon>
+      </v-btn>
+
+
+
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer">
+                <v-icon size="32">mdi-format-list-bulleted</v-icon>
+
+      </v-app-bar-nav-icon>
+
+    </v-toolbar>
+
+
+    
+  </div>
+
+  <v-navigation-drawer
+  v-model="drawer"
+  absolute
+  left
+  temporary
+>
+  <v-list
+    nav
+    dense
+  >
+    <v-list-item-group
+      v-model="group"
+      active-class="deep-purple--text text--accent-4"
+    >
+      <v-list-item>
+        <v-list-item-title>Foo</v-list-item-title>
+      </v-list-item>
+
+      <v-list-item>
+        <v-list-item-title>Bar</v-list-item-title>
+      </v-list-item>
+
+      <v-list-item>
+        <v-list-item-title>Fizz</v-list-item-title>
+      </v-list-item>
+
+      <v-list-item>
+        <v-list-item-title>Buzz</v-list-item-title>
+      </v-list-item>
+    </v-list-item-group>
+  </v-list>
+</v-navigation-drawer>
+  

@@ -1,0 +1,29 @@
+
+          <v-container class="">
+
+<v-row
+no-gutters
+>
+<v-col
+  cols="12"
+  align-self="center"
+>
+
+        <v-breadcrumbs :items="breadcrumb_items" large class="my-text-color py-5 pl-0">
+            <template v-slot:item="{ item }" class="my-text-color">
+              <v-breadcrumbs-item
+                :href="item.href"
+                :disabled="item.disabled"
+                class="my-text-color"
+            >
+                [[ item.text.toUpperCase() ]]
+              </v-breadcrumbs-item>
+            </template>
+            <template v-slot:divider>
+                <v-icon>mdi-chevron-right</v-icon>
+            </template>
+          </v-breadcrumbs>
+
+        </v-col>
+      </v-row>
+    </v-container>

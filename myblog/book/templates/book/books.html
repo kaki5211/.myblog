@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<!-- head -->
+{% include 'book/head.html' %}
+
+
+
+
+<body>
+  <div id="app" class>
+    <v-app id="inspire" class="my-bg-color">
+      
+      <!-- toolbar -->
+      {% include 'book/toolbar.html' %}
+
+
+        
+          <!-- 目次 -->
+
+          <v-container class="my-16">
+            <v-row
+              no-gutters
+            >
+            <v-col
+                cols="12"
+                align-self="center"
+                class="mx-auto"
+              >
+            <p class="text-h2 my-text-color-title text-h5 text-md-h4" style="letter-spacing:3px;">
+              <v-icon size="40" >mdi-book-open-page-variant</v-icon>
+          
+              目次</p>
+          </v-col>
+          
+          {% with ''|center:3 as range %}
+          {% for _ in range %}
+            <v-col
+                cols="10"
+                align-self="center"
+                class="mx-auto mb-14"
+              >
+              <v-card
+              elevation="15"
+            >
+            
+          
+              <v-card
+                class="mx-auto"
+                {% comment %} max-width="344" {% endcomment %}
+              >
+                <v-img
+                {% comment %} src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" {% endcomment %}
+                {% comment %} src={{ book_list.1.amazon_url | safe }} {% endcomment %}
+                {% comment %} height="200px" {% endcomment %}
+                >{{ book_list.1.amazon_url | safe }}</v-img>
+            
+          
+                <v-card-text class="pb-0 my-text-color">
+                  {{ book_list.1.post_day | safe }}
+                </v-card-text>
+          
+          
+                <v-card-title class="pb-0 pt-1">
+                  {{ book_list.1.title | safe }}
+                </v-card-title>
+          
+                <v-card-text class="ms-2">
+                  <v-icon color="#9A9" size="14">mdi-eye</v-icon>
+                  <a class="ms-1 me-3 text-subtitle-2 text-md-subtitle-1 my-text-color-glay">XXX,XXX,XXX</a>
+                </v-card-text>
+          
+                
+                <v-card-actions>
+                  <v-btn color="{% for item2 in book_list.1.category_info.all %}{{item2.color_hex}}{%endfor%}" elevation="1" outlined rounded small>
+                    <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %}
+                      <input type="submit" href="{% url "book:book" %}" value="{% for item2 in book_list.1.category_info.all %}{{item2.get_category_display}}{%endfor%}">
+                    </form>
+                  </v-btn>
+          
+          
+                  <v-btn color="#455045" elevation="1" outlined rounded small>
+                    <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %}
+                      <input type="submit" href="{% url "book:book" %}" value="{{ book_list.1.Author_info }}">
+                    </form>
+                  </v-btn>
+                  <v-btn color="#455045" elevation="1" outlined rounded small>
+                    <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %}
+                      <input type="submit" href="{% url "book:book" %}" value="{{ book_list.1.publisher_info}}">
+                    </form>
+                  </v-btn>
+                </v-card-actions>
+                <v-card-text>
+                  {{ book_list.1.contents_synopsis}}
+                </v-card-text>
+          
+                <v-spacer></v-spacer>
+            
+          
+          
+                <v-card-actions>
+                  <v-btn color="#1aa179" text class="flex-child-right" href ="{% url 'book:book_info' book_list.1.post_day %}">
+                  この記事を読む
+                </v-btn>
+                </v-card-actions>
+          
+          
+                {% comment %} 
+            
+                <v-expand-transition>
+                  <div v-show="show">
+                    <v-divider></v-divider>
+            
+          
+                  </div>
+                </v-expand-transition> {% endcomment %}
+              </v-card>
+            </v-col>
+            {% endfor %}
+            {% endwith %}          
+          
+          </v-row>
+          </v-container>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+</v-row>
+</v-container>
+
+
+  
+
+
+
+<!-- footer -->
+{% include 'book/footer.html' %}
+
+
+
+  
+    </div>
+  
+
+
+
+
+
+  </v-app>
+  
+
+
+<!-- sumple あああああ -->  
+{% comment %} 
+
+
+    {% with ''|center:100 as range %}
+    {% for _ in range %}
+  
+    <p>ああ</p>
+  
+  
+  
+    {% endfor %}
+    {% endwith %}
+{% endcomment %}
+
+
+
+
+
+
+ 
+</body>
+
+
+
+
+
+<!-- components-->
+{% include 'book/components.html' %}
+
+
+<!-- script -->
+{% include 'book/script.html' %}
+
+<!-- style -->
+{% include 'book/style.html' %}
+
+
+
+
+
+
+</html>

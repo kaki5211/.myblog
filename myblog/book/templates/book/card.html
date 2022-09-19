@@ -1,0 +1,99 @@
+
+ <v-container class="my-16">
+    <v-row
+      no-gutters
+    >
+    <v-col
+        cols="12"
+        align-self="center"
+        class="mx-auto"
+      >
+    <p class="text-h2 my-text-color-title text-h5 text-md-h4" style="letter-spacing:3px;">
+      <v-icon size="40" >mdi-book-open-page-variant</v-icon>
+  
+      最近の投稿</p>
+  </v-col>
+  
+  {% for book_ in book_list %}
+    <v-col
+        cols="10"
+        align-self="center"
+        class="mx-auto mb-14"
+      >
+    
+  
+      <v-card
+        class="mx-auto"
+        elevation="15"
+
+      >
+        <v-img min-width="100"
+        >{{ book_.amazon_url | safe }}</v-img>
+    
+  
+        <v-card-text class="pb-0 my-text-color">
+          {{ book_.post_day | safe }}
+        </v-card-text>
+  
+  
+        <v-card-title class="pb-0 pt-1">
+          {{ book_.title | safe }}
+        </v-card-title>
+  
+        <v-card-text class="ms-2">
+          <v-icon color="#9A9" size="14">mdi-eye</v-icon>
+          <a class="ms-1 me-3 text-subtitle-2 text-md-subtitle-1 my-text-color-glay">XXX,XXX,XXX</a>
+        </v-card-text>
+  
+        
+        <v-card-actions>
+          <v-btn color="{{book_.category_info.color_hex}}" elevation="1" outlined rounded small>
+            <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %}
+              <input type="submit" href="{% url "book:book" %}" value="{{book_.category_info.get_category_display}}">
+            </form>
+          </v-btn>
+  
+  
+          <v-btn color="#455045" elevation="1" outlined rounded small>
+            <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %}
+              <input type="submit" href="{% url "book:book" %}" value="{{ book_.author_info }}">
+            </form>
+          </v-btn>
+          <v-btn color="#455045" elevation="1" outlined rounded small>
+            <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %}
+              <input type="submit" href="{% url "book:book" %}" value="{{ book_.publisher_info}}">
+            </form>
+          </v-btn>
+        </v-card-actions>
+        <v-card-text>
+          {{ book_.contents_synopsis | safe }}
+        </v-card-text>
+  
+        <v-spacer></v-spacer>
+    
+  
+  
+        <v-card-actions>
+          <v-btn color="#1aa179" text class="flex-child-right" href ="{% url 'book:book_info' book_.post_day %}">
+          この記事を読む
+        </v-btn>
+        </v-card-actions>
+  
+  
+        {% comment %} 
+    
+        <v-expand-transition>
+          <div v-show="show">
+            <v-divider></v-divider>
+    
+  
+          </div>
+        </v-expand-transition> {% endcomment %}
+      </v-card>
+    </v-col>
+    {% endfor %}
+  
+  </v-row>
+  </v-container>
+  
+  

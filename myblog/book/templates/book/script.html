@@ -1,0 +1,87 @@
+
+    <script>
+        {% comment %} $icon-size: 50px; {% endcomment %}
+        new Vue({
+          el: '#app',
+          vuetify: new Vuetify(),
+      
+        data () {
+          return {
+            icons: [
+            'mdi-facebook',
+            'mdi-twitter',
+            'mdi-linkedin',
+            'mdi-instagram',
+          ],    
+            items: [
+              {
+                src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+              },
+              {
+                src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
+              },
+              {
+                src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
+              },
+              {
+                src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
+              },
+            ],
+            breadcrumb_items: [
+            {% for string_, path_ in breadcrumb.items %}
+
+            {
+              text: '{{ string_ }}',
+              href: '{{ path_ }}',
+              disabled: {% if forloop.last %} true {% else %} false{% endif %},
+            },
+            {% endfor %}
+            ],
+            drawer: false,
+            group: null,
+          }
+        },
+        delimiters: ['[[', ']]']
+  
+        })
+
+
+        let elements = document.getElementsByTagName("img");
+        Array.prototype.forEach.call(elements, function (element) {
+            element.classList.add("my-w-100");
+        });      
+      
+      
+      
+      </script>
+      {% comment %} 
+
+
+  <script>
+    const { createApp } = Vue
+    const { createVuetify } = Vuetify
+    
+    const vuetify = createVuetify()
+    
+    const app = createApp({
+      template: '#app-template',
+    }).use(vuetify).mount('#app')
+  </script> {% endcomment %}
+
+
+
+  {% comment %} 
+  
+              breadcrumb_items: [
+            {% for string_, path_ in breadcrumb.items %}
+
+            {
+              text: '{{ string_ }}'
+              href: '{{ path_ }}'
+              disabled: {% if forloop.last %} true {% else %} false{% endif %}
+            },
+            {% endfor %}
+            ],
+  
+  
+  {% endcomment %}

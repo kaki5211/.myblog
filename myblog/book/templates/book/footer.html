@@ -1,0 +1,106 @@
+<v-footer
+padless
+dark
+class="my-bg-color-glay"
+>
+<v-card
+  flat
+  tile
+  class="lighten-1 white--text text-center my-bg-color-glay my-text-color-light-glay"
+  style="width: 100%"
+>
+
+
+
+
+<div class="px-6 pt-10 my-text-color-light-glay">
+  <v-card-title class="pa-0 pb-1">
+    カテゴリー
+  </v-card-title>
+  <v-card-text class="pl-3 pt-0" style="text-align: left;">
+    {% for item in category %}
+    <v-btn color="{{item.color_hex}}" class="ma-1" elevation="1" outlined rounded small>
+      <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %}
+        <input type="submit" href="{% url "book:book" %}" value="{{item.get_category_display}}">
+      </form>
+    </v-btn>
+    {% endfor %}
+  </v-card-text>
+</div>
+
+
+
+
+<div class="px-6 pt-4 ">
+  <v-card-title class="pa-0 pb-1">
+    著者
+  </v-card-title>
+  <v-card-text class="pl-3 pt-0" style="text-align: left;">
+    {% for item in author_Aa %}
+    {% for item2 in item %}
+      {% if forloop.first %}
+      <div class="me-auto mb-2 mb-lg-0 text-start mt-1">
+        <a class="text-decoration-none text-start btn-light text-dark fs-6 fs-md-5 rounded d-inline-block">{{item2.get_word_oder_display}}</a>
+      {% endif %}
+
+
+        <v-btn color="{{item.color_hex}}" class="ma-1" elevation="1" outlined rounded small>
+          <form class="d-inline-block fs-5_5" action="{% url 'book:book' %}" method="post">{% csrf_token %}<input type="hidden" name="author" value={{ item2.author }}><input type="hidden" name="age_low" value='1900-1-1'><input type="hidden" name="age_high" value={{ date_now|date:"Y-n-j" }}><input type="submit" class="text-decoration-none py-0 px-01 my-1 d-inline-block px-01 py-0 border rounded btn-dark" href="{% url "book:book" %}" value="{{ item2.author }}"></form>
+        </v-btn>
+        {% if forloop.last %}
+        </div>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+      </v-card-text>
+</div>
+
+
+
+
+
+<div class="px-6 pt-4 ">
+  <v-card-title class="pa-0 pb-1">
+  出版社
+</v-card-title>
+<v-card-text class="pl-3 pt-0" style="text-align: left;">
+  <v-card-text class="pl-3 pt-0" style="text-align: left;">
+    {% for item in publisher %}
+    <v-btn color="{{item.color_hex}}" class="ma-1" elevation="1" outlined rounded small>
+      <form class="text-decoration-none py-0 px-01 my-1 d-inline-block fs-5_5" action="{% url 'book:book' %}" method="post">{% csrf_token %}<input type="hidden" name="publisher" value={{ item.publisher_eng}}><input type="submit" class="text-decoration-none py-0 px-01 my-1 d-inline-block px-01 py-0 border rounded btn-dark" href="{% url "book:book" %}" value="{{ item.publisher}}"></form>
+
+    </v-btn>
+    {% endfor %}
+  </v-card-text>
+</div>
+
+
+
+
+
+
+
+
+  {% comment %} <v-card-text class="white--text pt-8">
+    Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris cursus commodo interdum. Praesent ut risus eget metus luctus accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+  </v-card-text> {% endcomment %}
+
+  <v-card-text class="my-text-color-light"  style="text-align:right;">
+
+    <v-btn icon fab xlarge dark class="mx-0 my-text-color-light-glay" href="https://twitter.com/BOOK_IC">
+      <v-icon size="24" >mdi-twitter</v-icon>
+    </v-btn>
+    <v-btn icon fab xlarge dark class="mx-0 my-text-color-light-glay" href="https://www.instagram.com/BOOK_I.C/">
+      <v-icon size="24" >mdi-instagram</v-icon>
+    </v-btn>
+</v-card-text>
+
+  <v-divider></v-divider>
+
+  <v-card-text class="my-text-color-light">
+    2022 — <strong>Vuetify</strong>
+      
+
+  </v-card-text>
+</v-card>
+</v-footer>
