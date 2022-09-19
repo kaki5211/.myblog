@@ -13,9 +13,41 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 
 import os
+import platform
+
+pf = platform.system()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+if pf == 'Windows':
+
+    DEBUG = True
+
+    ALLOWED_HOSTS = ["*"]
+
+else:
+
+    DEBUG = False
+
+    ALLOWED_HOSTS = ["*"]
+
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+
+    SECURE_BROWSER_XSS_FILTER = True
+
+    SECURE_SSL_REDIRECT = True
+
+    SESSION_COOKIE_SECURE = True
+
+    CSRF_COOKIE_SECURE = True
+
+    X_FRAME_OPTIONS = "DENY"
+
+    SECURE_HSTS_PRELOAD = True
 
 
 # Quick-start development settings - unsuitable for production
@@ -40,7 +72,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'book.apps.BookConfig',
+    'django.contrib.sites',  # 追加
+    'django.contrib.sitemaps',  # 追加
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -69,7 +105,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'book.my_context_processor.common' # 追記
-            ],
+                ],
         },
     },
 ]

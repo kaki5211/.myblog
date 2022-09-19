@@ -13,7 +13,7 @@ from django.contrib.sitemaps import Sitemap
 from django.contrib.sitemaps.views import sitemap
 from django.shortcuts import resolve_url
 from django.urls import path, include
-#from .models import Book
+from .models import Book
 import datetime
 
 
