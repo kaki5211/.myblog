@@ -40,7 +40,7 @@ sitemaps = {
 
 
 urlpatterns = [
-    # path('', views.TopView.as_view(), name="top"),
+    path('', views.TopView.as_view(), name="top"),
     path('quasar/', views.TopquasarView.as_view(), name="top_quasar"),
 
     path('categorys/', views.CategoryView.as_view(), name='category'),# 本のカテゴリー
@@ -55,7 +55,7 @@ urlpatterns = [
     path('series/', views.SeriesView.as_view(), name='series'), # シリーズもの本
     path('series/<slug:data_info>', views.SeriesView.as_view(), name='series_info'), 
 
-    path('', views.BookView.as_view(), name='book'), # 主に本の検索と
+    path('books', views.BookView.as_view(), name='book'), # 主に本の検索と
     path('books/<slug:data_info>', views.BookView.as_view(), name='book_info'), 
 
     path('search', views.SearchView.as_view(), name='search' ), # 本の検索全般
