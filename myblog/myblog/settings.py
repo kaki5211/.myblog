@@ -30,7 +30,7 @@ else:
 
     DEBUG = False
 
-    ALLOWED_HOSTS = ["*"]
+    ALLOWED_HOSTS = ["book-ic.jp", "164.70.75.58"]
 
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
