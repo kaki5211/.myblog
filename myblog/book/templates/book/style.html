@@ -44,6 +44,24 @@
       width: 100%;
     }
 
+    .my-h-500p {
+      height: 500px;
+    }
+
+    .my-h-500p {
+      height: auto;
+     }
+     @media screen and (min-width:480px) { 
+      .my-h-500p {
+        max-height: 800px;
+       }
+    }
+     @media screen and (min-width:960px) {
+      .my-h-500p {
+        height: 500px;
+       }
+    }    
+
   </style>
   
   
@@ -243,6 +261,31 @@ blockquote cite {
   content: "\2014\00A0";
 }
 
+
+#my_container {
+  max-width: 100%;
+ }
+ @media screen and (min-width:480px) { 
+  #my_container {
+    max-width: 100%;
+   }
+}
+ @media screen and (min-width:960px) {
+  #my_container {
+    max-width: 900px;
+   }
+}
+ @media screen and (min-width:1264px) {
+  #my_container {
+    max-width: 1200px;
+   }
+}
+@media screen and (min-width:1400px) {
+  #my_container {
+    max-width: 1350px;
+   }
+}
+ 
 
   {% comment %} 
   

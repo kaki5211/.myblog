@@ -48,8 +48,13 @@
 
         let elements = document.getElementsByTagName("img");
         Array.prototype.forEach.call(elements, function (element) {
-            element.classList.add("my-w-100");
-        });      
+            element.classList.add("my-w-100")
+        });
+        elements = document.getElementsByClassName("v-responsive__content");
+        Array.prototype.forEach.call(elements, function (element) {
+          element.classList.add("my-h-500p");
+      });
+      
       
       
       

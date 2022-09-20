@@ -1,5 +1,5 @@
 
- <v-container class="my-16">
+ <v-container id="my_container" class="my-16 mx-auto">
     <v-row
       no-gutters
     >
@@ -17,21 +17,23 @@
   {% for book_ in book_list %}
     <v-col
         cols="10"
+        md="6"
+        lg="4"
         align-self="center"
-        class="mx-auto mb-14"
+        class="px-3 mb-14 mx-auto mt-5 mb-auto"
       >
     
   
       <v-card
-        class="mx-auto"
+        class="mx-auto my-bg-color-glay"
         elevation="15"
-
+        style=""
       >
         <v-img min-width="100"
         >{{ book_.amazon_url | safe }}</v-img>
     
-  
-        <v-card-text class="pb-0 my-text-color">
+        <div style="background-color:white;">
+        <v-card-text class="pb-0 my-text-color" style="border-top: solid 0.2em;">
           {{ book_.post_day | safe }}
         </v-card-text>
   
@@ -89,6 +91,7 @@
   
           </div>
         </v-expand-transition> {% endcomment %}
+      </div>
       </v-card>
     </v-col>
     {% endfor %}

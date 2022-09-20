@@ -8,7 +8,7 @@
 
 
 <body>
-  {% include 'book/tag_google_body.html' %}
+    {% include 'book/tag_google_body.html' %}
   <div id="app" class>
     <v-app id="inspire" class="my-bg-color">
 
@@ -42,8 +42,9 @@
 
       <!-- サンプル -->
 
-
+      {% if DEBUG == True %}
       {% include 'book/sample.html' %}
+      {% endif %}
 
 
     <!-- footer -->

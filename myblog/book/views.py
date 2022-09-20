@@ -16,6 +16,7 @@ from . import forms
 
 from .models import Book, Category, Author, Publisher, Series
 import ast
+from django.conf import settings
 
 # Create your views here
 
@@ -23,6 +24,7 @@ import ast
 
 class MyListView(ListView):
     template_list = ['authors', 'categorys', 'publishers', 'top', 'books']
+    
     # request = get_request()
     def my_get_data(self, *args, **kwargs):
         # get_data = super().aet_data(self, request, *args, **kwargs)
@@ -94,6 +96,8 @@ class MyListView(ListView):
             context['category_info'] = get_data['category_info']
             context['author_info'] = get_data['author_info']
             context['publisher_info'] = get_data['publisher_info']
+            context['DEBUG'] = settings.DEBUG
+
         except:
             pass
         context['view'] = [1,1,1,1,1] # [ブログ紹介, メインコンテンツ+サイドバー, メインコンテンツのみ, トピックス] 
@@ -269,10 +273,7 @@ class BookView(ListView):
         else:
             print('セッション名officeは存在しません')
             self.request.session['office'] = "office"
-
-
-# ast.literal_eval(
-
+        context['DEBUG'] = settings.DEBUG
 
         return context
 
@@ -491,7 +492,6 @@ class BookView(ListView):
             # context['myform'] = [BookForm(), CategoryForm(request.POST) ,AuthorForm(), PublisherForm(request.POST)]
             
             return render(request, 'book/books.html', context)
-            
 
 
 
