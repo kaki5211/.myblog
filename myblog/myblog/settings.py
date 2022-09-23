@@ -24,7 +24,7 @@ if pf == 'Windows':
 
     DEBUG = True
 
-    ALLOWED_HOSTS = ["*"]
+    ALLOWED_HOSTS = ["*","192.168.10.7"]
 
 else:
 
@@ -88,11 +88,17 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'myblog.urls'
 
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
+TEMPLATES_DIR_COMPONENTS = os.path.join(BASE_DIR, 'book', 'templates','book','components')
+
+
+print(TEMPLATES_DIR)
+print("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■")
+print(TEMPLATES_DIR_COMPONENTS)
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES_DIR,],
+        'DIRS': [TEMPLATES_DIR,TEMPLATES_DIR_COMPONENTS],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

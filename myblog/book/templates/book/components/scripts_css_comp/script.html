@@ -12,7 +12,7 @@
             'mdi-twitter',
             'mdi-linkedin',
             'mdi-instagram',
-          ],    
+          ],
             items: [
               {
                 src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
@@ -50,11 +50,15 @@
         Array.prototype.forEach.call(elements, function (element) {
             element.classList.add("my-w-100")
         });
-        elements = document.getElementsByClassName("v-responsive__content");
-        Array.prototype.forEach.call(elements, function (element) {
-          element.classList.add("my-h-500p");
-      });
-      
+        
+        {% if url_main == None %}
+          {% if url_sub == None %}
+          elements = document.getElementsByClassName("v-responsive__content");
+          Array.prototype.forEach.call(elements, function (element) {
+            element.classList.add("my-h-500p");
+          });
+          {% endif %}
+        {% endif %}
       
       
       

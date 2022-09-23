@@ -1,78 +1,49 @@
-<!DOCTYPE html>
-<html>
 
-<!-- head -->
-{% include 'book/head.html' %}
+{% extends 'book/_block_static.html' %}
 
+{% block contents %}
 
 
 
-<body>
-  {% include 'book/tag_google_body.html' %}
-  <div id="app" class>
-    <v-app id="inspire" class="my-bg-color">
-      
+    <!-- BOOK DB -->
+    {% include 'text/text_title.html' with text=book_info.title %}
 
-
-      
-    <!-- toolbar -->
-    {% include 'book/toolbar.html' %}
-
+    <!-- breadcrumbs -->
+    {% include 'block/breadcrumbs.html' with aueiu=book_info.title%}
         
-      <!-- 目次 -->
-      <v-container class="mb-15">
-        <v-row
-          no-gutters
-        >
-        <v-col
-            cols="12"
-            align-self="center"
-          >
-        <p class="text-h2 my-text-color-title text-h5 text-md-h4 py-10 px-0 my-2 mx-auto my-container-center" style="letter-spacing:5px; min-height: 60vh;">
-            {% comment %} <v-icon size="40">mdi-format-list-bulleted</v-icon> {% endcomment %}
-            {{ book_info.title | safe }}
-          </p>
-          </v-col>
-        </v-row>
-      </v-container>
-
-
-      <!-- breadcrumbs -->
-      {% include 'book/breadcrumbs.html' with aueiu=book_info.title%}
-          
-      
-      <!-- mokuji -->
-      {% include 'book/mokuji.html' %}
+    
+    <!-- mokuji -->
+    {% include 'block/mokuji.html' %}
 
 
       <!-- contents -->
-      <v-container class="">
         <v-row no-gutters >
-          <v-col cols="12" class="mx-0 px-0" >
 
             <v-col cols="12" class="mx-auto px-0">
               {% comment %} <a class="text-my-text-color my-contents-title text-h5 text-md-h4 mb-0"> {% endcomment %}
-                {% include 'book/contents_title.html' with text=book_info.title ty="title" %}
+                {% include 'book_info/contents_title.html' with text=book_info.title ty="title" %}
                 <!-- title -->
               {% comment %} </a> {% endcomment %}
-            <v-col cols="11" class="mx-auto px-0" >
-              <p class="my-text-color-title mb-1"></p>
-              <v-icon size="20">mdi-book-edit-outline</v-icon>
-                {{ book_info.post_day | safe }}
-                <v-icon size="20" class="pl-2">mdi-refresh</v-icon>
-                {{ book_info.update_day | safe }}   
+              <p class="my-text-color-title mb-1">
+                <v-icon size="20">mdi-book-edit-outline</v-icon>
+                  {{ book_info.post_day | safe }}
+                  <v-icon size="20" class="pl-2">mdi-refresh</v-icon>
+                  {{ book_info.update_day | safe }}   
+              </p>        
+                
+            <v-col cols="12" sm="11" md="9" lg="6" class="mt-16 mx-auto px-0" >
               <v-img
-              >{{ book_info.amazon_url | safe }}</v-img>          
+              >{{ book_info.amazon_url | safe }}</v-img>  
             </v-col>
 
-            <v-col cols="12" class="mx-auto py-10">         <!-- table -->
+            <v-col cols="12" sm="11" md="10" lg="8" class="mx-auto py-10">         <!-- table -->
               <v-simple-table dense class="my-bg-color my-border">
                 <template v-slot:default>
                   <tbody>
                     <tr>
                       <td class="text-center font-weight-bold">タイトル</td>
                       <td width="10" class="text-center font-weight-bold px-0">：</td>
-                      <td class="text-center font-weight-bold">{{ book_info.title}}</td>
+                      <td class="text-center font-weight-bold">{{ book_info.title }}</td>
                     </tr>
                     <tr>
                       <td class="text-center font-weight-bold">カテゴリー</td>
@@ -99,7 +70,7 @@
                     <tr>
                       <td class="text-center font-weight-bold">発売日</td>
                       <td width="10" class="text-center font-weight-bold px-0">：</td>
-                      <td class="text-center">{{ book_info.issue}}</td>
+                      <td class="text-center">{{ book_info.issue | safe }}</td>
                     </tr>
                     <tr>
                       <td class="text-center font-weight-bold">ページ数</td>
@@ -146,31 +117,36 @@
                 </template>
               </v-simple-table>
             </v-col>
-          </v-col>
+            
 
 
           <v-col cols="12" class="mx-auto px-0 text-center  my-10" >
-            {% include 'book/contents_subtitle.html' with text='あらすじ' ty="arasuji" %}
-            {% include 'book/contents_text.html' with text=book_info.contents_synopsis %}
+            {% include 'book_info/contents_subtitle.html' with text='あらすじ' ty="arasuji" %}
+            {% include 'book_info/contents_text.html' with text=book_info.contents_synopsis %}
           </v-col>
           
-
-
 
           <v-col cols="12" class="mx-auto px-0 py-10">
 
             {% for contents_ in book_info_contents %}
+              {% if contents_.0 != "title" and contents_.0 != "title" and contents_.0 != "blockquote" %}
+                <div class="px-3">
+              {% endif %} 
 
               {% if contents_.0 == "title" %}
-                {% include 'book/contents_title.html' with text=contents_.1 ty=forloop.counter %}
+                {% include 'book_info/contents_title.html' with text=contents_.1 ty=forloop.counter %}
+                
               {% elif contents_.0 == "subtitle" %}
-                {% include 'book/contents_subtitle.html' with text=contents_.1  ty=forloop.counter %}
+                {% include 'book_info/contents_subtitle.html' with text=contents_.1  ty=forloop.counter %}
               {% elif contents_.0 == "text" %}
-                {% include 'book/contents_text.html' with text=contents_.1 %}
+                {% include 'book_info/contents_text.html' with text=contents_.1 %}
               {% elif contents_.0 == "blockquote"%}
-                {% include 'book/contents_blockquote.html' with text=contents_.1 page=contents_.2 %}
+                {% include 'book_info/contents_blockquote.html' with text=contents_.1 page=contents_.2 %}
               {% endif %} 
-      
+
+              {% if contents_.0 != "title" and contents_.0 != "title" and contents_.0 != "blockquote"%}
+                </div>
+              {% endif %}      
       
             {% endfor %}
 
@@ -180,87 +156,5 @@
       </v-container>
 
 
+{% endblock %}
 
-
-
-
-
-
-
-
-
-
-      
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
-{% comment %} <!-- footer -->
-{% include 'book/sample.html' %}  {% endcomment %}
-
-
-
-<!-- footer -->
-{% include 'book/footer.html' %}
-
-
-
-  
-  
-
-
-
-
-
-  </v-app>
-  
-</div>
-
-
-
-
-
-
-
- 
-</body>
-
-
-
-
-
-<!-- components-->
-{% include 'book/components.html' %}
-
-
-<!-- script -->
-{% include 'book/script.html' %}
-
-<!-- style -->
-{% include 'book/style.html' %}
-
-
-
-
-
-
-
-</html>

@@ -1,0 +1,59 @@
+{% load static %}
+
+
+
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- head -->
+{% include 'block/head.html' %}
+
+
+
+<body>
+  {% include 'block/tag_google_body.html' %}
+  <div id="app" class>
+    <v-app id="inspire" class="my-bg-color">
+
+        <!-- toolbar -->
+        {% include 'block/toolbar.html' %}
+
+        <v-container id="my_container" class="mx-auto">
+
+
+        <!-- content -->
+        {% block contents %}
+        {% endblock %}
+
+        </v-container>
+        
+        <!-- サンプル -->
+        {% if DEBUG == True %}
+        {% include 'sample/sample.html' %}
+        {% endif %}
+
+
+        <!-- footer -->
+        {% include 'block/footer.html' %}
+    </v-app>    
+  </div>
+</body>
+
+
+
+
+
+
+<!-- components-->
+{% include 'scripts_css_comp/components.html' %}
+
+
+<!-- script -->
+{% include 'scripts_css_comp/script.html' %}
+
+<!-- style -->
+{% include 'scripts_css_comp/style.html' %}
+
+</html>

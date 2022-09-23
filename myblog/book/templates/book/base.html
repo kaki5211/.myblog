@@ -1,110 +1,23 @@
-<!DOCTYPE html>
-<html>
+
+{% extends 'book/_block_static.html' %}
+
+{% block contents %}
+
+  <!-- BOOK DB -->
+  {% include 'text/text_title_book-ic.html' with text="BOOK I.C." text_sub="～本の感想を創造するブログ～" %}
 
 
-  <!-- head -->
-  {% include 'book/head.html' %}
+  {% comment %}         
+  <!-- ランキング -->
+  {% include 'book/components/ranking.html' %}
+  {% endcomment %}
+
+  <!-- title -->
+  {% include 'text/text_subtitle.html' with text="最近の投稿" icon_name="mdi-book-open-page-variant" %}
+
+  <!-- card -->
+  {% include 'block/card.html' %}
 
 
+{% endblock %}
 
-<body>
-    {% include 'book/tag_google_body.html' %}
-  <div id="app" class>
-    <v-app id="inspire" class="my-bg-color">
-
-      <!-- toolbar -->
-      {% include 'book/toolbar.html' %}
-        
-
-      <!-- BOOK DB -->
-      <div class="my-container-max-width" style="height: 30vh;"></div>
-
-      <div class="q-py-xl my-container-max-width">
-        <div class="">
-        {% comment %} <p class="text-center m-auto"><strong><u>文庫本の感想</u></strong>ブログ！</p></br> {% endcomment %}
-        {% comment %} <p class="text-center m-auto">Python の Django で作成し、<strong><u>個人で運営！</u></strong></p></br> {% endcomment %}
-        {% comment %} <p class="text-center m-auto">本の感想だけでなく、<strong><u>文庫本に関する様々な情報</u></strong>を投稿予定！</p></br> {% endcomment %}
-        <p id="my-letter-spacing-3" class="text-center my-font-weight-title text-h5 text-md-h4 my-text-color-title my-letter-spacing-3">BOOK I.C.</p>
-        <p id="my-letter-spacing-5" class="text-center text-subtitle-1 text-md-h5 my-text-color-glay">&nbsp;～本の感想を創造するブログ～</p>
-        {% comment %} <q-btn stretch flat label="Book DB" class="text-weight-bold text-h2" href="{% url 'book:top' %}" style="letter-spacing:3px;"></q-btn> {% endcomment %}
-        </div>
-      </div>
-
-      <div class="my-container-max-width" style="height: 50vh;"></div>
-
-        
-      <!-- ランキング -->
-      {% include 'book/ranking.html' %}
-
-      <!-- card -->
-      {% include 'book/card.html' %}
-  
-
-      <!-- サンプル -->
-
-      {% if DEBUG == True %}
-      {% include 'book/sample.html' %}
-      {% endif %}
-
-
-    <!-- footer -->
-    {% include 'book/footer.html' %}
-   
-
-
-
-
-
-    </v-app>
-    
-  </div>
-
-
-<!-- sumple あああああ -->  
-{% comment %} 
-
-
-    {% with ''|center:100 as range %}
-    {% for _ in range %}
-  
-    <p>ああ</p>
-  
-  
-  
-    {% endfor %}
-    {% endwith %}
-{% endcomment %}
-
-
-
-
-
-
- 
-</body>
-
-
-
-
-
-
-<!-- components-->
-{% include 'book/components.html' %}
-
-
-<!-- script -->
-{% include 'book/script.html' %}
-
-<!-- style -->
-{% include 'book/style.html' %}
-
-
-
-
-
-
-
-
-
-
-</html>

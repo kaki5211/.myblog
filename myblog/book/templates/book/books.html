@@ -1,211 +1,84 @@
-<!DOCTYPE html>
-<html>
 
-<!-- head -->
-{% include 'book/head.html' %}
+{% extends 'book/_block_static.html' %}
 
-
-
-
-<body>
-  {% include 'book/tag_google_body.html' %}
-  <div id="app" class>
-    <v-app id="inspire" class="my-bg-color">
-      
-      <!-- toolbar -->
-      {% include 'book/toolbar.html' %}
-
-
+{% block contents %}
         
-          <!-- 目次 -->
 
-          <v-container class="my-16">
-            <v-row
-              no-gutters
-            >
-            <v-col
-                cols="12"
-                align-self="center"
-                class="mx-auto"
-              >
-            <p class="text-h2 my-text-color-title text-h5 text-md-h4" style="letter-spacing:3px;">
-              <v-icon size="40" >mdi-book-open-page-variant</v-icon>
-          
-              目次</p>
-          </v-col>
-          
-          {% with ''|center:3 as range %}
-          {% for _ in range %}
-            <v-col
-                cols="10"
-                align-self="center"
-                class="mx-auto mb-14"
-              >
-              <v-card
-              elevation="15"
-            >
-            
-          
-              <v-card
-                class="mx-auto"
-                {% comment %} max-width="344" {% endcomment %}
-              >
-                <v-img
-                {% comment %} src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" {% endcomment %}
-                {% comment %} src={{ book_list.1.amazon_url | safe }} {% endcomment %}
-                {% comment %} height="200px" {% endcomment %}
-                >{{ book_list.1.amazon_url | safe }}</v-img>
-            
-          
-                <v-card-text class="pb-0 my-text-color">
-                  {{ book_list.1.post_day | safe }}
-                </v-card-text>
-          
-          
-                <v-card-title class="pb-0 pt-1">
-                  {{ book_list.1.title | safe }}
-                </v-card-title>
-          
-                <v-card-text class="ms-2">
-                  <v-icon color="#9A9" size="14">mdi-eye</v-icon>
-                  <a class="ms-1 me-3 text-subtitle-2 text-md-subtitle-1 my-text-color-glay">XXX,XXX,XXX</a>
-                </v-card-text>
-          
-                
-                <v-card-actions>
-                  <v-btn color="{% for item2 in book_list.1.category_info.all %}{{item2.color_hex}}{%endfor%}" elevation="1" outlined rounded small>
-                    <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %}
-                      <input type="submit" href="{% url "book:book" %}" value="{% for item2 in book_list.1.category_info.all %}{{item2.get_category_display}}{%endfor%}">
-                    </form>
-                  </v-btn>
-          
-          
-                  <v-btn color="#455045" elevation="1" outlined rounded small>
-                    <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %}
-                      <input type="submit" href="{% url "book:book" %}" value="{{ book_list.1.Author_info }}">
-                    </form>
-                  </v-btn>
-                  <v-btn color="#455045" elevation="1" outlined rounded small>
-                    <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %}
-                      <input type="submit" href="{% url "book:book" %}" value="{{ book_list.1.publisher_info}}">
-                    </form>
-                  </v-btn>
-                </v-card-actions>
-                <v-card-text>
-                  {{ book_list.1.contents_synopsis}}
-                </v-card-text>
-          
-                <v-spacer></v-spacer>
-            
-          
-          
-                <v-card-actions>
-                  <v-btn color="#1aa179" text class="flex-child-right" href ="{% url 'book:book_info' book_list.1.post_day %}">
-                  この記事を読む
-                </v-btn>
-                </v-card-actions>
-          
-          
-                {% comment %} 
-            
-                <v-expand-transition>
-                  <div v-show="show">
-                    <v-divider></v-divider>
-            
-          
-                  </div>
-                </v-expand-transition> {% endcomment %}
-              </v-card>
-            </v-col>
+
+  <!-- title -->
+  {% include 'text/text_title.html' with text="書籍一覧" %}
+
+  <!-- breadcrumbs -->
+  {% include 'block/breadcrumbs.html' with aueiu=book_info.title%}
+
+  <!-- text_title-->
+  {% include 'text/text_subtitle.html' with text="フィルター" icon_name="mdi-magnify-expand" %}
+  
+
+
+  <!-- filter -->
+  <form class="myform mx-auto py-3 fs-6" action="" method="POST">
+    {% if form_book.errors %}
+        <div class="errorlist">
+            {% for errors in form_book.errors.values %}
+                {% for error in errors %}
+                    {{ error }}<br>
+                {% endfor %}
             {% endfor %}
-            {% endwith %}          
-          
-          </v-row>
-          </v-container>
+        </div>
+    {% endif %}
+    {% for field2 in myform %}
+    {{field2.0.id_for_label}}
+        {% for field in field2 %}
+        {% if "high" not in field.id_for_label %}
+        <div>
+        <div class="d-inline-block mb-1">
+        {% endif %}
+            {% comment %} {{field.id_for_label}} {% endcomment %}
+            {{ field.label_tag }}
+            {% if "high" not in field.id_for_label %}
+            ：
+                {% comment %} <ul class="d-inline-block form-inline px-0 mb-0"> {% endcomment %}
+            {% endif %}
+            {% if "low" in field.id_for_label and "page" not in field.id_for_label %}
+                <ul class="d-inline-block form-inline mb-1 ps-0">
+            {% endif %}
 
 
+                    {{ field }}
+            {% if field.help_text %}
+                <span class="helptext">{{ field.help_text }}</span>
+            {% endif %}
+            
+            {% if "high" in field.id_for_label %}
+                </ul>
+            {% endif %}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-</v-row>
-</v-container>
-
-
-  
-
-
-
-<!-- footer -->
-{% include 'book/footer.html' %}
-
-
-
-  
-    </div>
-  
-
-
-
-
-
-  </v-app>
-  
-
-
-<!-- sumple あああああ -->  
-{% comment %} 
-
-
-    {% with ''|center:100 as range %}
-    {% for _ in range %}
-  
-    <p>ああ</p>
-  
-  
-  
+        {% if "low" not in field.id_for_label %}
+        </div>
+        </div>
+        {% endif %}
     {% endfor %}
-    {% endwith %}
-{% endcomment %}
+    {% endfor %}
+
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-end py-3">
+  <button class="btn bg-white btn-outline-teal btn-sm border-teal" type="submit" >検索</button>
+</div>
+
+
+    {% csrf_token %}
+</form>
+
+
+  <!-- text_title-->
+  {% include 'text/text_subtitle.html' with text="書籍一覧" icon_name="mdi-bookshelf" %}
+
+
+  <!-- card -->
+  {% include 'block/card.html' %}
 
 
 
 
-
-
- 
-</body>
-
-
-
-
-
-<!-- components-->
-{% include 'book/components.html' %}
-
-
-<!-- script -->
-{% include 'book/script.html' %}
-
-<!-- style -->
-{% include 'book/style.html' %}
-
-
-
-
-
-
-</html>
+{% endblock %}
