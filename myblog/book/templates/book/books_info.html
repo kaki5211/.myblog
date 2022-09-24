@@ -137,6 +137,9 @@
                 {% include 'book_info/contents_title.html' with text=contents_.1 ty=forloop.counter %}
                 
               {% elif contents_.0 == "subtitle" %}
+                {% if count_subtitle ==  forloop.counter %}
+                  {% include 'google/adsense_article.html' %}
+                {% endif %}
                 {% include 'book_info/contents_subtitle.html' with text=contents_.1  ty=forloop.counter %}
               {% elif contents_.0 == "text" %}
                 {% include 'book_info/contents_text.html' with text=contents_.1 %}

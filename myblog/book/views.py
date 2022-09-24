@@ -263,8 +263,18 @@ class BookView(ListView):
                 if len(text_) == 3:
                     text_[2] = text_[2].splitlines()[0]
                 list_.append(text_)
-            print(list_)
             context['book_info_contents'] = list_
+            count = 0
+            count_subtitle = 0
+            for text_ in list_:
+                print(text_[0])
+                count += 1
+                if text_[0] == "subtitle":
+                    count_subtitle += 1
+                    if count_subtitle == 3:
+                        break
+            context['count_subtitle'] = count
+            print(context['count_subtitle'], "■■■■■■■■■■■■■■■■■■■")
         except:
             pass
         if 'office' in self.request.session:
