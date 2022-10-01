@@ -44,7 +44,7 @@ urlpatterns = [
     path('quasar/', views.TopquasarView.as_view(), name="top_quasar"),
 
     path('categorys/', views.CategoryView.as_view(), name='category'),# 本のカテゴリー
-    path('categorys/<slug:data_info>', views.CategoryView.as_view(), name='category_info'),
+    path('categorys/<slug:data_info>', views.CategoryView.as_view(), name='category_infprofile', ),
 
     path('authors/', views.AuthorView.as_view(), name='author'), # 著者について全般
     path('authors/<data_info>', views.AuthorView.as_view(), name='author_info'),
@@ -65,6 +65,9 @@ urlpatterns = [
     path('others/', views.OthersView.as_view(),  name='other'),
     path('others/shedule', views.Schedule.as_view(),  name='schedule'),
 
+    path('profile/', views.ProfileView.as_view(), name="profile"),
+    path('book-ic/', views.Book_icView.as_view(), name="book-ic"),
+    
 
     path('sitemap.xml/', sitemap, {'sitemaps': sitemaps},  name='sitemap'),
 

@@ -63,13 +63,14 @@ def common(request):
     url_split = url_path.split('/')
     url_path = ""
     url_dict = {}
+    url_dict = {"ホーム": "{0}://{1}/".format(request.scheme, request.get_host())}
     flag = 0
     url_path = "{0}://{1}/".format(request.scheme, request.get_host())
     try:
         context["url_main"] = None
         context['title_author_flag']  = 0
         for item in url_split[1:]:
-            if item == "":
+            if item == "" :
                 continue
             url_path += item + "/"
 
@@ -130,11 +131,9 @@ def common(request):
 
             url_dict.update({item:url_path})
             context["url_sub"] = item
-
         context['breadcrumb'] = url_dict # パンくずリスト完成
     except:
+        context['breadcrumb'] = url_dict
         pass
     
-
-        
     return context

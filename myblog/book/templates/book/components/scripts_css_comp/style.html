@@ -286,6 +286,31 @@ blockquote cite {
    }
 }
  
+.my-checkbox label {
+  position: relative;
+  display: block;
+}
+
+.my-checkbox input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+}
+
+{% comment %} !button .my-checkbox label input[type="checkbox"]:checked {
+  background-color: black;
+  color: white;
+} {% endcomment %}
+
+.my-checkbox:has(> span input[type="checkbox"]:checked) {
+  background-color: #455045;
+}
+
+{% comment %} 
+label input[type="checkbox"]:checked {
+  background-color: black;
+  color: white;
+}
+ {% endcomment %}
 
   {% comment %} 
   

@@ -19,7 +19,6 @@
       </v-btn>
 
 
-
       <v-app-bar-nav-icon @click.stop="drawer = !drawer">
                 <v-icon size="32">mdi-format-list-bulleted</v-icon>
 
@@ -36,6 +35,7 @@
   absolute
   left
   temporary
+  style="border: solid #455045;"
 >
   <v-list
     nav
@@ -45,21 +45,39 @@
       v-model="group"
       active-class="deep-purple--text text--accent-4"
     >
-      <v-list-item>
-        <v-list-item-title>Foo</v-list-item-title>
+
+      <v-list-item href="{% url 'book:top' %}">
+        <v-list-item-content>
+          <v-list-item-title class="text-h6">
+            BOOK I.C.
+          </v-list-item-title>
+          <v-list-item-subtitle>
+            ～本の感想を創造するブログ～
+          </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+      
+      <v-divider></v-divider>
+      
+
+
+      <v-list-item class="mt-10" href="{% url 'book:book-ic' %}">
+        <v-list-item-title color="#1aa179">BOOK I.C. について（準備中...）</v-list-item-title>
       </v-list-item>
 
-      <v-list-item>
-        <v-list-item-title>Bar</v-list-item-title>
+      <v-list-item href="{% url 'book:profile' %}">
+        <v-list-item-title>プロフィール（準備中...）</v-list-item-title>
       </v-list-item>
 
-      <v-list-item>
-        <v-list-item-title>Fizz</v-list-item-title>
+      <v-list-item href="{% url 'book:book' %}">
+        <v-list-item-title>書籍一覧</v-list-item-title>
       </v-list-item>
 
-      <v-list-item>
+      <v-divider></v-divider>
+
+      {% comment %} <v-list-item>
         <v-list-item-title>Buzz</v-list-item-title>
-      </v-list-item>
+      </v-list-item> {% endcomment %}
     </v-list-item-group>
   </v-list>
 </v-navigation-drawer>

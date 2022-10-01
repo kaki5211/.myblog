@@ -21,7 +21,7 @@ class="my-bg-color-glay"
     {% for item in category %}
     <v-btn color="{{item.color_hex}}" class="ma-1" elevation="1" outlined rounded small>
       <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %}
-        <input type="submit" href="{% url "book:book" %}" value="{{item.get_category_display}}">
+        <input type="submit" name="category" href="{% url "book:book" %}" value="{{item.get_category_display}}">
       </form>
     </v-btn>
     {% endfor %}

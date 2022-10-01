@@ -7,10 +7,15 @@
   {% include 'text/text_title_book-ic.html' with text="BOOK I.C." text_sub="～本の感想を創造するブログ～" %}
 
 
+
   {% comment %}         
   <!-- ランキング -->
   {% include 'book/components/ranking.html' %}
   {% endcomment %}
+
+
+  <!-- breadcrumbs -->
+  {% include 'block/breadcrumbs.html' with aueiu=book_info.title%}
 
   <!-- title -->
   {% include 'text/text_subtitle.html' with text="最近の投稿" icon_name="mdi-book-open-page-variant" %}

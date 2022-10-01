@@ -139,7 +139,7 @@ class TopView(MyListView): # TopView
         return context
 
     def get_queryset(self):
-        q = Book.objects.all().order_by("post_day")
+        q = Book.objects.filter(fin=1).order_by("post_day")
         return q
 
 class TopquasarView(MyListView): # TopView
@@ -151,7 +151,7 @@ class TopquasarView(MyListView): # TopView
         return context
 
     def get_queryset(self):
-        q = Book.objects.all().order_by("post_day")
+        q = Book.objects.filter(fin=1).order_by("post_day")
         return q        
 
 
@@ -247,7 +247,7 @@ class BookView(ListView):
         except:
             pass
         try:
-            context['book_list'] = Book.objects.all()
+            context['book_list'] = Book.objects.filter(fin=1)
             context['contents_text'] = context['book_info'].contents
             list_ = []
             count = 0
@@ -267,21 +267,18 @@ class BookView(ListView):
             count = 0
             count_subtitle = 0
             for text_ in list_:
-                print(text_[0])
                 count += 1
                 if text_[0] == "subtitle":
                     count_subtitle += 1
                     if count_subtitle == 3:
                         break
             context['count_subtitle'] = count
-            print(context['count_subtitle'], "■■■■■■■■■■■■■■■■■■■")
         except:
             pass
         if 'office' in self.request.session:
             print('セッション名officeは存在します')
             del self.request.session['office']
         else:
-            print('セッション名officeは存在しません')
             self.request.session['office'] = "office"
         context['DEBUG'] = settings.DEBUG
 
@@ -293,7 +290,7 @@ class BookView(ListView):
         if data_info['category_d'] != None:
             q = Book.objects.filter(post_day=datetime.date(int(data_info['category_y']), int(data_info['category_m']), int(data_info['category_d'])))
         else:
-            q =  Book.objects.all()
+            q =  Book.objects.filter(fin=1)
         return q
 
     def get_template_names(self, *args, **kwargs):
@@ -371,7 +368,7 @@ class BookView(ListView):
 
 
 
-
+        print("■■■■■resultresultresultresultresultresultresult■■■■")
 
 
 
@@ -380,7 +377,8 @@ class BookView(ListView):
         # context2 = context['myform'][1].__dict__
         # if 'issue_low_year' in request.POST and 'issue_low_month' in request.POST and 'issue_low_day' in request.POST:
         request.session['form_data'] = request.POST
-        
+        print(request.POST)
+
         # aaa = BookForm(request.POST)
         # aa
 
@@ -398,33 +396,36 @@ class BookView(ListView):
                     condition_title = Q(title__contains=request.POST['title'])
                     condition_result.append("condition_title")
 
-            if 'pages_low' in request.POST and 'pages_high' in request.POST:
-                if request.POST['pages_low'] != "" or request.POST['pages_high'] != "":
-                    if request.POST['pages_low'] != "" and request.POST['pages_high'] != "":
-                        condition_pages = Q(pages__range=[request.POST['pages_low'], request.POST['pages_high']])
-                    elif request.POST['pages_low'] == "":
-                        condition_pages = Q(pages__range=['0', request.POST['pages_high']])
-                    elif request.POST['pages_high'] == "":
-                        condition_pages = Q(pages__range=[request.POST['pages_low'], '9999'])
-                    condition_result.append("condition_pages")
 
 
-            if 'issue_low_year' in request.POST and 'issue_low_month' in request.POST and 'issue_low_day' in request.POST:
-                # condition_issue = Q(issue__range=["1990-1-1", datetime.date.today().strftime('%Y/%m/%d')])
-                condition_issue = Q(issue__range=["{}-{}-{}".format(request.POST['issue_low_year'], request.POST['issue_low_month'], request.POST['issue_low_day']),
-                    "{}-{}-{}".format(request.POST['issue_high_year'], request.POST['issue_high_month'], request.POST['issue_high_day'])])
-                if request.POST['issue_low_year'] > request.POST['issue_high_year']:
-                    condition_issue = Q(issue__range=["{}-{}-{}".format(request.POST['issue_high_year'], request.POST['issue_high_month'], request.POST['issue_high_day']),
-                        "{}-{}-{}".format(request.POST['issue_low_year'], request.POST['issue_low_month'], request.POST['issue_low_day'])])
-                elif request.POST['issue_low_year'] == request.POST['issue_high_year']:
-                    if request.POST['issue_low_month'] > request.POST['issue_high_month']:
-                        condition_issue = Q(issue__range=["{}-{}-{}".format(request.POST['issue_high_year'], request.POST['issue_high_month'], request.POST['issue_high_day']),
-                            "{}-{}-{}".format(request.POST['issue_low_year'], request.POST['issue_low_month'], request.POST['issue_low_day'])])
-                    elif request.POST['issue_low_month'] == request.POST['issue_high_month']:
-                        if request.POST['issue_low_day'] > request.POST['issue_high_day']:
-                            condition_issue = Q(issue__range=["{}-{}-{}".format(request.POST['issue_high_year'], request.POST['issue_high_month'], request.POST['issue_high_day']),
-                                "{}-{}-{}".format(request.POST['issue_low_year'], request.POST['issue_low_month'], request.POST['issue_low_day'])])
-                condition_result.append("condition_issue")
+            # if 'pages_low' in request.POST and 'pages_high' in request.POST:
+            #     if request.POST['pages_low'] != "" or request.POST['pages_high'] != "":
+            #         if request.POST['pages_low'] != "" and request.POST['pages_high'] != "":
+            #             condition_pages = Q(pages__range=[request.POST['pages_low'], request.POST['pages_high']])
+            #         elif request.POST['pages_low'] == "":
+            #             condition_pages = Q(pages__range=['0', request.POST['pages_high']])
+            #         elif request.POST['pages_high'] == "":
+            #             condition_pages = Q(pages__range=[request.POST['pages_low'], '9999'])
+            #         condition_result.append("condition_pages")
+
+
+            # if 'issue_low_year' in request.POST and 'issue_low_month' in request.POST and 'issue_low_day' in request.POST:
+            #     # condition_issue = Q(issue__range=["1990-1-1", datetime.date.today().strftime('%Y/%m/%d')])
+            #     condition_issue = Q(issue__range=["{}-{}-{}".format(request.POST['issue_low_year'], request.POST['issue_low_month'], request.POST['issue_low_day']),
+            #         "{}-{}-{}".format(request.POST['issue_high_year'], request.POST['issue_high_month'], request.POST['issue_high_day'])])
+            #     if request.POST['issue_low_year'] > request.POST['issue_high_year']:
+            #         condition_issue = Q(issue__range=["{}-{}-{}".format(request.POST['issue_high_year'], request.POST['issue_high_month'], request.POST['issue_high_day']),
+            #             "{}-{}-{}".format(request.POST['issue_low_year'], request.POST['issue_low_month'], request.POST['issue_low_day'])])
+            #     elif request.POST['issue_low_year'] == request.POST['issue_high_year']:
+            #         if request.POST['issue_low_month'] > request.POST['issue_high_month']:
+            #             condition_issue = Q(issue__range=["{}-{}-{}".format(request.POST['issue_high_year'], request.POST['issue_high_month'], request.POST['issue_high_day']),
+            #                 "{}-{}-{}".format(request.POST['issue_low_year'], request.POST['issue_low_month'], request.POST['issue_low_day'])])
+            #         elif request.POST['issue_low_month'] == request.POST['issue_high_month']:
+            #             if request.POST['issue_low_day'] > request.POST['issue_high_day']:
+            #                 condition_issue = Q(issue__range=["{}-{}-{}".format(request.POST['issue_high_year'], request.POST['issue_high_month'], request.POST['issue_high_day']),
+            #                     "{}-{}-{}".format(request.POST['issue_low_year'], request.POST['issue_low_month'], request.POST['issue_low_day'])])
+            #     condition_result.append("condition_issue")
+
 
             else:
                 a = request.POST
@@ -432,6 +433,7 @@ class BookView(ListView):
                 # request.POST['issue_high_month'] = datetime.date.today().strftime('%m')
                 # request.POST['issue_high_day'] = datetime.date.today().strftime('%d')
 
+            print("■■■■■resultresultresultresultresultresultresult■■■■")
 
             if 'age_high_year' in request.POST and 'age_high_month' in request.POST and 'age_high_day' in request.POST:
                 condition_age = Q(author_info__age__range=["{}-{}-{}".format(request.POST['age_low_year'], request.POST['age_low_month'], request.POST['age_low_day']),
@@ -469,7 +471,6 @@ class BookView(ListView):
                     condition_result.append("condition_author")
 
 
-
             result_q=""
             for q in condition_result:
                 if condition_result[0] != q:
@@ -483,9 +484,9 @@ class BookView(ListView):
             exec("result_and = {}".format(result_q), locals(), rdict)
             result = Book.objects.select_related().filter(rdict["result_and"])
 
-                
+            print("■■■■■■condition_result", condition_result)
 
-            context["book"] = result
+            context["book_list"] = result
             if 'sex' in request.POST:
                 context['myform'] = [BookForm(request.POST), CategoryForm(request.POST) ,AuthorForm(request.POST), PublisherForm(request.POST)]
             else:
@@ -545,6 +546,22 @@ class TestView(MyListView): # TopView
         context = super().my_get_context_data(self, *args, **kwargs)
         return context
 
+
+class ProfileView(MyListView):
+    model = Book
+    template_name = 'book/profile.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().my_get_context_data(self, *args, **kwargs)
+        return context
+        
+class Book_icView(MyListView):
+    model = Book
+    template_name = 'book/book-ic.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().my_get_context_data(self, *args, **kwargs)
+        return context
 
 
 

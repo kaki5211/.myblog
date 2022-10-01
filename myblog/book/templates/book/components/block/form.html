@@ -1,0 +1,126 @@
+
+  <v-col cols="11" class="mx-auto">
+
+  {% comment %} <v-col cols="12" sm="11" md="9" lg="6" class="mt-16 mx-auto px-0" > {% endcomment %}
+    
+    
+
+    <form action="{% url 'book:book' %}" method="post">
+      {% csrf_token %}
+
+
+      <div class="mt-4">
+        <p class="">■書籍</p>
+        <v-text-field
+          {% comment %} v-model="message3" {% endcomment %}
+          {% comment %} :error-messages="nameErrors" {% endcomment %}
+          {% comment %} label="書籍 タイトル" {% endcomment %}
+          color="#1aa179"
+          filled
+          clearable
+          class="my-text-color ps-5"
+          type="text"
+          name="title"
+          {% comment %} @input="$v.name.$touch()" {% endcomment %}
+          {% comment %} @blur="$v.name.$touch()" {% endcomment %}
+        >
+      </v-text-field>
+    </div>
+
+    
+
+
+
+
+    <div class="my-6">
+      <p class="my-text-color-title">■カテゴリー</p>
+      <div class="ps-2">
+          {% for item in category %}
+
+        <v-btn color="{{item.color_hex}}" class="my-checkbox my-1" elevation="1" outlined rounded small>
+          <label>
+            <input class="checkbox_category" type="checkbox" name="category" style="display: none;" value="{{item.get_category_display}}">{{item.get_category_display}}
+          </label>
+        </v-btn>
+
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="my-6">
+      <p class="my-text-color-title">■著者</p>
+      <div class="ps-2">
+      {% for item in author_Aa %}
+      {% for item2 in item %}
+        {% if forloop.first %}
+        <div class="me-auto mb-2 text-start pr-5" style="display: inline-block;">
+          <a class="my-text-color-title mx-2">{{item2.get_word_oder_display}}</a>
+        {% endif %}
+  
+  
+        <v-btn class="my-checkbox my-1" elevation="1" outlined rounded small>
+          <label>
+            <input class="checkbox_author" type="checkbox" name="author" style="display: none;" value="{{ item2.author }}">{{ item2.author }}
+          </label>
+        </v-btn>
+          {% if forloop.last %}
+          </div>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="my-6">
+    <p class="my-text-color-title">■出版社</p>
+    <div class="ps-2">
+        {% for item in publisher %}
+
+      <v-btn color="{{item.color_hex}}" class="my-checkbox my-1" elevation="1" outlined rounded small>
+        <label>
+          <input class="checkbox_publisher" type="checkbox" name="publisher" style="display: none;" value="{{item.publisher}}">{{item.publisher}}
+        </label>
+      </v-btn>
+
+      {% endfor %}
+    </div>
+  </div>
+
+
+
+
+
+
+    <div  class="my-10 d-flex justify-end">
+
+  <v-btn 
+  color="#1aa179"
+  class="mr-4"
+  id="search_clear"
+  outlined
+  {% comment %} @click="clear" {% endcomment %}
+  >
+    クリアー
+  </v-btn>
+
+
+  <v-btn
+  class="mr-4"
+  id="search_execution"
+  outlined
+  color="#1aa179"
+  {% comment %} @click="submit" {% endcomment %}
+  type="submit"
+>
+
+
+  書籍検索
+
+</v-btn>
+
+
+</div>
+
+
+</form>
+  </v-col>
