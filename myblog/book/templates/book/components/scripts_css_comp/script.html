@@ -1,5 +1,5 @@
 
-    <script>
+    <script type="application/javascript">
         {% comment %} $icon-size: 50px; {% endcomment %}
         new Vue({
           el: '#app',
@@ -67,9 +67,9 @@
       
       </script>
 
-      <script>
+      <script type="application/javascript">
 
-
+        
         {% comment %} var els_tag_input = document.getElementsByClassName("checkbox_category"); {% endcomment %}
         var els_input_all = document.querySelectorAll('.checkbox_category, .checkbox_author, .checkbox_publisher');
         var els_input_category = document.querySelectorAll('.checkbox_category')
@@ -81,117 +81,136 @@
         var els_input_author = document.querySelectorAll('.checkbox_author')
         var els_card = document.getElementsByClassName("my-books");
 
+        if (!els_tag_vbtn){
 
-        for (let i = 0; i < els_input_all.length; i++) {
-          els_tag_vbtn[i].addEventListener('click', event => {
-            if( els_input_all[i].checked ) {
-              els_input_all[i].checked=false;
-            }else{
-              els_input_all[i].checked=true;
-            }
+          for (let i = 0; i < els_input_all.length; i++) {
+            els_tag_vbtn[i].addEventListener('click', event => {
+              if( els_input_all[i].checked ) {
+                els_input_all[i].checked=false;
+              }else{
+                els_input_all[i].checked=true;
+              }
 
 
-            var card_category = "";
-            var flag_author_checked = "";
-            var card_publisher = "";
+              var card_category = "";
+              var flag_author_checked = "";
+              var card_publisher = "";
 
-            for (let j = 0; j < els_card.length; j++ ) {
-              card_category = els_card[j].getElementsByClassName("card_category");
-              card_author = els_card[j].getElementsByClassName("card_author");
-              card_publisher = els_card[j].getElementsByClassName("card_publisher");
+              for (let j = 0; j < els_card.length; j++ ) {
+                card_category = els_card[j].getElementsByClassName("card_category");
+                card_author = els_card[j].getElementsByClassName("card_author");
+                card_publisher = els_card[j].getElementsByClassName("card_publisher");
 
-              
+                
 
-              let flag_category_checked = false;
-              let flag_author_checked = false;
-              let flag_publisher_checked = false;
+                let flag_category_checked = false;
+                let flag_author_checked = false;
+                let flag_publisher_checked = false;
 
-              let flag_category_checked_none_all = true;
-              let flag_author_checked_none_all = true;
-              let flag_publisher_checked_none_all = true;
-              
+                let flag_category_checked_none_all = true;
+                let flag_author_checked_none_all = true;
+                let flag_publisher_checked_none_all = true;
+                
 
-              for (let k = 0; k < els_input_category.length; k++ ) {
-                if ( els_input_category[k].checked ) {
-                  flag_category_checked_none_all = false;
-                }
-                if ( els_input_category[k].value == card_category[0].value ) {
+                for (let k = 0; k < els_input_category.length; k++ ) {
                   if ( els_input_category[k].checked ) {
-                    flag_category_checked = true;
-                  }else{
-                    flag_category_checked = false;
+                    flag_category_checked_none_all = false;
+                  }
+                  if ( els_input_category[k].value == card_category[0].value ) {
+                    if ( els_input_category[k].checked ) {
+                      flag_category_checked = true;
+                    }else{
+                      flag_category_checked = false;
+                    }
                   }
                 }
-              }
-              for (let k = 0; k < els_input_author.length; k++ ) {
-                if ( els_input_author[k].checked ) {
-                  flag_author_checked_none_all = false;
-                }
-                if ( els_input_author[k].value == card_author[0].value ) {
+                for (let k = 0; k < els_input_author.length; k++ ) {
                   if ( els_input_author[k].checked ) {
-                    flag_author_checked = true;
-                  }else{
-                    flag_author_checked = false;
+                    flag_author_checked_none_all = false;
+                  }
+                  if ( els_input_author[k].value == card_author[0].value ) {
+                    if ( els_input_author[k].checked ) {
+                      flag_author_checked = true;
+                    }else{
+                      flag_author_checked = false;
+                    }
                   }
                 }
-              }
-              for (let k = 0; k < els_input_publisher.length; k++ ) {
-                if ( els_input_publisher[k].checked ) {
-                  flag_publisher_checked_none_all = false;
-                }
-                if ( els_input_publisher[k].value == card_publisher[0].value ) {
+                for (let k = 0; k < els_input_publisher.length; k++ ) {
                   if ( els_input_publisher[k].checked ) {
-                    flag_publisher_checked = true;
-                  }else{
-                    flag_publisher_checked = false;
+                    flag_publisher_checked_none_all = false;
+                  }
+                  if ( els_input_publisher[k].value == card_publisher[0].value ) {
+                    if ( els_input_publisher[k].checked ) {
+                      flag_publisher_checked = true;
+                    }else{
+                      flag_publisher_checked = false;
+                    }
                   }
                 }
-              }
 
-              var display_flag = true;
-              
-                if ( flag_category_checked_none_all == true ||  flag_category_checked == true) {
-                }else{
-                  display_flag = false;
-                }
-                if ( flag_author_checked_none_all == true ||  flag_author_checked == true) {
-                }else{
-                  display_flag = false;
-                  els_card[j].style.display = "none";
+                var display_flag = true;
+                
+                  if ( flag_category_checked_none_all == true ||  flag_category_checked == true) {
+                  }else{
+                    display_flag = false;
+                  }
+                  if ( flag_author_checked_none_all == true ||  flag_author_checked == true) {
+                  }else{
+                    display_flag = false;
+                    els_card[j].style.display = "none";
+
+                  }
+                  if ( flag_publisher_checked_none_all == true ||  flag_publisher_checked == true) {
+                  }else{
+                    display_flag = false;
+                  }
+
+                  if ( display_flag == true) {
+                    els_card[j].style.display = "block";
+                  }else{
+                    els_card[j].style.display = "none";
+                  }
 
                 }
-                if ( flag_publisher_checked_none_all == true ||  flag_publisher_checked == true) {
-                }else{
-                  display_flag = false;
-                }
-
-                if ( display_flag == true) {
-                  els_card[j].style.display = "block";
-                }else{
-                  els_card[j].style.display = "none";
-                }
-
-              }
+            }
+            );
           }
-          );
+
+          var search_clear = document.getElementById("search_clear")
+          search_clear.addEventListener('click', event => { 
+            for (let i = 0; i < els_input_all.length; i++) { 
+              els_input_all[i].checked = false;
+            }
+            for (let k = 0; k < els_card.length; k++) {
+              els_card[k].style.display = "block";
+            }
+          })
+
+
+
+          
+          var card_category = document.getElementsByClassName("card_category");
         }
-
-      var search_clear = document.getElementById("search_clear")
-      search_clear.addEventListener('click', event => { 
-        for (let i = 0; i < els_input_all.length; i++) { 
-          els_input_all[i].checked = false;
-        }
-        for (let k = 0; k < els_card.length; k++) { 
-          els_card[k].style.display = "block";
-        }
-      })
-
-
-
-        
-        var card_category = document.getElementsByClassName("card_category");
 
       </script>
+
+
+
+      <script type="application/javascript">
+        var book_img_urls = document.getElementsByClassName('kattene__imgpart');
+
+        for (let i = 0; i < book_img_urls.length; i++) {
+          book_img_url = book_img_urls[i].children[0].children[0].children[0];
+          book_img_url.setAttribute("class", "my-border mt-5 elevation-2 my-w-100")
+        }
+
+        {% comment %} amazon_img_url. {% endcomment %}
+
+      </script>
+
+
+
       {% comment %} .style.display ="none"; {% endcomment %}
       {% comment %} parentElement {% endcomment %}
 

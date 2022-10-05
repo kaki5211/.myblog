@@ -136,6 +136,7 @@ class TopView(MyListView): # TopView
 
     def get_context_data(self, *args, **kwargs):
         context = super().my_get_context_data(self, *args, **kwargs)
+        context['book_list'] = Book.objects.filter(fin=1)
         return context
 
     def get_queryset(self):

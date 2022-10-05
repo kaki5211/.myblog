@@ -53,7 +53,7 @@ class Book(models.Model):
     rakuten_url = models.CharField('楽天URL', max_length=1000, null=True, blank=True)
     rakuten_kobo_url = models.CharField('楽天KOBOURL', max_length=1000, null=True, blank=True)
 
-    book_img_url = models.CharField('商品画像', max_length=1000, null=True, blank=True)
+    book_img_url = models.TextField('商品画像', null=True, blank=True)
 
     def __str__(self):
         return self.title
