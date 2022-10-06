@@ -30,11 +30,53 @@
                   <v-icon size="20" class="pl-2">mdi-refresh</v-icon>
                   {{ book_info.update_day | safe }}   
               </p>        
-                
+{% comment %}                 
             <v-col cols="12" sm="11" md="9" lg="6" class="mt-16 mx-auto px-0" >
               <v-img
-              >{{ book_info.amazon_url | safe }}</v-img>  
-            </v-col>
+              >{{ book_info.book_img_url | safe }}</v-img>  
+            </v-col> {% endcomment %}
+            <v-col cols="10" class="mx-auto px-0">
+            <div class="kattene">
+              <div class="kattene__imgpart">
+                {% comment %} <a target="_blank" rel="noopener" href="【メインのURL】"> {% endcomment %}
+                {% comment %} <img src="" width="160" height="160" loading="lazy" class="kattene__shadow"> {% endcomment %}
+                <div>
+                  {% spaceless %}
+                  {{ book_info.book_img_url | safe}}
+                  {% endspaceless %}
+                </div>
+    
+    
+    
+                  {% comment %} <a href="https://www.amazon.co.jp/%E4%BD%95%E3%82%82%E3%81%8B%E3%82%82%E6%86%82%E9%AC%B1%E3%81%AA%E5%A4%9C%E3%81%AB-%E9%9B%86%E8%8B%B1%E7%A4%BE%E6%96%87%E5%BA%AB-%E4%B8%AD%E6%9D%91-%E6%96%87%E5%89%87/dp/4087467988?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&crid=22P8P409551PY&keywords=%E4%BD%95%E3%82%82%E3%81%8B%E3%82%82%E6%86%82%E9%AC%B1%E3%81%AA%E5%A4%9C%E3%81%AB&qid=1664892669&qu=eyJxc2MiOiIxLjA2IiwicXNhIjoiMC40NiIsInFzcCI6IjAuNDkifQ%3D%3D&s=instant-video&sprefix=%E4%BD%95%E3%82%82%E3%81%8B%E3%82%82%E6%86%82%E9%AC%B1%E3%81%AA%E5%A4%9C%E3%81%AB%2Cinstant-video%2C178&sr=1-1-catcorr&linkCode=li2&tag=bookic-22&linkId=3b66b22a86ce0d296bde27c76521a4b0&language=ja_JP&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=4087467988&Format=_SL160_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=bookic-22&language=ja_JP" ></a> {% endcomment %}
+    
+                {% comment %} </a> {% endcomment %}
+              </div>
+              <div class="kattene__infopart">
+                <div class="kattene__btns __four" class="d-flex">
+                  <div class="d-flex"><v-btn text outlined class="mx-auto my-w-100">
+                    <a class="text-decoration-none" target="_blank" href="{{ book_info.amazon_url }}">Amazon</a></v-btn>
+                  </div>
+                  
+                  <div class="d-flex"><v-btn text outlined class="mx-auto my-w-100">
+                    <a class="text-decoration-none" target="_blank" {% if book_info.kindle_url != none %}href="{{ book_info.kindle_url }}"{% endif %}>{% if book_info.kindle_url != none %}Kindle{% else %}none{% endif %}</a></v-btn>
+                  </div>
+    
+                  <div class="d-flex"><v-btn text outlined class="mx-auto my-w-100">
+                    <a class="text-decoration-none" target="_blank" href="{{ book_info.rakuten_url }}">楽天</a></v-btn>
+                  </div>
+    
+                  <div class="d-flex"><v-btn text outlined class="mx-auto my-w-100">
+                    <a class="text-decoration-none" target="_blank" {% if book_info.rakuten_kobo_url != none %}href="{{ book_info.rakuten_kobo_url }}"{% endif %}>{% if book_info.rakuten_kobo_url != none %}楽天KOBO{% else %}none{% endif %}</a></v-btn>
+                    
+                    
+                  </div>
+                </div>
+              </div>
+          </div>
+        </v-col>
+
+
 
             <v-col cols="12" sm="11" md="10" lg="8" class="mx-auto py-10">         <!-- table -->
               <v-simple-table dense class="my-bg-color my-border">
