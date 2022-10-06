@@ -46,12 +46,12 @@
       active-class="deep-purple--text text--accent-4"
     >
 
-      <v-list-item href="{% url 'book:top' %}">
+      <v-list-item class="my-3" href="{% url 'book:top' %}">
         <v-list-item-content>
-          <v-list-item-title class="text-h6">
+          <v-list-item-title id="my-letter-spacing-3" class="my-font-weight-title text-h6 text-center">
             BOOK I.C.
           </v-list-item-title>
-          <v-list-item-subtitle>
+          <v-list-item-subtitle class="text-center">
             ～本の感想を創造するブログ～
           </v-list-item-subtitle>
         </v-list-item-content>
@@ -65,15 +65,42 @@
         <v-list-item-title color="#1aa179">BOOK I.C. について（準備中...）</v-list-item-title>
       </v-list-item>
 
-      <v-list-item href="{% url 'book:profile' %}">
+      <v-list-item class="mb-5" href="{% url 'book:profile' %}">
         <v-list-item-title>プロフィール（準備中...）</v-list-item-title>
       </v-list-item>
 
+      <v-divider></v-divider>
+      
       <v-list-item href="{% url 'book:book' %}">
         <v-list-item-title>書籍一覧</v-list-item-title>
       </v-list-item>
 
       <v-divider></v-divider>
+
+
+      <v-treeview
+      v-model="tree"
+      :open="initiallyOpen"
+      :items="items"
+      activatable
+      item-key="name"
+      open-on-click
+    >
+      <template v-slot:prepend="{ item, open }">
+        <v-icon v-if="!item.file">
+          [[ open ? 'mdi-folder-open' : 'mdi-folder' ]]
+        </v-icon>
+        <v-icon v-else>
+          [[ files[item.file] ]]
+        </v-icon>
+      </template>
+    </v-treeview>
+
+
+
+
+
+      {% comment %} <v-divider></v-divider> {% endcomment %}
 
       {% comment %} <v-list-item>
         <v-list-item-title>Buzz</v-list-item-title>

@@ -28,10 +28,57 @@
     </div>
 
     
+    <div class="my-1 d-inline-block">
+      <a class="my-text-color-title">■カテゴリー：</a>
+          {% for item in category %}
+
+        <v-btn color="{{item.color_hex}}" class="my-checkbox my-1" elevation="1" outlined rounded small>
+          <label>
+            <input class="checkbox_category" type="checkbox" name="category" style="display: none;" value="{{item.get_category_display}}">{{item.get_category_display}}
+          </label>
+        </v-btn>
+
+        {% endfor %}
+      </div>
+        
+
+    <div class="my-1">
+      <a class="my-text-color-title">■著者：</a>
+      {% for item in author_Aa %}
+      {% for item2 in item %}
+        {% if forloop.first %}
+        <div class="me-auto mb-2 text-start" style="display: inline-block;">
+          <a class="my-text-color-title">{{item2.get_word_oder_display|cut:"行"}}</a>
+        {% endif %}
+
+        <v-btn class="my-checkbox my-1" elevation="1" outlined rounded small>
+          <label>
+            <input class="checkbox_author" type="checkbox" name="author" style="display: none;" value="{{ item2.author }}">{{ item2.author }}
+          </label>
+        </v-btn>
+          {% if forloop.last %}
+          </div>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+        </div>
+
+        <div class="my-1">
+          <a class="my-text-color-title">■出版社：</a>
+        {% for item in publisher %}
+
+      <v-btn color="{{item.color_hex}}" class="my-checkbox my-1" elevation="1" outlined rounded small>
+        <label>
+          <input class="checkbox_publisher" type="checkbox" name="publisher" style="display: none;" value="{{item.publisher}}">{{item.publisher}}
+        </label>
+      </v-btn>
+
+      {% endfor %}
+    </div>
 
 
 
-
+{% comment %} 
     <div class="my-6">
       <p class="my-text-color-title">■カテゴリー</p>
       <div class="ps-2">
@@ -85,13 +132,13 @@
       {% endfor %}
     </div>
   </div>
+ {% endcomment %}
 
 
 
 
 
-
-    <div  class="my-10 d-flex justify-end">
+    <div  class="mb-10 mt-3 d-flex justify-end">
 
   <v-btn 
   color="#1aa179"
