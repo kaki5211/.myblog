@@ -564,6 +564,27 @@ class Book_icView(MyListView):
         context = super().my_get_context_data(self, *args, **kwargs)
         return context
 
+class OthersView(MyListView):
+    model = Book
+    template_name = 'book/others.html'
+    def get_context_data(self, *args, **kwargs):
+        context = super().my_get_context_data(self, *args, **kwargs)
+        return context
+
+
+class Privacy_policyView(MyListView):
+    model = Book
+    template_name = 'book/privacy_policy.html'
+    def get_context_data(self, *args, **kwargs):
+        context = super().my_get_context_data(self, *args, **kwargs)
+        return context
+
+class ContactView(MyListView):
+    model = Book
+    template_name = 'book/contact.html'
+    def get_context_data(self, *args, **kwargs):
+        context = super().my_get_context_data(self, *args, **kwargs)
+        return context
 
 
 # def sitemap(request):

@@ -1,0 +1,21 @@
+
+{% extends 'book/_block_static.html' %}
+
+{% block contents %}
+
+  <!-- BOOK DB -->
+  {% include 'text/text_title.html' with text="プライバシーポリシー" %}
+
+
+
+  <!-- breadcrumbs -->
+  {% include 'block/breadcrumbs.html' with aueiu=book_info.title%}
+
+  <!-- title -->
+  {% include 'text/text_subtitle.html' with text="プライバシーポリシー" icon_name="mdi-shield-lock-outline" %}
+
+  <p>準備中... (2022.10.02)</p>
+
+
+{% endblock %}
+

@@ -62,11 +62,14 @@ urlpatterns = [
 
     path('articles/', views.ArticlesView.as_view(), name='article'), # トピックスに近いもの
 
-    path('others/', views.OthersView.as_view(),  name='other'),
+    path('otherss/', views.OthersView.as_view(),  name='other'),
     path('others/shedule', views.Schedule.as_view(),  name='schedule'),
 
     path('profile/', views.ProfileView.as_view(), name="profile"),
     path('book-ic/', views.Book_icView.as_view(), name="book-ic"),
+    path('others', views.OthersView.as_view(), name="others"),
+    path('privacypolicy', views.Privacy_policyView.as_view(), name="privacy_policy"),
+    path('contact', views.ContactView.as_view(), name="contact"),
     
 
     path('sitemap.xml/', sitemap, {'sitemaps': sitemaps},  name='sitemap'),

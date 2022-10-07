@@ -35,57 +35,136 @@
   absolute
   left
   temporary
-  style="border: solid #455045;"
+  style="border: solid #455045; height: 100vh;"
 >
   <v-list
     nav
     dense
+    class=""
   >
     <v-list-item-group
-      v-model="group"
-      active-class="deep-purple--text text--accent-4"
+      {% comment %} v-model="group" {% endcomment %}
+      class=""
+      {% comment %} active-class="deep-purple--text text--accent-4" {% endcomment %}
     >
 
-      <v-list-item class="my-3" href="{% url 'book:top' %}">
+      <v-list-item class="mt-3" href="{% url 'book:top' %}">
         <v-list-item-content>
-          <v-list-item-title id="my-letter-spacing-3" class="my-font-weight-title text-h6 text-center">
+          <v-list-item-title id="my-letter-spacing-3" class="mb-3 my-font-weight-title text-h6 text-center my-text-color-title">
             BOOK I.C.
           </v-list-item-title>
-          <v-list-item-subtitle class="text-center">
+          <v-list-item-subtitle class="text-center my-text-color-glay">
             ～本の感想を創造するブログ～
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
       
-      <v-divider></v-divider>
+      <v-divider class="my-2"></v-divider>
+      
+
       
 
 
-      <v-list-item class="mt-10" href="{% url 'book:book-ic' %}">
-        <v-list-item-title color="#1aa179">BOOK I.C. について（準備中...）</v-list-item-title>
+
+
+
+      <v-list-item class="mb-1 my-text-color" href="{% url 'book:book-ic' %}">
+        <v-list-item-icon>
+          <v-icon>mdi-office-building-marker-outline</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>BOOK I.C. について（準備中...）</v-list-item-title>
+        </v-list-item-content>
       </v-list-item>
 
-      <v-list-item class="mb-5" href="{% url 'book:profile' %}">
-        <v-list-item-title>プロフィール（準備中...）</v-list-item-title>
+      <v-list-item class="my-text-color" href="{% url 'book:profile' %}">
+        <v-list-item-icon>
+          <v-icon>mdi-account-circle-outline</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>プロフィール（準備中...）</v-list-item-title>
+        </v-list-item-content>
       </v-list-item>
 
-      <v-divider></v-divider>
       
-      <v-list-item href="{% url 'book:book' %}">
-        <v-list-item-title>書籍一覧</v-list-item-title>
+
+
+
+      <v-divider class="my-2"></v-divider>
+        
+      <v-list-item class="mb-1 my-text-color" href="{% url 'book:top' %}">
+        <v-list-item-icon>
+          <v-icon>mdi-home</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>ホーム</v-list-item-title>
+        </v-list-item-content>
       </v-list-item>
 
-      <v-divider></v-divider>
+      <v-list-item class="mb-1 my-text-color" href="{% url 'book:book' %}">
+        <v-list-item-icon>
+          <v-icon>mdi-bookshelf</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>書籍一覧</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      
+      <v-list-item class="mb-1 my-text-color" href="{% url 'book:others' %}">
+        <v-list-item-icon>
+          <v-icon>mdi-dots-horizontal-circle-outline</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>その他 記事（準備中...）</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
 
+
+      
+  
+
+      
+      <v-divider class="my-2"></v-divider>
+
+
+      <v-list-item class="mb-1 my-text-color" href="{% url 'book:privacy_policy' %}">
+        <v-list-item-icon>
+          <v-icon>mdi-shield-lock-outline</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>プライバシーポリシー（準備中...）</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-list-item class="mb-1 my-text-color" href="{% url 'book:contact' %}">
+        <v-list-item-icon>
+          <v-icon>mdi-email-outline</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>問い合わせ（準備中...）</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-divider class="my-2"></v-divider>
+      
+      <v-btn icon fab class="my-text-color" href="https://twitter.com/BOOK_IC">
+        <v-icon size="28" >mdi-twitter</v-icon>
+      </v-btn>
+      <v-btn icon fab class="my-text-color me-5" href="https://www.instagram.com/BOOK_I.C/">
+        <v-icon size="28" >mdi-instagram</v-icon>
+      </v-btn>
+
+      
+{% comment %} 
 
       <v-treeview
-      v-model="tree"
-      :open="initiallyOpen"
-      :items="items"
-      activatable
-      item-key="name"
-      open-on-click
-    >
+        v-model="tree"
+        :open="initiallyOpen"
+        :items="items"
+        activatable
+        item-key="name"
+        open-on-click
+      >
       <template v-slot:prepend="{ item, open }">
         <v-icon v-if="!item.file">
           [[ open ? 'mdi-folder-open' : 'mdi-folder' ]]
@@ -94,7 +173,7 @@
           [[ files[item.file] ]]
         </v-icon>
       </template>
-    </v-treeview>
+    </v-treeview> {% endcomment %}
 
 
 
