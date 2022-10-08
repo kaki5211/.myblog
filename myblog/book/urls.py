@@ -24,7 +24,7 @@ class PostSitemap(Sitemap):
     priority = 0.5
 
     def items(self):
-        return Book.objects.all()
+        return Book.objects.filter(fin=True)
 
     def location(self, obj):
         data_info=(obj.post_day).strftime("%Y-%m-%d")
@@ -34,8 +34,24 @@ class PostSitemap(Sitemap):
     def lastmod(self, obj):
         return obj.post_day
 
+class StaticSitemap(Sitemap):
+    changefreq = "never"
+    priority = 0.5
+
+    def items(self):
+        name_list = ['profile', 'book-ic', 'others', 'privacy_policy', 'contact', 'book', 'top']
+        items = []
+        for name_ in name_list:
+            items.append("book:{}".format(name_))          
+        return items
+
+    def location(self, obj):
+        return resolve_url(obj)
+
+
 sitemaps = {
     'posts': PostSitemap,
+    'static': StaticSitemap
 }
 
 

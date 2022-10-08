@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'book.apps.BookConfig',
     'django.contrib.sites',  # 追加
     'django.contrib.sitemaps',  # 追加
+    'book.templatetags.split_tags', # 追加
 ]
 
 SITE_ID = 1
@@ -91,9 +92,9 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 TEMPLATES_DIR_COMPONENTS = os.path.join(BASE_DIR, 'book', 'templates','book','components')
 
 
-print(TEMPLATES_DIR)
-print("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■")
-print(TEMPLATES_DIR_COMPONENTS)
+# print(TEMPLATES_DIR)
+# print("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■")
+# print(TEMPLATES_DIR_COMPONENTS)
 
 TEMPLATES = [
     {

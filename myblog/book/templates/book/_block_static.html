@@ -13,7 +13,10 @@
 
 
 <body>
-  {% include 'block/tag_google_body.html' %}
+  {% if  DEBUG == False %}
+    {% include 'block/tag_google_body.html' %}
+  {% endif %}
+
   <div id="app" class>
     <v-app id="inspire" class="my-bg-color">
 

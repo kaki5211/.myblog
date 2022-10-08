@@ -11,10 +11,45 @@
   <!-- breadcrumbs -->
   {% include 'block/breadcrumbs.html' with aueiu=book_info.title%}
 
-  <!-- title -->
-  {% include 'text/text_subtitle.html' with text="BOOK I.C. について" icon_name="" %}
 
-  <p>準備中... (2022.10.02)</p>
+  <!-- mokuji -->
+  {% include 'block/mokuji.html'%}
+
+  
+  <!-- title -->
+  <v-row no-gutters >
+
+  
+
+  <v-col cols="12" class="mx-auto px-0 py-10">
+
+    {% include 'book_info/contents_title.html' with text="BOOK I.C.について" ty=1 %}
+    {% include 'book_info/contents_subtitle.html' with text="小説の感想ブログ"  ty=2 %}
+
+    {% include 'book_info/contents_text.html' with text="　主に、小説の感想ブログです。「書籍一覧」に小説の感想を、「その他 記事」に小説以外の気まぐれ記事を投稿しています。" %}
+    
+    {% include 'book_info/contents_subtitle.html' with text="個人で運用"  ty=3 %}
+    {% include 'book_info/contents_text.html' with text="　このブログはPythonのフレームワーク「Djanog」で作成しています。フロントはJavaフレームワーク「Vuetify」を採用し、不足部分のcssやjavaは自分で組んでいます。サーバー,ドメイン,も個人で選定し契約しています。" %}
+
+    {% include 'book_info/contents_title.html' with text="BOOK I.C.今後について" ty=1 %}
+
+    {% include 'book_info/contents_subtitle.html' with text="毎週１記事"  ty=4 %}
+    {% include 'book_info/contents_text.html' with text="　100記事を目標として、2023年1月1日～2025年1月1日までの間、毎週1記事を基準に投稿していきます。" %}
+
+    {% include 'book_info/contents_subtitle.html' with text="ブログのブランド化"  ty=3 %}
+    {% include 'book_info/contents_text.html' with text="　さらに並行してブログ自体のユーザビリティやデザインのUPDATE等、ブランド化に向けて強化を継続していきます。" %}
+
+
+
+
+  </v-col>
+    
+</v-row>
+
+
+
+
+
 
 
 {% endblock %}

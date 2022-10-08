@@ -1,4 +1,5 @@
 
+{% load split_tags %}
 
             <v-row
               no-gutters
@@ -39,9 +40,13 @@
             <v-card-text class="pl-7 py-12">
 {% comment %} label-outline {% endcomment %}
 
+
+{% with request.path|split:"/" as path_ %}
+  {% if path_.1 == "books" %}
+
               <div class="pb-1">                  
                 <p class="text-my-text-color my-contents-title text-h6 text-md-h5 mt-5">
-                  <a style="text-decoration: none;" href="#title">{{ book_list.1.title | safe }}</a>
+                  <a style="text-decoration: none;" href="#title">{{ title_info | safe }}</a>
                 </p>
               </div>
               <div style="justify-content: center;">
@@ -51,6 +56,10 @@
                 </p>
               </div>
 
+  {% endif %}
+
+
+{% endwith %}
 
 
 
