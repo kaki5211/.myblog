@@ -37,59 +37,10 @@
       
             <v-divider></v-divider>
 
-            <v-card-text class="pl-7 py-12">
-{% comment %} label-outline {% endcomment %}
 
-
-{% with request.path|split:"/" as path_ %}
-  {% if path_.1 == "books" %}
-
-              <div class="pb-1">                  
-                <p class="text-my-text-color my-contents-title text-h6 text-md-h5 mt-5">
-                  <a style="text-decoration: none;" href="#title">{{ title_info | safe }}</a>
-                </p>
-              </div>
-              <div style="justify-content: center;">
-                <p class="text-my-text-color text-h6_5 text-md-h6 pl-3 ">
-                  <v-icon size="25">mdi-menu-right</v-icon>
-                  <a style="text-decoration: none;" href="#arasuji">あらすじ</a>
-                </p>
-              </div>
-
-  {% endif %}
-
-
-{% endwith %}
-
-
-
-
-              {% for contents_ in book_info_contents %}
-
-              {% if contents_.0 == "title" %}
-                {% comment %} {% include 'book/contents_title.html' with text=contents_.1 %} {% endcomment %}
-                <div class="pb-1">                  
-                  <p class="text-my-text-color my-contents-title text-h6 text-md-h5 mt-5">
-                      <a href="#{{forloop.counter}}">{{contents_.1}}</a>
-                  </p>
-                </div>
-              {% elif contents_.0 == "subtitle" %}
-                {% comment %} {% include 'book/contents_subtitle.html' with text=contents_.1 %} {% endcomment %}
-                <div class="pb-1" style="justify-content: center;">                  
-                  <p class="text-晴my-text-color text-h6_5 text-md-h6 pl-3 mb-1">
-                    <v-icon size="25">mdi-menu-right</v-icon>
-                    <a href="#{{forloop.counter}}">{{contents_.1}}</a>
-                  </p>
-                </div>
-              {% endif %} 
-      
-      
-            {% endfor %}
-
-
-  
+            <!-- mokuji -->
+            <v-card-text class="pl-7 py-12 my_mokuji">  
             </v-card-text>
-
 
 
 
@@ -98,8 +49,6 @@
         
       
 
-
           </v-card>
         </v-col>
-
 </v-row>

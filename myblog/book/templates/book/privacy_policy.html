@@ -4,17 +4,39 @@
 {% block contents %}
 
   <!-- BOOK DB -->
-  {% include 'text/text_title.html' with text="プライバシーポリシー" %}
+  {% include 'text/text_title.html' with text="プライバシーポリシー" icon_="mdi-shield-lock-outline" %}
 
 
-
+  
   <!-- breadcrumbs -->
-  {% include 'block/breadcrumbs.html' with aueiu=book_info.title%}
+  {% include 'block/breadcrumbs.html' %}
 
-  <!-- title -->
-  {% include 'text/text_subtitle.html' with text="プライバシーポリシー" icon_name="mdi-shield-lock-outline" %}
+  <!-- mokuji -->
+  {% include 'block/mokuji.html'%}
 
-  <p>準備中... (2022.10.02)</p>
+
+
+  {% include 'book_info/contents_title.html' with text="プライバシーポリシー" %}
+  {% include 'book_info/contents_subtitle.html' with text="1.収集する情報及び利用目的" ty=1 %}
+  {% include 'book_info/contents_text.html' with text="　(1)BOOK I.C.（以下「当サイト」という）では、サイトの利用情報を分析するためにGoogle Analyticsを利用しています。Google Analyticsは、クッキーを利用してユーザー情報を収集します。(2)当サイトの「問い合わせ」では、当サイトの管理者とのやり取りに必要な、ユーザーの名前（ニックネーム）、年齢、性別、メールアドレス情報を取得します。" %}
+
+  {% include 'book_info/contents_subtitle.html' with text="2.取得した情報の利用制限" ty=2 %}
+  {% include 'book_info/contents_text.html' with text='　(1)"1-(2)"で取得した情報は、問い合わせに関する以外の目的のために自ら利用し、または第三者に提供いたしません。しかし、問い合わせに関する目的に達した後、目的以外の交友等の、利用者との継続的なやり取りのための利用に関してはこの限りではない。' %}
+
+  {% include 'book_info/contents_subtitle.html' with text="3.個人情報の安全対策" ty=3 %}
+  {% include 'book_info/contents_text.html' with text='　(1)Google Analyticsにより収集された利用者の情報は、Google社のプライバシーポリシーに基づいて管理されます。Google Analyticsのサービス利用によるいかなる損害についても、当サイトの管理者は一切の責任を負わないものとします。(2)当サイトの「問い合わせ」によって収集された情報に関しては、情報の漏えいの防止、情報の適切な管理のために必要な措置を講じます。' %}
+
+  {% include 'book_info/contents_subtitle.html' with text="4.情報の開示" ty=4 %}
+  {% include 'book_info/contents_text.html' with text="　当サイトによって収集された情報に関しての情報開示は、一切行いません。" %}
+
+  {% include 'book_info/contents_subtitle.html' with text="5.個人情報の廃棄" ty=5 %}
+  {% include 'book_info/contents_text.html' with text="　当サイトの管理者は。収集された個人情報の利用目的に照らしその必要性が失われたときは、個人情報を消去又は破棄するものとし、外部流失等の危険を防止するために必要かつ適切な方法により処理を行うよう努めるものとします。" %}
+
+
+
+
+
+
 
 
 {% endblock %}

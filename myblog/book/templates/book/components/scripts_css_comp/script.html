@@ -267,6 +267,54 @@
 
 
 
+
+
+      <!-- mokuji -->
+      <script type="application/javascript">
+        var my_mokuji = document.getElementsByClassName("my_mokuji");
+        var my_contents = document.querySelectorAll('.my_contents_title, .my_contents_subtitle');
+        var id_ = "";
+        var class_ = "";
+        var judge_title = "";
+        var judge_subtitle = "";
+        var my_mokuji_str = "";
+        var v_icon_right = '<i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-right theme--light" style="font-size: 25px;"></i>';
+
+        for (let i = 0; i < my_contents.length; i++) {
+          class_ = my_contents[i]._prevClass;
+          judge_title = class_.indexOf('my_contents_title');
+          judge_subtitle = class_.indexOf('my_contents_subtitle');
+          id_ = my_contents[i].parentNode.id
+          text_ = my_contents[i].text.replace(/\n+/g,"")
+
+
+          if ( judge_title != -1) {
+              var str_title = `
+              <div class="pb-1">                  
+                <p class="text-my-text-color my-contents-title text-h6 text-md-h5 mt-5">
+                  <a style="text-decoration: none;" href="#${id_}">${text_}</a>
+                </p>
+              </div>
+            `
+            }else if ( judge_subtitle != -1) {
+              var str_title = `
+              <div class="pb-1" style="justify-content: center;">                  
+                <p class="text-my-text-color text-h6_5 text-md-h6 pl-3 ">
+                  ${v_icon_right}
+                  <a style="text-decoration: none;" href="#${id_}">${text_}</a>
+                </p>
+              </div>
+            `
+            }
+          str_title = str_title.replace(/\n+/g,"");
+          my_mokuji_str =  my_mokuji_str + str_title;
+        }
+        my_mokuji[0].innerHTML = my_mokuji_str;
+      </script>
+
+
+
+
       <script type="application/javascript">
         var book_img_urls = document.getElementsByClassName('kattene__imgpart');
 

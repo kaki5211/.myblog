@@ -4,17 +4,21 @@
 {% block contents %}
 
   <!-- BOOK DB -->
-  {% include 'text/text_title.html' with text="問い合わせ" %}
+  {% include 'text/text_title.html' with text="問い合わせ" icon_="mdi-email-outline"%}
 
 
 
   <!-- breadcrumbs -->
-  {% include 'block/breadcrumbs.html' with aueiu=book_info.title%}
+  {% include 'block/breadcrumbs.html' %}
 
-  <!-- title -->
-  {% include 'text/text_subtitle.html' with text="問い合わせ" icon_name="mdi-email-outline" %}
+  <!-- mokuji -->
+  {% include 'block/mokuji.html'%}
 
-  <p>準備中... (2022.10.02)</p>
+
+
+  {% include 'book_info/contents_title.html' with text="問い合わせ" %}
+  {% include 'book_info/contents_subtitle.html' with text="準備中...(2022/10/10)" ty=1 %}
+  {% include 'book_info/contents_text.html' with text="準備中...(2022/10/10)" %}
 
 
 {% endblock %}

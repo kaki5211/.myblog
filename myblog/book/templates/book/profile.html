@@ -4,18 +4,136 @@
 {% block contents %}
 
   <!-- BOOK DB -->
-  {% include 'text/text_title.html' with text="プロフィール" %}
+  {% include 'text/text_title.html' with text="プロフィール" icon_="mdi-account-circle-outline"%}
 
 
 
   <!-- breadcrumbs -->
-  {% include 'block/breadcrumbs.html' with aueiu=book_info.title%}
+  {% include 'block/breadcrumbs.html' with aueiu=book_info.title %}
+
+  <!-- mokuji -->
+  {% include 'block/mokuji.html' %}
 
   <!-- title -->
-  {% include 'text/text_subtitle.html' with text="プロフィール" icon_name="" %}
 
-  <p>準備中... (2022.10.02)</p>
+  <v-row no-gutters >
+    <v-col cols="12" class="mx-auto px-0 py-10">
+      {% include 'book_info/contents_title.html' with text="プロフィール" ty=1 %}
 
 
-{% endblock %}
+
+      <v-col cols="12" sm="11" md="9" lg="6" class="mt-16 mx-auto px-0" >
+        <v-img
+        src=""
+      >
+      <v-responsive :aspect-ratio="16/9" class="my-bg-color-glay display-flex">
+        <div class="d-flex my-h-100">
+
+          <div class="ma-auto text-white">準備中
+          
+          </div>
+        </div>
+      </v-responsive>
+          {% comment %} <v-row
+            class="fill-height ma-0"
+            align="center"
+            justify="center"
+          >
+            <v-progress-circular
+              indeterminate
+              color="grey lighten-5"
+            ></v-progress-circular>
+          </v-row> {% endcomment %}
+      </v-img>
+      </v-col> 
+
+      
+
+      <v-col cols="12" sm="11" md="10" lg="8" class="mx-auto py-10">         <!-- table -->
+        <v-simple-table dense class="my-bg-color my-border">
+          <template v-slot:default>
+            <tbody>
+              <tr>
+                <td class="text-center font-weight-bold">ニックネーム</td>
+                <td width="10" class="text-center font-weight-bold px-0">：</td>
+                <td class="text-center">かつき</td>
+              </tr>              
+              <tr>
+                <td class="text-center font-weight-bold">年齢</td>
+                <td width="10" class="text-center font-weight-bold px-0">：</td>
+                <td class="text-center">26才（独身...）</td>
+              </tr>
+              <tr>
+                <td class="text-center font-weight-bold">性別</td>
+                <td width="10" class="text-center font-weight-bold px-0">：</td>
+                <td class="text-center">男</td>
+              </tr>
+              <tr>
+                <td class="text-center font-weight-bold">学歴</td>
+                <td width="10" class="text-center font-weight-bold px-0">：</td>
+                <td class="text-center">４年制私大ストレート卒（工学部）</td>
+              </tr>
+              <tr>
+                <td class="text-center font-weight-bold">職業</td>
+                <td width="10" class="text-center font-weight-bold px-0">：</td>
+                <td class="text-center">会社員（電子機器 回路設計）</td>
+              </tr>
+              <tr>
+                <td class="text-center font-weight-bold">出身地/勤務地</td>
+                <td width="10" class="text-center font-weight-bold px-0">：</td>
+                <td class="text-center">埼玉県/東京都</td>
+              </tr>
+              <tr>
+                <td class="text-center font-weight-bold">趣味</td>
+                <td width="10" class="text-center font-weight-bold px-0">：</td>
+                <td class="text-center">フットサル、読書、Web開発</td>
+              </tr>
+              <tr>
+                <td class="text-center font-weight-bold">取得免許・資格</td>
+                <td width="10" class="text-center font-weight-bold px-0">：</td>
+                <td class="text-center">・基本情報処理技術者<br>・教員免許（数学中高・情報）<br>・普通自動車免許</td>
+              </tr>
+              <tr>
+                <td class="text-center font-weight-bold">今はまってる曲</td>
+                <td width="10" class="text-center font-weight-bold px-0">：</td>
+                <td class="text-center">Prince - さなり(22/10/9 現在)</td>
+              </tr>
+              <tr>
+                <td class="text-center font-weight-bold">最近新しく始めたこと</td>
+                <td width="10" class="text-center font-weight-bold px-0">：</td>
+                <td class="text-center">自転車パンク修理</td>
+              </tr>
+              <tr>
+                <td class="text-center font-weight-bold">金持ちになったらやりたいこと</td>
+                <td width="10" class="text-center font-weight-bold px-0">：</td>
+                <td class="text-center">低所得家庭向け 塾経営</td>
+              </tr>
+              <tr>
+                <td class="text-center font-weight-bold">このブログ開くまでにかかった期間</td>
+                <td width="10" class="text-center font-weight-bold px-0">：</td>
+                <td class="text-center">２年（プログラミング知識0から）</td>
+              </tr>              
+              
+            </tbody>
+          </template>
+        </v-simple-table>
+      </v-col>
+
+
+    </v-col>
+  </v-row>
+
+
+
+
+  {% include 'book_info/contents_subtitle.html' with text="つぶやき（2022/10/09）" ty=2 %}
+  {% include 'book_info/contents_text.html' with text="　こんにちは！かつきです。なんとなく副業でお金を稼ぎたいと思って、なんとなくプログラミング勉強して、なんとなくブログがいいと思い始めて、なんとなく小説の感想ブログにしようと思い、なんとか開設できました！いや～、長かった。２年かかった。"%}
+
+  {% include 'book_info/contents_text.html' with text="　ブログ開設できたけど、収益どうやってとるんだ？。ネットで調べた結果、「Google ADSense」始めました。しかし、審査通らないんだけど。困った。"%}  
+  {% include 'book_info/contents_text.html' with text="　現在、固定ページ（プライバシーポリシーとか問い合わせとか）が整備できてなくて、まだ記事を書くって状態じゃないから、審査通らなくても仕方ないか。さあ。サラリーマンしながら、ブログづくりがんばるぞー。"%}  
+
+
+
+
+  {% endblock %}
 
