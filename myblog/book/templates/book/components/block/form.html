@@ -26,7 +26,18 @@
         >
       </v-text-field>
     </div>
-
+    <div  class="mb-10 mt-3 d-flex justify-end">
+    <v-btn
+    class="mr-4"
+    id="search_execution"
+    outlined
+    color="#1aa179"
+    {% comment %} @click="submit" {% endcomment %}
+    type="submit"
+  >
+    書籍検索
+  </v-btn>    
+</div>
     
     <div class="my-1 d-inline-block">
       <a class="my-text-color-title">■カテゴリー：</a>
@@ -151,19 +162,7 @@
   </v-btn>
 
 
-  <v-btn
-  class="mr-4"
-  id="search_execution"
-  outlined
-  color="#1aa179"
-  {% comment %} @click="submit" {% endcomment %}
-  type="submit"
->
 
-
-  書籍検索
-
-</v-btn>
 
 
 </div>

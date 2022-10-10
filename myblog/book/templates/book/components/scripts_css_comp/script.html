@@ -148,10 +148,9 @@
 
         var els_tag_vbtn = document.getElementsByClassName("my-checkbox");
 
-        var els_input_author = document.querySelectorAll('.checkbox_author')
         var els_card = document.getElementsByClassName("my-books");
 
-        if (!els_tag_vbtn){
+        if (els_tag_vbtn){
 
           for (let i = 0; i < els_input_all.length; i++) {
             els_tag_vbtn[i].addEventListener('click', event => {
