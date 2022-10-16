@@ -1,6 +1,6 @@
 #django.forms.ModelFormを継承する場合
 from django.forms import widgets
-from .models import Book, Category, Author, Publisher
+from .models import Book, Category, Author, Publisher, Inquiry
 from django import forms
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, FormView
@@ -11,11 +11,76 @@ from django.db.models import Prefetch
 # from betterforms.multiform import MultiModelForm
 from django.db.models import Q
 import datetime
+from django.core.mail import EmailMessage
+
+
 
 MONTHS = {}
 for i in range(1,12):
     MONTHS[i] = i
 
+
+class Contactform(forms.ModelForm):
+    name = forms.CharField(label="ニックネーム", max_length=50, 
+            widget=forms.Textarea(attrs={
+            'id': 'content_name'
+        }))
+    mail_add = forms.EmailField(label="メールアドレス", max_length=254,
+            widget=forms.Textarea(attrs={
+            'id': 'content_mail_add',
+            # 'class': 'd-inline-block form-inline mb-2'
+        }))
+
+    inquiry = forms.CharField(label="問い合わせ内容", max_length=2047,
+        widget=forms.Textarea(attrs={
+            'id': 'content_text'
+        }))
+
+
+    def send_email(self, No_):
+        name = self.cleaned_data['name']
+        mail_add = self.cleaned_data['mail_add']
+        inquiry = self.cleaned_data['inquiry']  
+        message = EmailMessage(subject=name + "からの問い合わせ",
+                                body=inquiry+"\r\n \r\n"+name+"\r\n"+mail_add,
+                                # from_email=["tsuki5211@gmail.com"],
+                                to=["book.impression.create@gmail.com"],
+                                # cc=[mail_add],
+                                )
+
+        body_res="""
+この度はお問い合わせいただき、誠にありがとうございました。
+
+[受付No.] {}
+[ニックネーム] {}
+[メールアドレス] {}
+[問い合わせ内容] {}
+
+BOOK I.C.
+
+""".format(No_, name, mail_add, inquiry)
+
+        message_res = EmailMessage(subject="[受付No.{}]問い合わせを受け付けました。BOOK I.C.".format(No_),
+                                body=body_res,
+                                to=[mail_add],
+                                )                                
+        message.send()
+        message_res.send()
+
+
+    def __init__(self, *args, **kwd):
+        super(Contactform, self).__init__(*args, **kwd)
+        # self.fields["category"].required = False
+        # self.fields["category"].label = "[本] カテゴリー"
+        # self.label_suffix = " "
+        # self.fields['category'].empty_label = '未選択'
+    
+    class Meta:
+        model = Inquiry
+        fields = ('name','mail_add','inquiry')
+        # widgets = {
+        #     "category": forms.CheckboxSelectMultiple(attrs={})
+        #     }        
 
 class BookForm(forms.ModelForm):
 

@@ -19,6 +19,9 @@ pf = platform.system()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+print("■", type(BASE_DIR), BASE_DIR.parent.parent)
+
+
 
 if pf == 'Windows':
 
@@ -123,8 +126,16 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    },
+    'db_inquiry': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR.parent.parent / 'db_2.sqlite3',
+    },
 }
+
+
+DATABASE_ROUTERS = ['book.db_router.DbRouter']
+
 
 
 # Password validation
@@ -169,3 +180,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.googlemail.com'
+EMAIL_HOST_USER = 'book.impression.create@gmail.com'
+EMAIL_HOST_PASSWORD = 'grssmskmdsjsqgvp'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

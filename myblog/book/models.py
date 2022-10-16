@@ -82,7 +82,7 @@ class Category(models.Model):
     # CATEGORYENG_CHOICES = (('action', 'アクション'),('adventure', 'アドベンチャー'),('youth', '青春'),('love', '恋愛'),('sf', 'SF'),('history', '時代'),('mystery', 'ミステリー'),('comedy', 'コメディー'), ('horror', 'ホラー'))
     COLOR_CHOICES = (('red', 'red'), ('orange','orange'),('blue', 'blue'), ('pink', 'pink'),('info','info'), ('green', 'green'), ('purple', 'purple'), ('warning','warning'),('dark', 'dark'))
 
-    category = models.CharField("カテゴリー", choices=CATEGORY_CHOICES, max_length=20, default=None) # 追加していく-----------
+    category = models.CharField("カテゴリー", choices=CATEGORY_CHOICES, max_length=20, default=None, null=True, blank=True) # 追加していく-----------
     category_eng = models.CharField("カテゴリーeng", choices=CATEGORYENG_CHOICES ,max_length=20, null=True, blank=True) # 追加していく-----------
     color = models.CharField("色", choices=COLOR_CHOICES, max_length=20)
     color_hex = models.CharField("色_hex値", max_length=20,  blank=True)
@@ -121,8 +121,20 @@ class Series(models.Model):
     def __str__(self):
         return self.series
 
+
+class Inquiry(models.Model):
+    id = models.AutoField("id", primary_key = True)
+    name = models.CharField("ニックネーム", max_length=50)
+    mail_add = models.EmailField("メールアドレス", max_length=254)
+    inquiry = models.TextField("問い合わせ内容", max_length=2047)
+
+
+
+
+
 class Templates(models.Model):
     breadcrumb = models.TextField("目次")
+
     
 
 

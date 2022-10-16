@@ -17,8 +17,114 @@
 
 
   {% include 'book_info/contents_title.html' with text="問い合わせ" %}
-  {% include 'book_info/contents_subtitle.html' with text="準備中...(2022/10/10)" ty=1 %}
-  {% include 'book_info/contents_text.html' with text="準備中...(2022/10/10)" %}
+  {% comment %} {% include 'book_info/contents_subtitle.html' with text="準備中...(2022/10/10)" ty=1 %}
+  {% include 'book_info/contents_text.html' with text="準備中...(2022/10/10)" %} {% endcomment %}
+
+
+
+
+
+
+
+
+  <div class="my-container-max-width" style="height: 20vh;"></div>
+
+    <v-row
+    no-gutters
+  >
+
+  <v-col
+  cols="12"
+  md="10"
+  lg="8"
+  align-self="center"
+  class="mx-auto mb-14"
+>
+
+
+<v-card
+  class="mx-automy-border-color"
+  
+  
+
+  >
+
+
+  <template>
+    <v-form
+      ref="form"
+      color="#1aa179"
+      v-model="valid"
+      lazy-validation
+      method="post"
+      class="pa-5"
+    >
+
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    <v-text-field
+        v-model="name"
+        color="#1aa179"
+        :counter="20"
+        :rules="nameRules"
+        label="ニックネーム"
+        name="name"
+        id="content_name"
+        required
+      ></v-text-field>
+  
+      <v-text-field
+        v-model="email"
+        color="#1aa179"
+        :rules="emailRules"
+        label="メールアドレス"
+        name="mail_add"
+        id="content_mail_add"
+        required
+      ></v-text-field>
+  
+      <v-textarea
+        v-model="message"
+        color="#1aa179"
+        :counter="2047"
+        {% comment %} :rules="[v => !!v || 'Item is required']" {% endcomment %}
+        label="問い合わせ内容"
+        name="inquiry"
+        id="content_text"
+        required
+      ></v-textarea>
+
+
+      <div  class="mb-10 mt-3 d-flex justify-end pt-7">
+        <v-btn
+          color="#1aa179"
+          class="mr-4"
+          id="search_clear"
+          outlined
+          type="submit"
+              >
+          送信
+        </v-btn>
+      </div>
+
+
+
+
+    </v-form>
+  </template>
+
+
+
+</v-card>
+</v-col>
+</v-row>
+
+
+{% include 'book_info/contents_text.html' with text="一応メール送れるけど、まだ利便性悪いです。。（2022-10-16）"%}
+
+
+ 
 
 
 {% endblock %}

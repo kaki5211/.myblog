@@ -93,35 +93,35 @@ class="my-bg-color-glay"
 
       
 
-      <v-col cols="4" offset="1" class="px-0">
+      <v-col cols="4" offset="1" offset-md="0" class="px-0">
 
         <v-row no-gutters>
           <v-col cols="12" sm="8" md="6" lg="4" class="mx-auto px-0">        
 
         <v-list-item class="mb-1 pl-0">
           <v-list-item-content class="pb-1">
-            <v-list-item-title class="subtitle-2 my-text-color-light-glay">INFO</v-list-item-title>
+            <v-list-item-title class="subtitle-2 my-text-color-glay">INFO</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
 
 
-      <v-list-item class="mb-1" href="{% url 'book:book-ic' %}">
+      <v-list-item class="mb-1 footer-min-height" href="{% url 'book:book-ic' %}">
 
-        <v-list-item-icon class="mr-0">
-          <v-icon size="x-large">mdi-office-building-marker-outline</v-icon>
+        <v-list-item-icon class="mr-0 my-2">
+          <v-icon size="x-large" color="#f5f8f5">mdi-office-building-marker-outline</v-icon>
         </v-list-item-icon>
-        <v-list-item-content class="">
-          <v-list-item-title class="caption">BOOK I.C.</v-list-item-title>
+        <v-list-item-content class="py-0">
+          <v-list-item-title class="caption py-0 my-text-color-light-glay">BOOK I.C.</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
       
-      <v-list-item class="px-auto" href="{% url 'book:profile' %}">
-        <v-list-item-icon class="mr-0">
-        <v-icon size="x-large">mdi-account-circle-outline</v-icon>
+      <v-list-item class="px-auto footer-min-height" href="{% url 'book:profile' %}">
+        <v-list-item-icon class="mr-0 my-2">
+        <v-icon size="x-large" color="#f5f8f5">mdi-account-circle-outline</v-icon>
       </v-list-item-icon>
-      <v-list-item-content class="">
-        <v-list-item-title class="text-footer text-sm-caption">プロフィール</v-list-item-title>
+      <v-list-item-content class="py-0">
+        <v-list-item-title class="text-footer text-sm-caption py-0 my-text-color-light-glay">プロフィール</v-list-item-title>
       </v-list-item-content>
     </v-list-item>
 
@@ -135,42 +135,42 @@ class="my-bg-color-glay"
 
 
       {% comment %} <v-divider class="my-2"></v-divider> {% endcomment %}
-      <v-col cols="4" offset="2" class="px-0">
+      <v-col cols="4" offset="2" offset-md="0" class="px-0">
 
         <v-row no-gutters>
           <v-col cols="12" sm="8" md="6" lg="4"  class="mx-auto px-0">
   
         <v-list-item class="mb-1 pl-0">
           <v-list-item-content class="pb-1">
-            <v-list-item-title class="subtitle-2 mr-0 my-text-color-light-glay">Contents</v-list-item-title>
+            <v-list-item-title class="subtitle-2 mr-0 my-text-color-glay">Contents</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
 
-      <v-list-item class="mb-1 px-0" href="{% url 'book:top' %}">
-        <v-list-item-icon class="mr-0">
-          <v-icon size="x-large">mdi-home</v-icon>
+      <v-list-item class="mb-1 px-0 footer-min-height" href="{% url 'book:top' %}">
+        <v-list-item-icon class="mr-0 my-2">
+          <v-icon size="x-large" color="#f5f8f5">mdi-home</v-icon>
         </v-list-item-icon>
         <v-list-item-content class="">
-          <v-list-item-title class="caption">ホーム</v-list-item-title>
+          <v-list-item-title class="caption py-0 my-text-color-light-glay">ホーム</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
-      <v-list-item class="mb-1 px-0" href="{% url 'book:book' %}">
-        <v-list-item-icon class="mr-0">
-          <v-icon size="x-large">mdi-bookshelf</v-icon>
+      <v-list-item class="mb-1 px-0 footer-min-height" href="{% url 'book:book' %}">
+        <v-list-item-icon class="mr-0 my-2">
+          <v-icon size="x-large" color="#f5f8f5">mdi-bookshelf</v-icon>
         </v-list-item-icon>
         <v-list-item-content class="">
-          <v-list-item-title class="caption">書籍一覧</v-list-item-title>
+          <v-list-item-title class="caption py-0 my-text-color-light-glay">書籍一覧</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
-      <v-list-item class="mb-1 px-0" href="{% url 'book:others' %}">
-        <v-list-item-icon class="mr-0">
-          <v-icon size="x-large">mdi-dots-horizontal-circle-outline</v-icon>
+      <v-list-item class="mb-1 px-0 footer-min-height" href="{% url 'book:others' %}">
+        <v-list-item-icon class="mr-0 my-2">
+          <v-icon size="x-large" color="#f5f8f5">mdi-dots-horizontal-circle-outline</v-icon>
         </v-list-item-icon>
         <v-list-item-content class="">
-          <v-list-item-title class="caption">その他 記事</v-list-item-title>
+          <v-list-item-title class="caption py-0 my-text-color-light-glay">その他 記事</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
@@ -185,47 +185,45 @@ class="my-bg-color-glay"
 
 
 
-        <v-col cols="5" offset="1" sm="10" class=" mx-auto px-0">
+        <v-col cols="5" md="4" offset="1" offset-md="0" sm="10" class=" mx-auto px-0">
 
       <v-row no-gutters>
-        <v-col cols="12" sm="4" md="3" lg="2" class="mx-auto px-0">
+        <v-col cols="12" sm="4" md="7" lg="5" class="mx-auto px-0">
 
         <v-list-item class="mb-1 pl-0">
           <v-list-item-content class="pb-1">
-            <v-list-item-title class=" subtitle-2 my-text-color-light-glay">Other</v-list-item-title>
+            <v-list-item-title class=" subtitle-2 my-text-color-glay">Other</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
 
-      <v-list-item class="mb-1 px-0" href="{% url 'book:privacy_policy' %}">
-        <v-list-item-icon class="mr-0">
-          <v-icon size="x-large">mdi-shield-lock-outline</v-icon>
+      <v-list-item class="mb-1 px-0 footer-min-height" href="{% url 'book:privacy_policy' %}">
+        <v-list-item-icon class="mr-0 my-2">
+          <v-icon size="x-large" color="#f5f8f5">mdi-shield-lock-outline</v-icon>
         </v-list-item-icon>
         <v-list-item-content class="">
-          <v-list-item-title class="caption">プライバシーポリシー</v-list-item-title>
+          <v-list-item-title class="caption py-0 my-text-color-light-glay">プライバシーポリシー</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
 
 
-      <v-list-item class="mb-1 px-0" href="{% url 'book:contact' %}">
-        <v-list-item-icon class="mr-0">
-          <v-icon size="x-large">mdi-shield-lock-outline</v-icon>
+      <v-list-item class="mb-1 px-0 footer-min-height" href="{% url 'book:contact' %}">
+        <v-list-item-icon class="mr-0 my-2">
+          <v-icon size="x-large" color="#f5f8f5">mdi-email-outline</v-icon>
         </v-list-item-icon>
         <v-list-item-content class="">
-          <v-list-item-title class="caption">問い合わせ</v-list-item-title>
+          <v-list-item-title class="caption py-0 my-text-color-light-glay">問い合わせ</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
     </v-col>
-  </v-row>
-      
+  </v-row>      
     </v-col>
   </v-row>
 
+      {% comment %} <v-divider class="my-2"></v-divider> {% endcomment %}
 
-      <v-divider class="my-2"></v-divider>
-      
 
 
 {% comment %} 
@@ -257,20 +255,20 @@ class="my-bg-color-glay"
 
 
 
-  <v-card-text class="my-text-color-light"  style="text-align:right;">
+  <v-card-text class="my-text-color-light py-0"  style="text-align:right;">
 
     <v-btn icon fab xlarge dark class="mx-0 my-text-color-light-glay" href="https://twitter.com/BOOK_IC">
-      <v-icon size="24" >mdi-twitter</v-icon>
+      <v-icon size="24" color="#f5f8f5" >mdi-twitter</v-icon>
     </v-btn>
     <v-btn icon fab xlarge dark class="mx-0 my-text-color-light-glay" href="https://www.instagram.com/BOOK_I.C/">
-      <v-icon size="24" >mdi-instagram</v-icon>
+      <v-icon size="24" color="#f5f8f5" >mdi-instagram</v-icon>
     </v-btn>
 </v-card-text>
 
 
   <v-divider></v-divider>
 
-  <v-card-text class="my-text-color-light">
+  <v-card-text class="my-text-color-glay">
     <strong>Copyright © 2022 「BOOK I.C.」 All Rights Reserved.</strong>
   </v-card-text>
 

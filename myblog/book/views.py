@@ -9,14 +9,15 @@ import re, datetime
 from django_middleware_global_request.middleware import get_request
 # import django.django_middleware_global_request.middleware
 # from django.
-from .forms import BookForm, CategoryForm, AuthorForm, PublisherForm
+from .forms import BookForm, CategoryForm, AuthorForm, PublisherForm, Contactform
 from . import forms
 # from . import forms
 
 
-from .models import Book, Category, Author, Publisher, Series
+from .models import Book, Category, Author, Publisher, Series, Inquiry
 import ast
 from django.conf import settings
+from django.urls import reverse_lazy
 
 # Create your views here
 
@@ -579,13 +580,46 @@ class Privacy_policyView(MyListView):
         context = super().my_get_context_data(self, *args, **kwargs)
         return context
 
-class ContactView(MyListView):
+class ContactView(FormView, MyListView):
     model = Book
     template_name = 'book/contact.html'
+    object_list = None
+    success_url = reverse_lazy('book:contact')
+    form_class = forms.Contactform
     def get_context_data(self, *args, **kwargs):
         context = super().my_get_context_data(self, *args, **kwargs)
+        form = Contactform()
+        context['form'] = form
         return context
 
+    def post(self, request, *args, **kwargs):
+        object_list = None
+        context = super().my_get_context_data(self, *args, **kwargs)
+
+        print("■■■", request.method)
+        
+        if request.method == 'POST':
+            print("■■■", request.POST)            
+            form = Contactform(request.POST)
+            
+            if form.is_valid():
+                
+                No_ = Inquiry.objects.count()
+                form.send_email(No_)
+                form.save()
+                return render(request, 'book/contact.html', context)
+                # return redirect('contact')
+
+
+        print(request.POST)
+        return render(request, 'book/contact.html', context)
+        # if 'age_high_year' in request.POST and 
+    def form_valid(self,forms):
+        forms.send_email()
+        return super().form_valid(forms)
+
+
+        
 
 # def sitemap(request):
 #     return render(request, 'coupon/index.html', "")

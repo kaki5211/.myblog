@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Book, Author, Category,Series, Templates, Publisher
+from .models import Book, Author, Category,Series, Templates, Publisher, Inquiry
 
 
 # admin.site.register(Manage)
@@ -39,6 +39,7 @@ admin.site.register(Publisher)
 admin.site.register(Book)
 admin.site.register(Series)
 admin.site.register(Templates)
+admin.site.register(Inquiry)
 
 # admin.site.register(Publisher_label)
 
