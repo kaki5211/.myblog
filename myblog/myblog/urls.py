@@ -27,5 +27,6 @@ from django.conf import settings
 #     ]
 # else:
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('', include('book.urls')),
 ]
