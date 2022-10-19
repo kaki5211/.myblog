@@ -20,9 +20,12 @@
             tile
 
             >
+{% comment %}             
+            {% with request.path|split:"/" as skills %}
+              {{skills.1}}
+            {% endwith %}
+         {% endcomment %}
 
-        
-      
             <v-card-text class="py-0 my-text-color">
 
             </v-card-text>
@@ -39,7 +42,7 @@
 
 
             <!-- mokuji -->
-            <v-card-text class="pl-7 py-12 my_mokuji">  
+            <v-card-text class="pl-7 py-6 pb-8 my_mokuji">  
             </v-card-text>
 
 

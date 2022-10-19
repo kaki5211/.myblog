@@ -1,5 +1,5 @@
 
-    <script type="application/javascript">
+    <script async type="application/javascript">
         {% comment %} $icon-size: 50px; {% endcomment %}
         new Vue({
           el: '#app',
@@ -7,6 +7,11 @@
       
         data () {
           return {
+            {% for a in book_list %}
+            show{{ forloop.counter }}: false,
+            {% endfor %}
+            hover: false,
+            isActive: false,
             icons: [
             'mdi-facebook',
             'mdi-twitter',
@@ -137,7 +142,7 @@
       
       </script>
 
-      <script type="application/javascript">
+      <script async type="application/javascript">
 
         
         {% comment %} var els_tag_input = document.getElementsByClassName("checkbox_category"); {% endcomment %}
@@ -151,7 +156,6 @@
         var els_card = document.getElementsByClassName("my-books");
 
         if (els_tag_vbtn){
-
           for (let i = 0; i < els_input_all.length; i++) {
             els_tag_vbtn[i].addEventListener('click', event => {
               if( els_input_all[i].checked ) {
@@ -269,7 +273,7 @@
 
 
       <!-- mokuji -->
-      <script type="application/javascript">
+      <script async type="application/javascript">
         var my_mokuji = document.getElementsByClassName("my_mokuji");
         var my_contents = document.querySelectorAll('.my_contents_title, .my_contents_subtitle');
         var id_ = "";
@@ -290,7 +294,7 @@
           if ( judge_title != -1) {
               var str_title = `
               <div class="pb-1">                  
-                <p class="text-my-text-color my-contents-title text-h6 text-md-h5 mt-5">
+                <p class="text-my-text-color my-contents-title text-h6 text-md-h5 mt-2 mt-md-4 mb-1 mb-md-2">
                   <a style="text-decoration: none;" href="#${id_}">${text_}</a>
                 </p>
               </div>
@@ -298,7 +302,7 @@
             }else if ( judge_subtitle != -1) {
               var str_title = `
               <div class="pb-1" style="justify-content: center;">                  
-                <p class="text-my-text-color text-h6_5 text-md-h6 pl-3 ">
+                <p class="text-my-text-color text-h6_5 text-md-h6 pl-3 mb-1 mb-md-2">
                   ${v_icon_right}
                   <a style="text-decoration: none;" href="#${id_}">${text_}</a>
                 </p>
@@ -315,11 +319,19 @@
 
 
       <script type="application/javascript">
-        var book_img_urls = document.getElementsByClassName('kattene__imgpart');
+        var book_img_urls = document.getElementsByClassName('my-img-small');
 
+        {% load split_tags %}
         for (let i = 0; i < book_img_urls.length; i++) {
-          book_img_url = book_img_urls[i].children[0].children[0].children[0];
-          book_img_url.setAttribute("class", "my-border mt-5 elevation-2 my-w-100")
+          book_img_url = book_img_urls[i].children[0].children[0].children[1];
+          {% with request.path|split:"/" as skills %}
+            {% if skills.1 == "books" and skills.2 == "" %}
+              book_img_url.setAttribute("class", "my-border mt-5 elevation-2 my-w-100 kattene__imgpart_min-height")
+            {% else %}
+              book_img_url.setAttribute("class", "my-border mt-5 elevation-2 my-w-100")
+            {% endif %}
+          {% endwith %}
+
         }
 
         {% comment %} amazon_img_url. {% endcomment %}

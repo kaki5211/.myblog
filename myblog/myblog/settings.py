@@ -74,6 +74,9 @@ INSTALLED_APPS = [
     'django.contrib.sites',  # 追加
     'django.contrib.sitemaps',  # 追加
     'book.templatetags.split_tags', # 追加
+    'book.templatetags.get_img_src', # 追加
+    'book.templatetags.get_tag_el', # 追加
+    
 ]
 
 SITE_ID = 1
