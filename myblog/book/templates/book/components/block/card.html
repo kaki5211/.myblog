@@ -1,4 +1,6 @@
 
+{% load get_img_src %}
+{% load get_tag_el %}
 
 
   {% for book_ in book_list %}
@@ -39,9 +41,36 @@
           <div class="kattene__imgpart">
             {% comment %} <a target="_blank" rel="noopener" href="【メインのURL】"> {% endcomment %}
             {% comment %} <img src="" width="160" height="160" loading="lazy" class="kattene__shadow"> {% endcomment %}
-            <div>
+            
+            {% comment %} <div>
               {{ book_.book_img_url | safe }}
-            </div>
+            </div> {% endcomment %}
+
+            <a {{ book_.book_img_url | get_tag_el:"a"|safe }}>
+              <v-img
+              src="{{ book_.book_img_url | get_img_src:"src" }}"
+              {% comment %} lazy-src="https://picsum.photos/10/6?image=10" {% endcomment %}
+              {% comment %} aspect-ratio="1" {% endcomment %}
+              class="grey lighten-2 ml-4 mx-3 mb-3 mt-3"
+              transition="scale-transition"
+            >
+  
+            <template v-slot:placeholder>
+              <v-row
+                class="fill-height ma-0"
+                align="center"
+                justify="center"
+              >
+                <v-progress-circular
+                  indeterminate
+                  color="grey lighten-5"
+                ></v-progress-circular>
+              </v-row>
+            </template>
+  
+          </v-img>
+            
+        </a>
 
 
 

@@ -1,5 +1,4 @@
 
-{% load split_tags %}
 {% load get_img_src %}
 {% load get_tag_el %}
 
@@ -71,6 +70,7 @@
             {% comment %} lazy-src="https://picsum.photos/10/6?image=10" {% endcomment %}
             {% comment %} aspect-ratio="1" {% endcomment %}
             class="grey lighten-2 ml-4 mx-3 mb-3 mt-3"
+            transition="scale-transition"
           >
 
           <template v-slot:placeholder>

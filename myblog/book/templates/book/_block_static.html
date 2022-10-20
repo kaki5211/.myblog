@@ -1,4 +1,4 @@
-{% load static %}
+{% comment %} {% load static %} {% endcomment %}
 
 
 
@@ -9,7 +9,11 @@
 
 <!-- head -->
 {% include 'block/head.html' %}
-
+<style>
+  [v-cloak] {
+    display: none;
+  }
+</style>
 
 
 <body>
@@ -18,7 +22,7 @@
   {% endif %}
 
   <div id="app" v-cloak>
-    <v-app id="inspire" class="my-bg-color">
+    <v-app id="inspire" class="my-bg-color"  v-cloak>
 
         <!-- toolbar -->
         {% include 'block/toolbar.html' %}
@@ -37,7 +41,6 @@
         {% include 'sample/sample.html' %}
         {% endif %}
 
-        {% comment %} 
         <v-row
         no-gutters
         >
@@ -50,7 +53,6 @@
 
           </v-col>
         </v-row>
-         {% endcomment %}
 
         <!-- footer -->
         {% include 'block/footer.html' %}
