@@ -1,0 +1,91 @@
+
+{% extends 'book/_block_static.html' %}
+
+{% block contents %}
+
+
+
+    <!-- BOOK DB -->
+    {% include 'text/text_title.html' with text=book_info.title icon_="mdi-book-open-page-variant" %}
+    
+
+    <!-- breadcrumbs -->
+    {% include 'block/breadcrumbs.html' %}
+        
+    
+    <!-- mokuji -->
+    {% include 'block/mokuji.html' %}
+
+      <!-- contents -->
+        <v-row no-gutters >
+
+            <v-col cols="12" class="mx-auto px-0">
+              {% comment %} <a class="text-my-text-color my-contents-title text-h5 text-md-h4 mb-0"> {% endcomment %}
+                {% include 'book_info/contents_title.html' with text=book_info.title ty="title" %}
+                <!-- title -->
+              {% comment %} </a> {% endcomment %}
+              <p class="my-text-color-title mb-1">
+                <v-icon size="20">mdi-book-edit-outline</v-icon>
+                  {{ book_info.post_day | safe }}
+                  <v-icon size="20" class="pl-2">mdi-refresh</v-icon>
+                  {{ book_info.update_day | safe }}   
+              </p>        
+{% comment %}                 
+            <v-col cols="12" sm="11" md="9" lg="6" class="mt-16 mx-auto px-0" >
+              <v-img
+              >{{ book_info.book_img_url | safe }}</v-img>  
+            </v-col> {% endcomment %}
+
+            <v-col cols="10" class="mx-auto px-0">
+              <div class="kattene">
+                <div class="kattene__imgpart">
+                    {% include 'book_info/contents_img.html' with img_url=book_info.image.url %}
+                
+              </div>
+          </div>
+        </v-col>
+
+
+           
+
+          <v-col cols="12" class="mx-auto px-0 text-center my-10">
+            {% include 'book_info/contents_subtitle.html' with text='あらすじ' ty="arasuji" %}
+            {% include 'book_info/contents_text.html' with text=book_info.contents_synopsis %}
+          </v-col>
+          
+
+          <v-col cols="12" class="mx-auto px-0 py-10">
+
+            {% for contents_ in book_info_contents %}
+              {% if contents_.0 != "title" and contents_.0 != "title" and contents_.0 != "blockquote" %}
+                <div class="px-3">
+              {% endif %} 
+
+              {% if contents_.0 == "title" %}
+                {% include 'book_info/contents_title.html' with text=contents_.1 ty=forloop.counter %}
+                
+              {% elif contents_.0 == "subtitle" %}
+                {% if count_subtitle ==  forloop.counter %}
+                  {% include 'google/adsense_article.html' %}
+                {% endif %}
+                {% include 'book_info/contents_subtitle.html' with text=contents_.1  ty=forloop.counter %}
+              {% elif contents_.0 == "text" %}
+                {% include 'book_info/contents_text.html' with text=contents_.1 %}
+              {% elif contents_.0 == "blockquote"%}
+                {% include 'book_info/contents_blockquote.html' with text=contents_.1 page=contents_.2 %}
+              {% endif %} 
+
+              {% if contents_.0 != "title" and contents_.0 != "title" and contents_.0 != "blockquote"%}
+                </div>
+              {% endif %}      
+      
+            {% endfor %}
+
+          </v-col>
+            
+        </v-row>
+      {% comment %} </v-container> {% endcomment %}
+
+
+{% endblock %}
+

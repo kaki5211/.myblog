@@ -1,0 +1,29 @@
+{% load static %}
+
+{% load get_img_src %}
+{% load get_tag_el %}
+
+<v-img
+src="{{ img_url | safe}}"
+{% comment %} lazy-src="" {% endcomment %}
+{% comment %} aspect-ratio="1" {% endcomment %}
+class="grey lighten-2 ml-4 mx-3 mb-3 mt-3"
+transition="scale-transition"
+>
+
+<template v-slot:placeholder>
+<v-row
+  class="fill-height ma-0"
+  align="center"
+  justify="center"
+>
+  <v-progress-circular
+    indeterminate
+    color="grey lighten-5"
+  ></v-progress-circular>
+</v-row>
+</template>
+
+</v-img>
+
+

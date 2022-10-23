@@ -14,10 +14,14 @@ from . import forms
 # from . import forms
 
 
-from .models import Book, Category, Author, Publisher, Series, Inquiry
+from .models import Book, Category, Author, Publisher, Series, Inquiry, Other
 import ast
 from django.conf import settings
 from django.urls import reverse_lazy
+
+
+from django.http import request
+
 
 # Create your views here
 
@@ -511,14 +515,7 @@ class BookView(ListView):
         # コンテキストにフォームのオブジェクトを指定してレンダリング
 
 
-class OthersView(ListView):
-    model = Book
-    template_name = 'book/others.html'
-    def get_context_data(self, **kwargs):
-        # context = super().my_get_context_data(self, **kwargs)
-        context = super().get_context_data()
-        context['view'] = [0,1,0,1,0] # [ブログ紹介, メインコンテンツ+サイドバー, メインコンテンツのみ, トピックス]
-        return context
+
 
 class Schedule(ListView):
     model = Book
@@ -565,12 +562,116 @@ class Book_icView(MyListView):
         context = super().my_get_context_data(self, *args, **kwargs)
         return context
 
-class OthersView(MyListView):
-    model = Book
+class OthersView(MyListView,):
+    model = Other
     template_name = 'book/others.html'
+    context_object_name = 'other_list'
+
     def get_context_data(self, *args, **kwargs):
-        context = super().my_get_context_data(self, *args, **kwargs)
+        # if self.request.method != "POST":
+        #     context = super().get_context_data()
+        # else:
+        #     context = self.context
+        #     return context
+        # context = super().get_context_data()
+        context = {}
+        data_info = self.get_date()
+        url_path = self.request.path
+        url_split = url_path.split('/')
+
+        try:
+            context['book_info'] = Other.objects.get(post_day=url_split[2])
+        except:pass
+
+        try:
+            context['template_pages'] = [()]
+            context['date'] = data_info['data_info']
+        except:
+            pass
+        try:
+            context['contents_text'] = context['other_info'].contents
+            list_ = []
+            count = 0
+            for text_ in context['contents_text'].split('<')[1:]:
+                count += 1
+                text_ = text_.split(">")
+                # text_[0]
+                contents_split = text_[1].splitlines()
+                contents_ = contents_split[0]
+                for text_el in contents_split[1:]:
+                    contents_ = contents_ + "<br>" + text_el
+                text_[1] = contents_
+                if len(text_) == 3:
+                    text_[2] = text_[2].splitlines()[0]
+                list_.append(text_)
+            context['other_info_contents'] = list_
+            count = 0
+            count_subtitle = 0
+            for text_ in list_:
+                count += 1
+                if text_[0] == "subtitle":
+                    count_subtitle += 1
+                    if count_subtitle == 3:
+                        break
+            context['count_subtitle'] = count
+        except:
+            pass
+        # if 'office' in self.request.session:
+        #     print('セッション名officeは存在します')
+        #     del self.request.session['office']
+        # else:
+        #     self.request.session['office'] = "office"
+        context['DEBUG'] = settings.DEBUG
+
         return context
+
+
+    def get_template_names(self, *args, **kwargs):
+        # ■■■ urlの文字列で、テンプレートの分岐 ■■■
+        data_info = self.get_date()
+        template_name = 'book/err.html'
+        print("data_info['data_info']", data_info['data_info'])
+        
+        try:
+            if data_info['data_info'] == None:
+                template_name = 'book/others.html'
+                return template_name
+        except:
+            pass
+        try:
+            if Other.objects.get(post_day=datetime.date(int(data_info['category_y']), int(data_info['category_m']), int(data_info['category_d']))):
+                template_name = 'book/others_info.html'
+        except:
+            pass
+            print(datetime.date(int(data_info['category_y']), int(data_info['category_m']), int(data_info['category_d'])))
+        return template_name
+    
+    def get_date(self, *args, **kwargs):
+        # ■■■ urlから日付データ取得 ■■■
+        data_info = {}
+        data_info['category_y'] = None
+        data_info['category_m'] = None
+        data_info['category_d'] = None
+        data_info['data_info'] = None
+        try:
+            date_kwd = self.kwargs['data_info']
+            data_info['data_info'] = date_kwd
+            date_split = re.split(r"[-]", date_kwd)
+            if len(str(date_split[0])) == 4:
+                category_y = date_split[0]
+                data_info['category_y'] = category_y
+                if len(str(date_split[1])) == 2:
+                    category_m = date_split[1]
+                    data_info['category_m'] = category_m
+                    if len(str(date_split[2])) == 2:
+                        category_d = date_split[2]
+                        data_info['category_d'] = category_d    
+                        data_info['data_info'] = "{}-{}-{}".format(category_y, category_m, category_d)
+            return data_info
+        except:
+            return data_info
+
+
 
 
 class Privacy_policyView(MyListView):
@@ -619,7 +720,14 @@ class ContactView(FormView, MyListView):
         return super().form_valid(forms)
 
 
-        
+
+class SitemapView(MyListView):
+    model = Book
+    template_name = 'book/sitemap.html'
+    def get_context_data(self, *args, **kwargs):
+        context = super().my_get_context_data(self, *args, **kwargs)
+        return context
+
 
 # def sitemap(request):
 #     return render(request, 'coupon/index.html', "")

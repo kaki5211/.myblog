@@ -17,6 +17,9 @@ from .models import Book
 import datetime
 
 
+
+
+
 app_name='book'
 
 class PostSitemap(Sitemap):
@@ -78,17 +81,21 @@ urlpatterns = [
 
     path('articles/', views.ArticlesView.as_view(), name='article'), # トピックスに近いもの
 
-    path('otherss/', views.OthersView.as_view(),  name='other'),
+    # path('otherss/', views.OtherView.as_view(),  name='other'),
     path('others/shedule', views.Schedule.as_view(),  name='schedule'),
 
     path('profile/', views.ProfileView.as_view(), name="profile"),
     path('book-ic/', views.Book_icView.as_view(), name="book-ic"),
+
     path('others', views.OthersView.as_view(), name="others"),
+    path('others/<slug:data_info>', views.OthersView.as_view(), name="others_info"),
+
     path('privacypolicy', views.Privacy_policyView.as_view(), name="privacy_policy"),
     path('contact', views.ContactView.as_view(), name="contact"),
     
 
     path('sitemap.xml/', sitemap, {'sitemaps': sitemaps},  name='sitemap'),
+    path('sitemap/', views.SitemapView.as_view(),  name='sitemap_book-ic'),
 
     path('test/', views.test_,  name='test_'),
     
@@ -109,7 +116,7 @@ top
     -Publisher（出版社）一覧のみ
         -出版社の情報　＋　Author[（あいうえお順）/（男・女）/（年齢）]
     -category（カテゴリー）
-    -読む予定の本一覧
+    -読む予定の本一覧a
     -外部リンク[アリクイちゃんねる/技術コンテンツ/ヨウヘイ]
 
 search

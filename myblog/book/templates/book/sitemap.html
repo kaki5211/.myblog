@@ -1,0 +1,180 @@
+
+{% extends 'book/_block_static.html' %}
+
+{% block contents %}
+
+  <!-- BOOK DB -->
+  {% include 'text/text_title.html' with text="サイトマップ" icon_="mdi-sitemap-outline" %}
+  
+  <!-- breadcrumbs -->
+  {% include 'block/breadcrumbs.html' %}
+
+  <!-- mokuji -->
+  {% include 'block/mokuji.html' %}
+
+
+
+
+
+  <v-row no-gutters >
+    <v-col cols="12" class="mx-auto px-0 py-10">
+      {% include 'book_info/contents_title.html' with text="サイトマップ" ty=1 %}
+
+
+      {% include 'book_info/contents_subtitle.html' with text="サイトマップ" ty=2 %}
+      
+      <template>
+        <v-card tile elevation="0">
+
+          <v-data-table
+          class="my-bg-color my-table-sitemap"
+            style="width: 100%;
+            border-collapse: collapse;
+            white-space: nowrap;"
+            :headers="headers3"
+            :items="desserts3"
+            :show-rows-border="false"
+            hide-default-header
+            hide-default-footer
+            hover= "false"
+            dense
+            loading-text="$vuetify.dataIterator.loadingText"
+            mobile-breakpoint="50"
+          >
+        
+        
+          <template #item.title1="{ item }">
+            <a target="_blank" :href="item.url1" class="v-breadcrumbs__item">
+                <v-icon size="22px">[[ item.icon1 ]]</v-icon>
+                    [[ item.title1 ]]
+            </a>
+          </template>
+
+          <template #item.title2="{ item }">
+            <a target="_blank" :href="item.url2" class="v-breadcrumbs__item">
+                <v-icon size="22px">[[ item.icon2 ]]</v-icon>
+              [[ item.title2 ]]
+            </a>
+          </template>
+
+          <template #item.title3="{ item }">
+            <a target="_blank" :href="item.url3" class="v-breadcrumbs__item">
+                <v-icon size="22px">[[ item.icon3 ]]</v-icon>
+              [[ item.title3 ]]
+            </a>
+          </template>
+
+        
+        
+        
+        
+        
+        
+        
+        
+        </v-data-table>
+        </v-card>
+      </template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+      {% include 'book_info/contents_subtitle.html' with text="[検索] 書籍一覧" ty=3 %}
+    
+
+
+  <template>
+    <v-card tile elevation="0"  class="my-bg-color">
+        <v-text-field
+        style="width: 80%; max-width: 560px;"
+        class="my-bg-color mr-0 ml-auto"
+        color="#1aa179"
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+      <v-data-table
+      class="my-bg-color"
+        style="width: 100%;
+        border-collapse: collapse;
+        white-space: nowrap;"
+        :headers="headers"
+        :items="desserts"
+        :search="search"
+        :sort-by="['post_day']"
+        :sort-desc="[true]"
+        hide-default-footer
+        dense
+        loading-text="$vuetify.dataIterator.loadingText"
+        mobile-breakpoint="50"
+      ></v-data-table>
+    </v-card>
+  </template>
+
+
+      {% include 'book_info/contents_subtitle.html' with text="[検索] その他 記事" ty=4 %}
+
+
+
+
+
+
+      <template>
+        <v-card tile elevation="0" class="my-bg-color">
+            <v-text-field
+            style="width: 80%; max-width: 560px;"
+            class="my-bg-color mr-0 ml-auto"
+            color="#1aa179"
+              v-model="search2"
+              append-icon="mdi-magnify"
+              label="Search"
+              single-line
+              hide-details
+            ></v-text-field>
+          <v-data-table
+          class="my-bg-color"
+          style="width: 100%;
+            border-collapse: collapse;
+            white-space: nowrap;"
+            :headers="headers2"
+            :items="desserts2"
+            :search="search2"
+            :sort-by="['post_day']"
+            :sort-desc="[true]"
+            hide-default-footer
+            dense
+            loading-text="$vuetify.dataIterator.loadingText"
+            mobile-breakpoint="50"
+          ></v-data-table>
+        </v-card>
+      </template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+

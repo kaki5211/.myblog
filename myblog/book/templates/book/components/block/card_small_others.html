@@ -1,12 +1,9 @@
 {% load static %}
 
-{% load get_img_src %}
-{% load get_tag_el %}
 
 
-
-
-  {% for book_ in book_list %}
+  {% for book_ in others %}
+  
 
     {% if forloop.counter == 2 %}
       <v-col
@@ -21,7 +18,6 @@
     {% endif %}
 
 
-
       <v-col
         cols="12"
         sm="12"
@@ -31,7 +27,7 @@
       >
 
 
-  
+
       <v-card
         class="mx-auto my-books"
         elevation="15"
@@ -46,17 +42,55 @@
         sm="4"
         lg="2"
         class="mx-auto mr-md-auto mb-auto my-auto"
-      >          
+      >
+
+{% comment %}
+        <v-img min-width="100"
+        >{{ book_.amazon_url | safe }}</v-img> {% endcomment %}
+
+
+        {% comment %} <div class="kattene"> {% endcomment %}
+          {% comment %} <div class="kattene__imgpart"> {% endcomment %}
+            {% comment %} <a target="_blank" rel="noopener" href="【メインのURL】"> {% endcomment %}
+            {% comment %} <img src="" width="160" height="160" loading="lazy" class="kattene__shadow"> {% endcomment %}
             <div class="my-img-small">
+              
 
-            <a {{ book_.book_img_url | get_tag_el:"a"|safe }}>
-   
 
-            {% with book_.book_img_url|get_img_src:'src' as img_url %}
-            {% include 'block/img_small.html' with img_url=img_url %}
-            {% endwith %}
-      </a>
+              {% include 'block/img_small.html' with img_url=book_.image %}
+            
+
+          
     </div>
+
+
+              {% comment %} <a href="https://www.amazon.co.jp/%E4%BD%95%E3%82%82%E3%81%8B%E3%82%82%E6%86%82%E9%AC%B1%E3%81%AA%E5%A4%9C%E3%81%AB-%E9%9B%86%E8%8B%B1%E7%A4%BE%E6%96%87%E5%BA%AB-%E4%B8%AD%E6%9D%91-%E6%96%87%E5%89%87/dp/4087467988?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&crid=22P8P409551PY&keywords=%E4%BD%95%E3%82%82%E3%81%8B%E3%82%82%E6%86%82%E9%AC%B1%E3%81%AA%E5%A4%9C%E3%81%AB&qid=1664892669&qu=eyJxc2MiOiIxLjA2IiwicXNhIjoiMC40NiIsInFzcCI6IjAuNDkifQ%3D%3D&s=instant-video&sprefix=%E4%BD%95%E3%82%82%E3%81%8B%E3%82%82%E6%86%82%E9%AC%B1%E3%81%AA%E5%A4%9C%E3%81%AB%2Cinstant-video%2C178&sr=1-1-catcorr&linkCode=li2&tag=bookic-22&linkId=3b66b22a86ce0d296bde27c76521a4b0&language=ja_JP&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=4087467988&Format=_SL160_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=bookic-22&language=ja_JP" ></a> {% endcomment %}
+
+            {% comment %} </a> {% endcomment %}
+          {% comment %} </div> {% endcomment %}
+{% comment %}           
+          <div class="kattene__infopart">
+            <div class="kattene__btns __four" class="d-flex">
+              <div class="d-flex"><v-btn text outlined class="mx-auto my-w-100 px-1 py-1">
+                <a class="text-decoration-none caption py-1" target="_blank" href="{{ book_.amazon_url }}">Amazon</a></v-btn>
+              </div>
+              
+              <div class="d-flex"><v-btn text outlined class="mx-auto my-w-100 px-1 py-1">
+                <a class="text-decoration-none caption py-1" target="_blank" {% if book_.kindle_url != none %}href="{{ book_.kindle_url }}"{% endif %}>{% if book_.kindle_url != none %}Kindle{% else %}none{% endif %}</a></v-btn>
+              </div>
+
+              <div class="d-flex"><v-btn text outlined class="mx-auto my-w-100 px-1 py-1">
+                <a class="text-decoration-none caption py-1" target="_blank" href="{{ book_.rakuten_url }}">楽天</a></v-btn>
+              </div>
+
+              <div class="d-flex"><v-btn text outlined class="mx-auto my-w-100 px-1 py-1">
+                <a class="text-decoration-none caption py-1" target="_blank" {% if book_.rakuten_kobo_url != none %}href="{{ book_.rakuten_kobo_url }}"{% endif %}>{% if book_.rakuten_kobo_url != none %}楽天KOBO{% else %}none{% endif %}</a></v-btn>
+                
+                
+              </div>
+            </div>
+          </div> {% endcomment %}
+      {% comment %} </div> {% endcomment %}
 
 
 
@@ -73,7 +107,7 @@
       >    
 
 
-      
+    
           <v-card-text class="pb-0 text-sm-center my-text-color px-1 text-left">
             {{ book_.post_day | safe }}
           </v-card-text>
@@ -84,27 +118,13 @@
             </v-card-title>
           </div>
 
+          {% comment %}   
+          <v-card-text class="ms-2">
+            <v-icon color="#9A9" size="14">mdi-eye</v-icon>
+            <a class="ms-1 me-3 text-subtitle-2 text-md-subtitle-1 my-text-color-glay">XXX,XXX,XXX</a>
+          </v-card-text>
+          {% endcomment %}
 
-          <v-card-actions class="pl-0 d-block">
-            <v-btn class="my-1 mx-1" color="{{book_.category_info.color_hex}}" elevation="1" outlined rounded small>
-              <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %}
-                <input class="card_category" type="submit" name="category" href="{% url "book:book" %}" value="{{book_.category_info.get_category_display}}">
-              </form>
-            </v-btn>
-    
-    
-            <v-btn class="my-1 mx-1" color="#455045" elevation="1" outlined rounded small>
-              <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %}
-                <input class="card_author" type="submit" name="author" href="{% url "book:book" %}" value="{{ book_.author_info }}">
-              </form>
-            </v-btn>
-
-            <v-btn class="my-1 mx-1" color="#455045" elevation="1" outlined rounded small>
-              <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %}
-                <input class="card_publisher" type="submit" name="publisher" href="{% url "book:book" %}" value="{{ book_.publisher_info}}">
-              </form>
-            </v-btn>
-          </v-card-actions>
 
 
         <v-card-text class="d-none d-sm-block">
@@ -114,7 +134,7 @@
 
         <v-card-actions class="d-none d-md-block mt-auto mb-0 text-end my-w-100" style="align-items:flex-end;vertical-align:bottom">
           <div class="my-w-100" style="height:100%">
-            <v-btn color="#1aa179" outlined class="mx-auto" style="width:100%;" href ="{% url 'book:book_info' book_.post_day %}">
+            <v-btn color="#1aa179" outlined class="mx-auto" style="width:100%;" href ="{% url 'book:others_info' book_.post_day %}">
             この記事を読む
           </v-btn>
         </div>
@@ -134,7 +154,8 @@
   cols="12"
   class="px-1 py-0 mx-auto mr-md-auto mb-auto d-md-none"
   style="border-top: dashed 0.1em #455045;"
->            <v-expand-transition>
+>
+<v-expand-transition>
   <div v-show="show{{ forloop.counter }}">
 
     <v-card-text>
@@ -154,7 +175,7 @@
 
     <v-card-actions>
       <div class="my-w-100">
-      <v-btn color="#1aa179" outlined class="mx-auto" style="width:100%;" href ="{% url 'book:book_info' book_.post_day %}">
+      <v-btn color="#1aa179" outlined class="mx-auto" style="width:100%;" href ="{% url 'book:others_info' book_.post_day %}">
       この記事を読む
     </v-btn>
   </div>

@@ -4,6 +4,13 @@
         new Vue({
           el: '#app',
           vuetify: new Vuetify(),
+          {% comment %} methods: {
+            onIntersect (entries, observer) {
+              // More information about these options
+              // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+              this.isIntersecting = entries[0].isIntersecting
+            },
+          }, {% endcomment %}
       
         data () {
           return {
@@ -11,27 +18,136 @@
             show{{ forloop.counter }}: false,
             {% endfor %}
             hover: false,
-            isActive: false,
-            {% comment %} items: [
+            {% comment %} isActive: false, {% endcomment %}
+            isIntersecting: false,
+            search: '',
+            search2: '',
+            headers: [
+              { text: '投稿日', value: 'post_day', sortable: true },
+              { text: 'タイトル', value: 'title',},
+              { text: 'カテゴリー', value: 'category' },
+              { text: '著者', value: 'author' },
+              { text: '出版社', value: 'issue' },
+            ],
+            desserts: [
+              {% for item in book_list %}
               {
-                src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-              },
-              {
-                src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-              },
-              {
-                src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-              },
-              {
-                src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
-              },
-            ], {% endcomment %}
-            breadcrumb_items: [
-            {% for string_, path_ in breadcrumb.items %}
+                title: '{{ item }}',
+                category: '{{ item.category_info.get_category_display }}',
+                author: '{{ item.author_info }}',
+                issue: '{{ item.publisher_info }}',
+                post_day: '{{ item.post_day | safe}}',
 
+              },
+              {% endfor %}
+              ],
+
+
+              headers2: [
+              { text: '投稿日', value: 'post_day', sortable: true, },
+              { text: 'タイトル', value: 'title',},
+            ],
+            desserts2: [
+              {% for item in others %}
+              {
+                title: '{{ item }}',
+                post_day: '{{ item.post_day | safe}}',
+              },
+              {% endfor %}
+              ],
+
+
+
+              headers3: [
+              { text: 'title1', value: 'title1', align: 'end'},
+              { text: 'symbodl1', value: 'symbol1',},
+              { text: 'title2', value: 'title2',},
+              { text: 'symbol2', value: 'symbol2',},
+              { text: 'title3', value: 'title3',},
+
+            ],
+              desserts3: [
+              {
+                title1: 'ホーム',
+                symbol1: '┳',
+                title2:'BOOK I.C. について',
+                url1:"{% url 'book:top' %}",
+                url2:"{% url 'book:book-ic' %}",
+                icon1:"mdi-home",
+                icon2:"mdi-office-building-marker-outline",
+                
+              },
+              {
+                title2: 'プロフィール',
+                symbol1: '┣',
+                url2:"{% url 'book:profile' %}",
+                icon2:"mdi-account-circle-outline"
+              },
+              {
+                title2: '書籍一覧',
+                symbol1: '┣',
+                url2:"{% url 'book:book' %}",
+                title3: '本タイトル1',
+                symbol2: '┳',
+                icon2:"mdi-bookshelf",
+                icon3:"mdi-book-open-page-variant"
+              },
+              {
+                symbol1: '┃',
+                title3: '本タイトル2 ...',
+                symbol2: '┗',
+                icon3:"mdi-book-open-page-variant"
+              },              
+              {
+                title2: 'その他 記事',
+                symbol1: '┣',
+                url2:"{% url 'book:others' %}",
+                title3: 'その他 記事1',
+                symbol2: '┳',
+                icon2:"mdi-dots-horizontal-circle-outline",
+                icon3:"mdi-checkbox-blank-circle-outline"
+              },
+              {
+                symbol1: '┃',
+                title3: 'その他 記事2 ...',
+                symbol2: '┗',
+                icon3:"mdi-checkbox-blank-circle-outline"
+              },
+              {
+                title2: 'プライバシーポリシー',
+                symbol1: '┣',
+                url2:"{% url 'book:privacy_policy' %}",
+                icon2:"mdi-shield-lock-outline",
+              },
+              {
+                title2: '問い合わせ',
+                symbol1: '┣',
+                url2:"{% url 'book:contact' %}",
+                icon2:"mdi-email-outline"
+              },
+              {
+                title2: 'サイトマップ',
+                symbol1: '┗',
+                url2:"{% url 'book:sitemap_book-ic' %}",
+                icon2:"mdi-sitemap-outline"
+              },
+
+
+
+
+
+
+              ],
+
+
+
+
+            breadcrumb_items: [
+            {% for item_ in breadcrumb %}
             {
-              text: '{{ string_ }}',
-              href: '{{ path_ }}',
+              icon: '{{ item_.icon_ }}',
+              text: '{{ item_.title_info }}',
+              href: '{{ item_.url_path_ }}',
               disabled: {% if forloop.last %} true {% else %} false{% endif %},
             },
             {% endfor %}
@@ -187,10 +303,14 @@
           })
 
 
-
-          
           var card_category = document.getElementsByClassName("card_category");
         }
+
+
+
+
+
+        
 
       </script>
 
@@ -243,7 +363,7 @@
 
 
 
-
+      <!-- image -->
       <script type="application/javascript">
         var book_img_urls = document.getElementsByClassName('my-img-small');
 
@@ -252,154 +372,74 @@
           book_img_url = book_img_urls[i].children[0].children[0].children[1];
           {% with request.path|split:"/" as skills %}
             {% if skills.1 == "books" and skills.2 == "" %}
-              book_img_url.setAttribute("class", "my-border mt-5 elevation-2 my-w-100 kattene__imgpart_min-height")
+              {% comment %} book_img_url.setAttribute("class", "my-border mt-5 elevation-2 my-w-100 kattene__imgpart_min-height") {% endcomment %}
             {% else %}
-              book_img_url.setAttribute("class", "my-border mt-5 elevation-2 my-w-100")
+              book_img_url.setAttribute("class", "my-border mt-5 elevation-2 my-w-100 kattene__imgpart_min-height")
             {% endif %}
           {% endwith %}
-
         }
-
-        {% comment %} amazon_img_url. {% endcomment %}
-
       </script>
 
+      <!-- data-table -->
+      {% comment %} <script type="application/javascript">
+        var sitemap_ = document.getElementsByClassName("v-data-table__mobile-row__cell");
+       
+
+        for (let i = 0; i < sitemap_.length; i++) {
+          sitemap_[i].setAttribute("id", "my-text-left")
+        }
+      </script>
+      <style scoped>
+
+        #my-text-left {
+            text-align: left;
+        }
+      </style> {% endcomment %}
 
 
+      <!-- data-table -->
+    <style>
+      .my-table-sitemap table tbody td {
+        border: none!important;
+    }
+      .my-table-sitemap tbody tr:hover {
+            background-color: transparent !important;
+      }
 
-  <script>
- 
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-      {% comment %} .style.display ="none"; {% endcomment %}
-      {% comment %} parentElement {% endcomment %}
-
-      {% comment %} 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <script>
-    const { createApp } = Vue
-    const { createVuetify } = Vuetify
+  </style>
     
-    const vuetify = createVuetify()
-    
-    const app = createApp({
-      template: '#app-template',
-    }).use(vuetify).mount('#app')
-  </script> {% endcomment %}
 
 
 
-  {% comment %} 
-  
-              breadcrumb_items: [
-            {% for string_, path_ in breadcrumb.items %}
 
-            {
-              text: '{{ string_ }}'
-              href: '{{ path_ }}'
-              disabled: {% if forloop.last %} true {% else %} false{% endif %}
-            },
-            {% endfor %}
-            ],
-  
-  
-  {% endcomment %}
-
-
-
-<!-- Toolbar -->
 {% comment %} 
-              initiallyOpen: ['public'],
-              files: {
-                html: 'mdi-language-html5',
-                js: 'mdi-nodejs',
-                json: 'mdi-code-json',
-                md: 'mdi-language-markdown',
-                pdf: 'mdi-file-pdf',
-                png: 'mdi-file-image',
-                txt: 'mdi-file-document-outline',
-                xls: 'mdi-file-excel',
-              },
-              tree: [],
-              items: [
-                {
-                  name: '.git',
-                },
-                {
-                  name: 'node_modules',
-                },
-                {
-                  name: 'public',
-                  children: [
-                    {
-                      name: 'static',
-                      children: [{
-                        name: 'logo.png',
-                        file: 'png',
-                      }],
-                    },
-                    {
-                      name: 'favicon.ico',
-                      file: 'png',
-                    },
-                    {
-                      name: 'index.html',
-                      file: 'html',
-                    },
-                  ],
-                },
-                {
-                  name: '.gitignore',
-                  file: 'txt',
-                },
-                {
-                  name: 'babel.config.js',
-                  file: 'js',
-                },
-                {
-                  name: 'package.json',
-                  file: 'json',
-                },
-                {
-                  name: 'README.md',
-                  file: 'md',
-                },
-                {
-                  name: 'vue.config.js',
-                  file: 'js',
-                },
-                {
-                  name: 'yarn.lock',
-                  file: 'txt',
-                },
-              ], 
+
+
+たて	| │ ┃ ｜ ∥	￤ ¦ ┆ ┇ ┊ ┋ ╎ ╏ ║ ╵ ╷ ╹ ╻ ╽ ╿ ❘ ❙ ❚
+たてみぎ	├ ┝ ┠ ┣	┞ ┟ ┡ ┢ ╞ ╟ ╠
+たてひだり	┤ ┥ ┨ ┫	┧ ┦ ┩ ┪ ╡ ╢ ╣
+よこ	─ ━	┄ ┅ ┈ ┉ ╌ ╍ ═ ╴ ╶ ╸ ╺ ╼ ╾
+よこうえ	┸ ┴ ┷ ┻	┵ ┶ ┹ ┺ ╧ ╨ ╩
+よこした	┬ ┯ ┰ ┳	┭ ┮ ┱ ┲ ╤ ╥ ╦
+みぎうえ	┐ ┓	˥ ⏋ ┑ ┒ ╕ ╖ ╗ ╮
+みぎした	┘ ┛	˩ ⏌ ┙ ┚ ╛ ╜ ╝ ╯
+ひだりうえ	┌ ┏	⎾ ┍ ┎ ╒ ╓ ╔ ╭
+ひだりした	└ ┗	⎿ ┕ ┖ ╘ ╙ ╚ ╰
+まんなか	┼ ┿ ╂ ╋	┽ ┾ ╀ ╁ ╃ ╄ ╅ ╆ ╇ ╈ ╉ ╊ ╪ ╫ ╬
+ふとわく	┏┳━┓ ┗┻━┛	
+ほそわく	┌┬─┐ └┴─┘	
+けいせん	─ ━ │ ┃
+┌ ┏ ┐ ┓
+└ ┗ ┘ ┛
+├ ┝ ┠ ┣
+┤ ┥ ┨ ┫
+┬ ┯ ┰ ┳
+┴ ┷ ┸ ┻
+┼ ┿ ╂ ╋	⎿ ⏌ ⎾ ⏋ ⏉ ⏊
+
+
+
+
+
+
 {% endcomment %}

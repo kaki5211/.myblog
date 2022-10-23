@@ -1,6 +1,7 @@
 
 {% extends 'book/_block_static.html' %}
 
+{% load static %}
 {% block contents %}
 
   <!-- BOOK DB -->
@@ -20,11 +21,22 @@
     <v-col cols="12" class="mx-auto px-0 py-10">
       {% include 'book_info/contents_title.html' with text="プロフィール" ty=1 %}
 
+      <v-col cols="12" sm="11" md="9" lg="6" class="mt-0 mt-lg-10 mx-auto px-0">
 
+        {% static "static/arikui.png" as img_url  %}
+        {% include 'block/img_small.html' with img_url=img_url %}
+
+        {% comment %} {% include 'block/img_small.html' with img_url= %} {% endcomment %}
+
+      </v-col> 
+
+
+
+{% comment %} 
 
       <v-col cols="12" sm="11" md="9" lg="6" class="mt-16 mx-auto px-0" >
         <v-img
-        src=""
+        src="{% static "static/arikui.png" %}"
       >
       <v-responsive :aspect-ratio="16/9" class="my-bg-color-glay display-flex">
         <div class="d-flex my-h-100">
@@ -34,19 +46,14 @@
           </div>
         </div>
       </v-responsive>
-          {% comment %} <v-row
-            class="fill-height ma-0"
-            align="center"
-            justify="center"
-          >
-            <v-progress-circular
-              indeterminate
-              color="grey lighten-5"
-            ></v-progress-circular>
-          </v-row> {% endcomment %}
+
       </v-img>
       </v-col> 
+ {% endcomment %}
 
+
+
+      
       
 
       <v-col cols="12" sm="11" md="10" lg="8" class="mx-auto py-10">         <!-- table -->

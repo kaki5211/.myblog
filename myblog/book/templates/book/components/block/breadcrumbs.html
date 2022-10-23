@@ -25,9 +25,6 @@ no-gutters
   cols="12"
   align-self="center">
   <div style="display: inline-block;">
-    <v-icon>mdi-home</v-icon>
-  </div>
-  <div style="display: inline-block;">
         <v-breadcrumbs :items="breadcrumb_items" large class="my-text-color py-5 pl-0">
             <template v-slot:item="{ item }" class="my-text-color">
               <v-breadcrumbs-item
@@ -35,6 +32,7 @@ no-gutters
                 :disabled="item.disabled"
                 class="my-text-color"
             >
+            <v-icon size="22px">[[ item.icon]]</v-icon>
                 [[ item.text.toUpperCase() ]]
               </v-breadcrumbs-item>
             </template>

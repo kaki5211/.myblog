@@ -128,6 +128,18 @@ class Inquiry(models.Model):
     mail_add = models.EmailField("メールアドレス", max_length=254)
     inquiry = models.TextField("問い合わせ内容", max_length=2047)
 
+class Other(models.Model):
+    title = models.CharField('タイトル', max_length=100, null=True, blank=True)
+    post_day = models.DateField('投稿日', null=True, blank=True) # [投稿日, y m d]
+    update_day = models.DateField('更新日', null=True, blank=True) # [投稿日, y m d]
+    
+    image = models.ImageField(upload_to='media')
+    contents = models.TextField("コンテンツ", null=True, blank=True)
+    contents_synopsis =  models.TextField("あらすじ", null=True, blank=True)
+
+    def __str__(self):
+        return self.title
+
 
 
 
