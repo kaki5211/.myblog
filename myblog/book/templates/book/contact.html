@@ -69,7 +69,7 @@
         id="content_name"
         required
       ></v-text-field>
-  
+{% comment %}   
       <v-text-field
         v-model="email"
         color="#1aa179"
@@ -78,7 +78,7 @@
         name="mail_add"
         id="content_mail_add"
         required
-      ></v-text-field>
+      ></v-text-field> {% endcomment %}
   
       <v-textarea
         v-model="message"
@@ -92,6 +92,7 @@
       ></v-textarea>
 
 
+{% comment %}       
       <div  class="mb-3 mt-3 d-flex justify-end pt-5">
         <v-btn
           color="#1aa179"
@@ -102,7 +103,7 @@
               >
           送信
         </v-btn>
-      </div>
+      </div> {% endcomment %}
 
 
 
@@ -115,6 +116,9 @@
 </v-card>
 </v-col>
 </v-row>
+
+
+{% include 'book_info/contents_text.html' with text="いったん閉鎖。（2022-10-24）"%}
 
 
 {% include 'book_info/contents_text.html' with text="一応メール送れるけど、まだ利便性悪いです。。（2022-10-16）"%}
