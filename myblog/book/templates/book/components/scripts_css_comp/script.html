@@ -4,16 +4,17 @@
         new Vue({
           el: '#app',
           vuetify: new Vuetify(),
-          {% comment %} methods: {
+          methods: {
             onIntersect (entries, observer) {
               // More information about these options
               // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
               this.isIntersecting = entries[0].isIntersecting
             },
-          }, {% endcomment %}
+          },
       
         data () {
           return {
+            isHidden: true,
             {% for a in book_list %}
             show{{ forloop.counter }}: false,
             {% endfor %}
@@ -59,14 +60,20 @@
 
 
               headers3: [
-              { text: 'title1', value: 'title1', align: 'end'},
-              { text: 'symbodl1', value: 'symbol1',},
-              { text: 'title2', value: 'title2',},
-              { text: 'symbol2', value: 'symbol2',},
-              { text: 'title3', value: 'title3',},
+              { text: 'title1', value: 'title1', align: 'end',},
+              { text: 'symbodl1', value: 'symbol1', align: 'center',},
+              { text: 'title2', value: 'title2', align: 'start',},
+              { text: 'symbol2', value: 'symbol2', align: 'center',},
+              { text: 'title3', value: 'title3', align: 'start', width: "1000px"},
 
             ],
               desserts3: [
+              {
+                title1: 'HOME',
+                title2:'INFO',
+                title3:'CONTENT',
+                
+              },
               {
                 title1: 'ホーム',
                 symbol1: '┳',
@@ -401,10 +408,25 @@
     <style>
       .my-table-sitemap table tbody td {
         border: none!important;
+        padding-left: 5px!important;
+        padding-right: 5px!important;
+        width: 0!important;
+        white-space: nowrap!important;
     }
       .my-table-sitemap tbody tr:hover {
             background-color: transparent !important;
       }
+      .my-table-width-max {
+        
+      }
+      .my-table-sitemap table tbody tr:first-child td {
+        text-align: center!important;
+      }
+      .my-table-sitemap table tbody tr:first-child td a {
+        color: #9A9!important;
+        border-bottom: none!important;
+      }
+
 
   </style>
     

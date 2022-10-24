@@ -12,7 +12,7 @@
   {% include 'block/breadcrumbs.html' with aueiu=book_info.title%}
 
   <!-- text_title-->
-  {% include 'text/text_subtitle.html' with text="フィルター" icon_name="mdi-magnify-expand" %}
+  {% comment %} {% include 'text/text_subtitle.html' with text="フィルター" icon_name="mdi-magnify-expand" %} {% endcomment %}
   
 
 
@@ -78,7 +78,8 @@
 
 
   <!-- text_title-->
-  {% include 'text/text_subtitle.html' with text="書籍一覧" icon_name="mdi-bookshelf" %}
+  {% comment %} {% include 'text/text_subtitle.html' with text="書籍一覧" icon_name="mdi-bookshelf" %} {% endcomment %}
+  {% include 'book_info/contents_title.html' with text="書籍一覧" %}
 
 
   <!-- card -->

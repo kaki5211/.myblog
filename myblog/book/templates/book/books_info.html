@@ -182,7 +182,12 @@
                 {% if count_subtitle ==  forloop.counter %}
                   {% include 'google/adsense_article.html' %}
                 {% endif %}
+                {%if forloop.counter > 2  %}
+                <v-divider class="pb-0 mb-0"></v-divider>
+                {% endif %}
+
                 {% include 'book_info/contents_subtitle.html' with text=contents_.1  ty=forloop.counter %}
+                {% comment %} <v-divider class="pt-0 mt-0"></v-divider> {% endcomment %}
               {% elif contents_.0 == "text" %}
                 {% include 'book_info/contents_text.html' with text=contents_.1 %}
               {% elif contents_.0 == "blockquote"%}

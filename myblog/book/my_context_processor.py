@@ -91,7 +91,7 @@ def common(request):
 
                 elif context['title_info']  == "その他 記事":
                     item = Other.objects.get(post_day=item).title
-                    icon = "mdi-office-building-marker-outline"
+                    icon = "mdi-checkbox-blank-circle-outline"
                     context['title_info'] = item
                     
                 # elif item == "book-ic":

@@ -1,28 +1,50 @@
 
-  <v-col cols="11" class="mx-auto">
+  <v-col cols="12" md="10" class="mx-auto">
 
   {% comment %} <v-col cols="12" sm="11" md="9" lg="6" class="mt-16 mx-auto px-0" > {% endcomment %}
     
+
+
+
+
+    {% comment %} <button v-on:click="isHidden = true">Hide the text below</button> {% endcomment %}
+    <div class="d-flex justify-end my-w-100 mb-3">
+      <v-btn 
+      color="#455045"
+      class="mr-4"
+      outlined
+      v-on:click="isHidden = !isHidden"
+      >
+      フィルター
+      </v-btn>
+
+
+    </div>
+
+
+
+
+
     
 
-    <form action="{% url 'book:book' %}" method="post">
+    <form v-show="!isHidden" class="my-border" action="{% url 'book:book' %}" method="post">
       {% csrf_token %}
 
-
+{% comment %} 
       <div class="mt-4">
         <p class="">■書籍</p>
         <v-text-field
-          {% comment %} v-model="message3" {% endcomment %}
-          {% comment %} :error-messages="nameErrors" {% endcomment %}
-          {% comment %} label="書籍 タイトル" {% endcomment %}
+        #  v-model="message3"
+        #  :error-messages="nameErrors"
+       #   label="書籍 タイトル"
           color="#1aa179"
           filled
           clearable
           class="my-text-color ps-5"
           type="text"
           name="title"
-          {% comment %} @input="$v.name.$touch()" {% endcomment %}
-          {% comment %} @blur="$v.name.$touch()" {% endcomment %}
+       #  @input="$v.name.$touch()"
+       #  @blur="$v.name.$touch()"
         >
       </v-text-field>
     </div>
@@ -32,14 +54,19 @@
     id="search_execution"
     outlined
     color="#1aa179"
-    {% comment %} @click="submit" {% endcomment %}
+   #  @click="submit"
     type="submit"
   >
     書籍検索
   </v-btn>    
 </div>
-    
-    <div class="my-1 d-inline-block">
+     {% endcomment %}
+
+
+
+
+
+    <div class="my-1 d-inline-block" >
       <a class="my-text-color-title">■カテゴリー：</a>
           {% for item in category %}
 
@@ -149,7 +176,7 @@
 
 
 
-    <div  class="mb-10 mt-3 d-flex justify-end">
+    <div  class="mt-3 d-flex justify-end mb-3">
 
   <v-btn 
   color="#1aa179"

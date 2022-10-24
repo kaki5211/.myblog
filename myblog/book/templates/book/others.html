@@ -12,7 +12,8 @@
   {% include 'block/breadcrumbs.html' with aueiu=book_info.title%}
 
   <!-- title -->
-  {% include 'text/text_subtitle.html' with text="その他 記事" icon_name="mdi-dots-horizontal-circle-outline" %}
+  {% comment %} {% include 'text/text_subtitle.html' with text="その他 記事" icon_name="mdi-dots-horizontal-circle-outline" %} {% endcomment %}
+  {% include 'book_info/contents_title.html' with text="その他 記事" %}
 
 
   <!-- card -->

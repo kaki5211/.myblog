@@ -18,7 +18,8 @@
   {% include 'block/breadcrumbs.html' with aueiu=book_info.title%}
 
   <!-- title -->
-  {% include 'text/text_subtitle.html' with text="最近の投稿" icon_name="mdi-book-open-page-variant" %}
+  {% comment %} {% include 'text/text_subtitle.html' with text="最近の投稿" icon_name="mdi-book-open-page-variant" %} {% endcomment %}
+  {% include 'book_info/contents_title.html' with text="最近の投稿" %}
 
   <!-- card -->
   {% include 'block/card.html' %}

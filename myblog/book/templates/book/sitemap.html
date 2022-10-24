@@ -18,68 +18,21 @@
 
   <v-row no-gutters >
     <v-col cols="12" class="mx-auto px-0 py-10">
+
       {% include 'book_info/contents_title.html' with text="サイトマップ" ty=1 %}
 
 
+
+
       {% include 'book_info/contents_subtitle.html' with text="サイトマップ" ty=2 %}
-      
-      <template>
-        <v-card tile elevation="0">
-
-          <v-data-table
-          class="my-bg-color my-table-sitemap"
-            style="width: 100%;
-            border-collapse: collapse;
-            white-space: nowrap;"
-            :headers="headers3"
-            :items="desserts3"
-            :show-rows-border="false"
-            hide-default-header
-            hide-default-footer
-            hover= "false"
-            dense
-            loading-text="$vuetify.dataIterator.loadingText"
-            mobile-breakpoint="50"
-          >
-        
-        
-          <template #item.title1="{ item }">
-            <a target="_blank" :href="item.url1" class="v-breadcrumbs__item">
-                <v-icon size="22px">[[ item.icon1 ]]</v-icon>
-                    [[ item.title1 ]]
-            </a>
-          </template>
-
-          <template #item.title2="{ item }">
-            <a target="_blank" :href="item.url2" class="v-breadcrumbs__item">
-                <v-icon size="22px">[[ item.icon2 ]]</v-icon>
-              [[ item.title2 ]]
-            </a>
-          </template>
-
-          <template #item.title3="{ item }">
-            <a target="_blank" :href="item.url3" class="v-breadcrumbs__item">
-                <v-icon size="22px">[[ item.icon3 ]]</v-icon>
-              [[ item.title3 ]]
-            </a>
-          </template>
-
-        
-        
-        
-        
-        
-        
-        
-        
-        </v-data-table>
-        </v-card>
-      </template>
 
 
+      {% comment %} <v-divider></v-divider> {% endcomment %}
+
+      {% include 'block/sitemap.html' with text_color="my-text-color" bg_color="my-bg-color" border_color="my-border-color" %}
 
 
-
+      <v-divider></v-divider>
 
 
 
@@ -95,7 +48,7 @@
   <template>
     <v-card tile elevation="0"  class="my-bg-color">
         <v-text-field
-        style="width: 80%; max-width: 560px;"
+        style="width: 45%; max-width: 460px;"
         class="my-bg-color mr-0 ml-auto"
         color="#1aa179"
           v-model="search"
@@ -120,7 +73,11 @@
         mobile-breakpoint="50"
       ></v-data-table>
     </v-card>
+    <v-divider></v-divider>
+
   </template>
+
+
 
 
       {% include 'book_info/contents_subtitle.html' with text="[検索] その他 記事" ty=4 %}
@@ -133,7 +90,7 @@
       <template>
         <v-card tile elevation="0" class="my-bg-color">
             <v-text-field
-            style="width: 80%; max-width: 560px;"
+            style="width: 45%; max-width: 460px;"
             class="my-bg-color mr-0 ml-auto"
             color="#1aa179"
               v-model="search2"
@@ -158,19 +115,9 @@
             mobile-breakpoint="50"
           ></v-data-table>
         </v-card>
+        <v-divider></v-divider>
+
       </template>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
