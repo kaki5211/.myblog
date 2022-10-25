@@ -21,7 +21,7 @@
     
       <template #item.title1="{ item }" class="">
         
-        <a target="_blank" :href="item.url1" class="v-breadcrumbs__item {{ text_color }} my-border-bottom {{ border_color }}">
+        <a target="_self" :href="item.url1" class="v-breadcrumbs__item {{ text_color }} my-border-bottom {{ border_color }}">
             <v-icon size="22px">[[ item.icon1 ]]</v-icon>
                 [[ item.title1 ]]
         </a>
@@ -31,7 +31,7 @@
 
       <template #item.title2="{ item }" class="">
         
-            <a target="_blank" :href="item.url2" class="v-breadcrumbs__item {{ text_color }} my-border-bottom {{ border_color }}">
+            <a target="_self" :href="item.url2" class="v-breadcrumbs__item {{ text_color }} my-border-bottom {{ border_color }}">
             <v-icon size="22px">[[ item.icon2 ]]</v-icon>
           [[ item.title2 ]]
         </a>
@@ -40,7 +40,7 @@
 
       <template #item.title3="{ item }" class=" my-table-width-max">
         
-            <a target="_blank" :href="item.url3" class="v-breadcrumbs__item {{ text_color }}">
+            <a target="_self" :href="item.url3" class="v-breadcrumbs__item {{ text_color }}">
             <v-icon size="22px">[[ item.icon3 ]]</v-icon>
           [[ item.title3 ]]
         </a>

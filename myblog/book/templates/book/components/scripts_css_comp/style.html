@@ -239,6 +239,15 @@
   .my-border-solid-medium_gray {
     border: medium solid #455045;
   }
+  
+  {% load split_tags %}
+  {% for color in category %}
+  {% with color.color_hex|split:'#' as color_ %}
+  .text-color-{{color_.1}} {
+    color:{{color.color_hex}}!important;
+  }
+  {% endwith %}
+  {% endfor %}
 
 
   

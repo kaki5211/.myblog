@@ -42,7 +42,16 @@ def common(request):
                                 ]
     context['others'] = Other.objects.all()
     context['author'] = Author.objects.all()
-    context['book'] = Book.objects.order_by('-post_day')
+    context['book'] = Book.objects.filter(fin=1).order_by('-post_day')
+
+    dict_ = {x:x.post_day for x in context['book']} | {x:x.post_day for x in context['others']}
+    list_ = sorted(dict_.items(), key=lambda x:x[1] ,reverse=True)
+    list_to_dict_ = dict(list_)
+    context['books_others'] = list_to_dict_.keys()
+
+        
+        
+
     # context['author'] = []
     set_count = [Book.objects.filter(author_info=a).count for a in Author.objects.all()]
     if pf == 'Windows':
@@ -70,6 +79,7 @@ def common(request):
                 "url_path_":"{0}://{1}/".format(request.scheme, request.get_host()),
                 "icon_":"mdi-home",
             }]
+
     flag = 0
     url_path = "{0}://{1}/".format(request.scheme, request.get_host())
     try:
@@ -82,12 +92,10 @@ def common(request):
             url_path += item + "/"
 
             if flag != 0:
-                print("■■■■■■■■■context['breadcrumb']", url_list)
                 if context['title_info']  == "書籍一覧":
                     item = Book.objects.get(post_day=item).title
                     context['title_info'] = item
-                    icon = "mdi-office-building-marker-outline"
-                    print("item", item)
+                    icon = "mdi-book-open-page-variant"
 
                 elif context['title_info']  == "その他 記事":
                     item = Other.objects.get(post_day=item).title
@@ -154,7 +162,6 @@ def common(request):
 
 
         context['breadcrumb'] = url_list # パンくずリスト完成
-        print("■■■■■■■■■context['breadcrumb']", url_list)
     except:
         context['breadcrumb'] = url_list
         pass

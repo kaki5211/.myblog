@@ -15,9 +15,11 @@
         data () {
           return {
             isHidden: true,
-            {% for a in book_list %}
+            {% for a in books_others %}
             show{{ forloop.counter }}: false,
             {% endfor %}
+            show_card: true,
+            show_list: false,
             hover: false,
             {% comment %} isActive: false, {% endcomment %}
             isIntersecting: false,
@@ -26,20 +28,30 @@
             headers: [
               { text: '投稿日', value: 'post_day', sortable: true },
               { text: 'タイトル', value: 'title',},
-              { text: 'カテゴリー', value: 'category' },
+              { text: 'カテゴリー', value: 'category', },
               { text: '著者', value: 'author' },
               { text: '出版社', value: 'issue' },
             ],
             desserts: [
+            {% load split_tags %}
               {% for item in book_list %}
+
+              {% with item.category_info.color_hex|split:'#' as color_ %}
+
+
+
+
               {
                 title: '{{ item }}',
                 category: '{{ item.category_info.get_category_display }}',
                 author: '{{ item.author_info }}',
                 issue: '{{ item.publisher_info }}',
                 post_day: '{{ item.post_day | safe}}',
+                url:"{% url 'book:book_info' data_info=item.post_day %}",
+                text_color_rgb:'text-color-{{ color_.1 }}',
 
               },
+              {% endwith %}
               {% endfor %}
               ],
 
@@ -53,6 +65,7 @@
               {
                 title: '{{ item }}',
                 post_day: '{{ item.post_day | safe}}',
+                url:"{% url 'book:others_info' data_info=item.post_day %}",
               },
               {% endfor %}
               ],

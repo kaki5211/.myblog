@@ -1,0 +1,172 @@
+{% load static %}
+
+{% load get_img_src %}
+{% load get_tag_el %}
+
+
+  {% for book_ in book_list %}
+
+    {% if forloop.counter == 2 %}
+      <v-col
+      cols="12"
+      sm="6"
+      lg="4"
+      align-self="center"
+      class="mb-14 mx-auto mt-5"
+    >
+    {% include 'google/adsense_infeed.html' %}
+    </v-col>
+    {% endif %}
+
+
+      <v-col
+        cols="12"
+        sm="6"
+        lg="4"
+        align-self="center"
+        class="px-3 mb-14 mx-auto ml-md-0 mr-md-auto mt-5 mb-auto"
+      >
+    
+  
+      <v-card
+        class="mx-auto my-books"
+        elevation="15"
+        name="category"
+      >
+{% comment %}         
+        <v-img min-width="100"
+        >{{ book_.amazon_url | safe }}</v-img> {% endcomment %}
+
+
+        <div class="kattene">
+          <div class="kattene__imgpart">
+            {% comment %} <a target="_blank" rel="noopener" href="【メインのURL】"> {% endcomment %}
+            {% comment %} <img src="" width="160" height="160" loading="lazy" class="kattene__shadow"> {% endcomment %}
+            
+            {% comment %} <div>
+              {{ book_.book_img_url | safe }}
+            </div> {% endcomment %}
+
+            <a {{ book_.book_img_url | get_tag_el:"a"|safe }}>
+
+
+              {% with book_.book_img_url|get_img_src:'src' as img_url %}
+              {% include 'block/img_small.html' with img_url=img_url %}
+              {% endwith %}
+            
+        </a>
+
+
+
+              {% comment %} <a href="https://www.amazon.co.jp/%E4%BD%95%E3%82%82%E3%81%8B%E3%82%82%E6%86%82%E9%AC%B1%E3%81%AA%E5%A4%9C%E3%81%AB-%E9%9B%86%E8%8B%B1%E7%A4%BE%E6%96%87%E5%BA%AB-%E4%B8%AD%E6%9D%91-%E6%96%87%E5%89%87/dp/4087467988?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&crid=22P8P409551PY&keywords=%E4%BD%95%E3%82%82%E3%81%8B%E3%82%82%E6%86%82%E9%AC%B1%E3%81%AA%E5%A4%9C%E3%81%AB&qid=1664892669&qu=eyJxc2MiOiIxLjA2IiwicXNhIjoiMC40NiIsInFzcCI6IjAuNDkifQ%3D%3D&s=instant-video&sprefix=%E4%BD%95%E3%82%82%E3%81%8B%E3%82%82%E6%86%82%E9%AC%B1%E3%81%AA%E5%A4%9C%E3%81%AB%2Cinstant-video%2C178&sr=1-1-catcorr&linkCode=li2&tag=bookic-22&linkId=3b66b22a86ce0d296bde27c76521a4b0&language=ja_JP&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=4087467988&Format=_SL160_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=bookic-22&language=ja_JP" ></a> {% endcomment %}
+
+            {% comment %} </a> {% endcomment %}
+          </div>
+          <div class="kattene__infopart">
+            <div class="kattene__btns __four" class="d-flex">
+              <div class="d-flex"><v-btn text outlined class="mx-auto my-w-100">
+                <a class="text-decoration-none" target="_blank" href="{{ book_.amazon_url }}">Amazon</a></v-btn>
+              </div>
+              
+              <div class="d-flex"><v-btn text outlined class="mx-auto my-w-100">
+                <a class="text-decoration-none" target="_blank" {% if book_.kindle_url != none %}href="{{ book_.kindle_url }}"{% endif %}>{% if book_.kindle_url != none %}Kindle{% else %}none{% endif %}</a></v-btn>
+              </div>
+
+              <div class="d-flex"><v-btn text outlined class="mx-auto my-w-100">
+                <a class="text-decoration-none" target="_blank" href="{{ book_.rakuten_url }}">楽天</a></v-btn>
+              </div>
+
+              <div class="d-flex"><v-btn text outlined class="mx-auto my-w-100">
+                <a class="text-decoration-none" target="_blank" {% if book_.rakuten_kobo_url != none %}href="{{ book_.rakuten_kobo_url }}"{% endif %}>{% if book_.rakuten_kobo_url != none %}楽天KOBO{% else %}none{% endif %}</a></v-btn>
+                
+                
+              </div>
+            </div>
+          </div>
+      </div>
+
+
+
+
+    
+        <div style="background-color:white;">
+          <v-card-text class="pb-0 my-text-color" style="border-top: dashed 0.1em #455045;">
+            {{ book_.post_day | safe }}
+          </v-card-text>
+    
+          <v-card-title class="pb-0 pt-1">
+            {{ book_.title | safe }}
+          </v-card-title>
+
+          {% comment %}   
+          <v-card-text class="ms-2">
+            <v-icon color="#9A9" size="14">mdi-eye</v-icon>
+            <a class="ms-1 me-3 text-subtitle-2 text-md-subtitle-1 my-text-color-glay">XXX,XXX,XXX</a>
+          </v-card-text>
+          {% endcomment %}
+          <v-card-actions>
+            <v-btn color="{{book_.category_info.color_hex}}" elevation="1" outlined rounded small>
+              <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %}
+                <input class="card_category" type="submit" name="category" href="{% url "book:book" %}" value="{{book_.category_info.get_category_display}}">
+              </form>
+            </v-btn>
+    
+    
+            <v-btn color="#455045" elevation="1" outlined rounded small>
+              <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %}
+                <input class="card_author" type="submit" name="author" href="{% url "book:book" %}" value="{{ book_.author_info }}">
+              </form>
+            </v-btn>
+
+            <v-btn color="#455045" elevation="1" outlined rounded small>
+              <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %}
+                <input class="card_publisher" type="submit" name="publisher" href="{% url "book:book" %}" value="{{ book_.publisher_info}}">
+              </form>
+            </v-btn>
+
+          </v-card-actions>
+          <v-card-text>
+            {{ book_.contents_synopsis | safe }}
+          </v-card-text>
+    
+          <v-spacer></v-spacer>
+
+
+    
+          <v-card-actions>
+            <v-btn color="#1aa179" outlined class="mx-auto" style="width:100%;" href ="{% url 'book:book_info' book_.post_day %}">
+            この記事を読む
+          </v-btn>
+          </v-card-actions>
+    
+    
+          {% comment %} 
+      
+          <v-expand-transition>
+            <div v-show="show">
+              <v-divider></v-divider>
+      
+    
+            </div>
+          </v-expand-transition> {% endcomment %}
+      </div>
+      </v-card>
+
+      
+    </v-col>
+
+    {% empty %}
+    <v-col
+    cols="12"
+    sm="6"
+    lg="4"
+    align-self="center"
+    class="px-3 mb-14 mx-auto ml-md-0 mr-md-auto mt-5 mb-auto"
+  >      
+  <p>該当書籍が見つかりません。</p>
+    </v-col>
+    {% endfor %}
+  
+
+  
+  

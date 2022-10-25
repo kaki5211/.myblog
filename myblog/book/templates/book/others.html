@@ -14,10 +14,78 @@
   <!-- title -->
   {% comment %} {% include 'text/text_subtitle.html' with text="その他 記事" icon_name="mdi-dots-horizontal-circle-outline" %} {% endcomment %}
   {% include 'book_info/contents_title.html' with text="その他 記事" %}
+  <div class="d-flex justify-end my-w-100 mb-3">
+    
+    <v-btn 
+    color="#455045"
+    class="mr-4"
+    outlined
+    v-on:click="show_card = !show_card, show_list = !show_list"
+    >
+    <v-icon>mdi-format-list-bulleted</v-icon>
+      リスト
+    </v-btn>
+
+
+  </div>
+
 
 
   <!-- card -->
-  {% include 'block/card_small_others.html' %}
+  <div v-show="show_card">
+    {% include 'block/card_small_others.html' %}
+  </div>
+
+
+
+
+
+
+
+
+
+
+      <template>
+        <v-card tile elevation="0" class="my-bg-color" v-show="show_list">
+          {% include 'book_info/contents_subtitle.html' with text="[検索] その他 記事"%}
+          <v-text-field
+            style="width: 45%; max-width: 460px;"
+            class="my-bg-color mr-0 ml-auto"
+            color="#1aa179"
+              v-model="search2"
+              append-icon="mdi-magnify"
+              label="Search"
+              single-line
+              hide-details
+            ></v-text-field>
+          <v-data-table
+          class="my-bg-color"
+          style="width: 100%;
+            border-collapse: collapse;
+            white-space: nowrap;"
+            :headers="headers2"
+            :items="desserts2"
+            :search="search2"
+            :sort-by="['post_day']"
+            :sort-desc="[true]"
+            hide-default-footer
+            dense
+            loading-text="$vuetify.dataIterator.loadingText"
+            mobile-breakpoint="50"
+          >
+
+          <template #item.title="{ item }" class="">
+            <a target="_self" :href="item.url" class="v-breadcrumbs__item {{ text_color }} my-border-bottom">
+            <v-icon size="22px">mdi-checkbox-blank-circle-outline</v-icon>
+          [[ item.title ]]
+        </a>
+        </template> 
+
+        </v-data-table>
+        </v-card>
+        <v-divider></v-divider>
+
+      </template>
 
 
   {% comment %} <p>準備中... (2022.10.02)</p> {% endcomment %}

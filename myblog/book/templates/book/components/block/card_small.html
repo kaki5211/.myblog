@@ -87,22 +87,22 @@
 
           <v-card-actions class="pl-0 d-block">
             <v-btn class="my-1 mx-1" color="{{book_.category_info.color_hex}}" elevation="1" outlined rounded small>
-              <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %}
+              {% comment %} <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %} {% endcomment %}
                 <input class="card_category" type="submit" name="category" href="{% url "book:book" %}" value="{{book_.category_info.get_category_display}}">
-              </form>
+              {% comment %} </form> {% endcomment %}
             </v-btn>
     
     
             <v-btn class="my-1 mx-1" color="#455045" elevation="1" outlined rounded small>
-              <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %}
+              {% comment %} <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %} {% endcomment %}
                 <input class="card_author" type="submit" name="author" href="{% url "book:book" %}" value="{{ book_.author_info }}">
-              </form>
+              {% comment %} </form> {% endcomment %}
             </v-btn>
 
             <v-btn class="my-1 mx-1" color="#455045" elevation="1" outlined rounded small>
-              <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %}
+              {% comment %} <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %} {% endcomment %}
                 <input class="card_publisher" type="submit" name="publisher" href="{% url "book:book" %}" value="{{ book_.publisher_info}}">
-              </form>
+              {% comment %} </form> {% endcomment %}
             </v-btn>
           </v-card-actions>
 
