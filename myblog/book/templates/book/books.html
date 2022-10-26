@@ -113,7 +113,7 @@
 
   <template>
     <v-card tile elevation="0"  class="my-bg-color" v-show="show_list">
-        {% include 'book_info/contents_subtitle.html' with text="[検索] 書籍一覧" %}
+        {% include 'book_info/contents_subtitle.html' with text="[リスト] 書籍一覧" %}
         <v-text-field
         style="width: 45%; max-width: 460px;"
         class="my-bg-color mr-0 ml-auto"
@@ -140,7 +140,7 @@
         mobile-breakpoint="50"
       >
       <template #item.title="{ item }">
-        <a target="_self" :href="item.url" class="v-breadcrumbs__item {{ text_color }} my-border-bottom my-border-bottom-midium">
+        <a target="_self" :href="item.url" class="v-breadcrumbs__item {{ text_color }} my-border-bottom">
         <v-icon size="22px">mdi-book-open-page-variant</v-icon>
       [[ item.title ]]
     </a>

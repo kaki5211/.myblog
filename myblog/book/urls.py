@@ -13,7 +13,7 @@ from django.contrib.sitemaps import Sitemap
 from django.contrib.sitemaps.views import sitemap
 from django.shortcuts import resolve_url
 from django.urls import path, include
-from .models import Book
+from .models import Book, Other
 import datetime
 
 
@@ -22,12 +22,27 @@ import datetime
 
 app_name='book'
 
-class PostSitemap(Sitemap):
+class PostSitemap_Book(Sitemap):
     changefreq = "never"
-    priority = 0.5
+    priority = 0.6
 
     def items(self):
         return Book.objects.filter(fin=True)
+
+    def location(self, obj):
+        data_info=(obj.post_day).strftime("%Y-%m-%d")
+        # data_info= obj.post_day
+        return resolve_url('book:book_info', data_info=data_info)
+
+    def lastmod(self, obj):
+        return obj.post_day
+
+class PostSitemap_Other(Sitemap):
+    changefreq = "never"
+    priority = 0.4
+
+    def items(self):
+        return Other.objects.all()
 
     def location(self, obj):
         data_info=(obj.post_day).strftime("%Y-%m-%d")
@@ -42,7 +57,7 @@ class StaticSitemap(Sitemap):
     priority = 0.5
 
     def items(self):
-        name_list = ['profile', 'book-ic', 'others', 'privacy_policy', 'contact', 'book', 'top']
+        name_list = ['profile', 'book-ic', 'others', 'privacy_policy', 'contact', 'book', 'top', 'sitemap_book-ic']
         items = []
         for name_ in name_list:
             items.append("book:{}".format(name_))          
@@ -53,8 +68,9 @@ class StaticSitemap(Sitemap):
 
 
 sitemaps = {
-    'posts': PostSitemap,
-    'static': StaticSitemap
+    'posts_book': PostSitemap_Book,
+    'posts_other':PostSitemap_Other,
+    'static': StaticSitemap,
 }
 
 

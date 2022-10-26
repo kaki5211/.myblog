@@ -2,7 +2,7 @@
     <v-card tile elevation="0" class="{{ bg_color }} mx-auto">
 
       <v-data-table
-      class="{{ bg_color }} my-table-sitemap mx-auto"
+      class="{{ bg_color }} my-table-sitemap mx-auto pb-5"
         style="width: 480px;
         border-collapse: collapse;
         white-space: nowrap;"
@@ -36,7 +36,7 @@
           [[ item.title2 ]]
         </a>
     
-</template>
+    </template>
 
       <template #item.title3="{ item }" class=" my-table-width-max">
         
@@ -45,9 +45,9 @@
           [[ item.title3 ]]
         </a>
     
-</template>
+      </template>
 
     
     </v-data-table>
-    </v-card>
-  </template>
+  </v-card>
+</template>

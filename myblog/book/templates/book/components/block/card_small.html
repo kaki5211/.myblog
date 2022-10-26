@@ -8,7 +8,7 @@
 
   {% for book_ in book_list %}
 
-    {% if forloop.counter == 2 %}
+    {% comment %} {% if forloop.counter == 2 %}
       <v-col
       cols="12"
       sm="6"
@@ -18,7 +18,7 @@
     >
     {% include 'google/adsense_infeed.html' %}
     </v-col>
-    {% endif %}
+    {% endif %} {% endcomment %}
 
 
 

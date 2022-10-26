@@ -589,7 +589,7 @@ class OthersView(MyListView,):
         except:
             pass
         try:
-            context['contents_text'] = context['other_info'].contents
+            context['contents_text'] = context['book_info'].contents
             list_ = []
             count = 0
             for text_ in context['contents_text'].split('<')[1:]:
@@ -604,7 +604,7 @@ class OthersView(MyListView,):
                 if len(text_) == 3:
                     text_[2] = text_[2].splitlines()[0]
                 list_.append(text_)
-            context['other_info_contents'] = list_
+            context['book_info_contents'] = list_
             count = 0
             count_subtitle = 0
             for text_ in list_:

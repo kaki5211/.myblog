@@ -4,7 +4,7 @@
 
   {% for book_ in others %}
   
-
+{% comment %} 
     {% if forloop.counter == 2 %}
       <v-col
       cols="12"
@@ -15,7 +15,7 @@
     >
     {% include 'google/adsense_infeed.html' %}
     </v-col>
-    {% endif %}
+    {% endif %} {% endcomment %}
 
 
       <v-col

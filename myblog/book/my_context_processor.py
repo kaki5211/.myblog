@@ -23,11 +23,11 @@ import platform
 
 
 def common(request):
-    pf = platform.system()    
+    # pf = platform.system()    
     
     context = {}
     # context['primary'] = Category.objects.all().first()
-    context['date_now'] = datetime.datetime.now()
+    # context['date_now'] = datetime.datetime.now()
     context['category'] = Category.objects.all().order_by('category')
     context['author_Aa'] = [Author.objects.filter(word_oder='Aa').order_by("author"),
                                 Author.objects.filter(word_oder='Ka').order_by("author"),
@@ -40,7 +40,9 @@ def common(request):
                                 Author.objects.filter(word_oder='Ra').order_by("author"),
                                 Author.objects.filter(word_oder='Wa').order_by("author")
                                 ]
+    # context['others'] = Other.objects.filter(fin=1)
     context['others'] = Other.objects.all()
+
     context['author'] = Author.objects.all()
     context['book'] = Book.objects.filter(fin=1).order_by('-post_day')
 
@@ -53,11 +55,11 @@ def common(request):
         
 
     # context['author'] = []
-    set_count = [Book.objects.filter(author_info=a).count for a in Author.objects.all()]
-    if pf == 'Windows':
-        context['google_analytics'] = 0
-    else:
-        context['google_analytics'] = 1
+    # set_count = [Book.objects.filter(author_info=a).count for a in Author.objects.all()]
+    # if pf == 'Windows':
+    #     context['google_analytics'] = 0
+    # else:
+    #     context['google_analytics'] = 1
         
     # for a in range(1, len(Author.objects.all())):
         # context['author'].append(Author.objects.values()[a] | {'category_count':set_count[a-1]})
@@ -66,7 +68,7 @@ def common(request):
 
 
     context['publisher'] = Publisher.objects.all()
-    context['templates'] = Templates.objects.all()
+    # context['templates'] = Templates.objects.all()
 
     #---  パンくずリスト作成　---
     url_path = request.path
