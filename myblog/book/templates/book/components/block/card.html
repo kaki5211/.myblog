@@ -168,7 +168,7 @@ style="border-top: dashed 0.1em #455045;"
 
 <v-card-actions>
   <div class="my-w-100">
-  <v-btn color="#1aa179" outlined class="mx-auto" style="width:100%;" href ="{% url 'book:book_info' book_.post_day %}">
+  <v-btn color="#1aa179" outlined class="mx-auto" style="width:100%;" href ="{% if book_.book_img_url is not None %}{% url 'book:book_info' book_.post_day %}{% url 'book:others_info' book_.post_day %}{%endif%}">
   この記事を読む
 </v-btn>
 </div>
