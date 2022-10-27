@@ -1,9 +1,25 @@
+    {% if  DEBUG == False %}
 
     <!-- vue -->
     <script  type="application/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-    <script  type="application/javascript" src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script  type="application/javascript" src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.js"></script>
 
 
+    {% else %}
+
+
+        <!-- vue -->
+        <script  type="application/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+        <script  type="application/javascript" src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+        
+    {% endif %}
+
+
+
+        
+
+    
 
     <!-- quasar -->
     {% comment %} <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script> {% endcomment %}

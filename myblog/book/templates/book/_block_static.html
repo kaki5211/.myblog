@@ -37,22 +37,26 @@
         </v-container>
         
         <!-- サンプル -->
-        {% if DEBUG == True %}
+        {% comment %} {% if DEBUG == True %}
         {% include 'sample/sample.html' %}
-        {% endif %}
+        {% endif %} {% endcomment %}
 
-        <v-row
+        {% comment %} <v-row
         no-gutters
         >
           <v-col
           cols="12"
-          align-self="center">
+          align-self="center"
+          class="my-2"
+          >
 
         <!-- google_Adsense_Multiplex -->
         {% include 'google/adsense_multiplex.html' %}
 
           </v-col>
-        </v-row>
+        </v-row> {% endcomment %}
+        
+        <v-divider class="py-10 my-10" style="border-color: #f5f8f5; height: 30vh;"></v-divider>
 
         <!-- footer -->
         {% include 'block/footer.html' %}
