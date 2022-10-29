@@ -16,21 +16,19 @@
 
 
 
-  <v-row no-gutters >
-    <v-col cols="12" class="mx-auto px-0 py-10">
 
       {% include 'book_info/contents_title.html' with text="サイトマップ" ty=1 %}
 
 
 
 
-      {% include 'book_info/contents_subtitle.html' with text="サイトマップ" ty=2 %}
+      {% comment %} {% include 'book_info/contents_subtitle.html' with text="サイトマップ" ty=2 %} {% endcomment %}
 
+          {% comment %} <v-divider></v-divider> {% endcomment %}
 
-      {% comment %} <v-divider></v-divider> {% endcomment %}
-
+          <div class="my-10">
       {% include 'block/sitemap.html' with text_color="my-text-color" bg_color="my-bg-color" border_color="my-border-color" %}
-
+          </div>
 
       <v-divider></v-divider>
 

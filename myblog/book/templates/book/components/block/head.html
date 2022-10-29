@@ -1,5 +1,5 @@
 <head>
-
+    <meta charset="utf-8">
     {% if  DEBUG == False %}
         <!-- Google ADSense -->
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1203419703310974"
@@ -25,41 +25,118 @@
         })(window,document,'script','dataLayer','GTM-KKTTVX3');</script>
         <!-- End Google Tag Manager -->
 
-    {% endif %}
+    {% endif %}      
+
+
+        {% with breadcrumb|length as el_ %}
+        {% if el_ == 1 %}
+        <meta name="description" content="
+            BOOK I.C. ～本の感想を創造するブログ～,  
+                {%for item in books_others%}
+                    {{item.post_day}} - {{ item.title }} | 
+                {% endfor %}
+            "/>
+            {% elif el_ == 3 %}
+        <meta name="description" content="
+            {{breadcrumb.2.title_info}} | {{ breadcrumb.1.title_info }} | BOOK I.C. ～本の感想を創造するブログ～,
+            — あらすじ — {{ book_info.contents_synopsis }}
+
+        "/>
+        {% endif %}
+    {% endwith %}
+    
+
+    <title>
+        {% with breadcrumb|length as el_ %}
+        {% if el_ == 1 %}
+            BOOK I.C. ～本の感想を創造するブログ～ 
+        {% elif el_ == 2 %}
+            {{breadcrumb.1.title_info}} | BOOK I.C. ～本の感想を創造するブログ～ 
+        {% elif el_ == 3 %}
+            {{breadcrumb.2.title_info}} — {{ breadcrumb.1.title_info }} | BOOK I.C. ～本の感想を創造するブログ～ 
+        {% endif %}
+        {% endwith %}
+    </title>
+
+
+
+
 
     <!-- jQuery -->
         {% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> {% endcomment %}
 
     <!-- VUETIFY -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    {% comment %} <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet"> {% endcomment %}
     {% comment %} <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet"> {% endcomment %}
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <!-- VUETIFY-icon -->
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
-    {% comment %} <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet"> {% endcomment %}
-    {% comment %} <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone" rel="stylesheet">     {% endcomment %}
-    
 
-    {% comment %} <link href='http://fonts.googleapis.com/css?family=mdi+office+building+marker+outline' rel='stylesheet' type='text/css'> {% endcomment %}
+    {% comment %} <!-- Noto Sans JP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+    {% endcomment %}
 
 
-
-
+    <!-- sawarabi gothic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap" rel="stylesheet">
 
 
     <meta name="theme-color" content="#455045">
 
-    {% comment %} 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P2MXX4GKND"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
-    gtag('config', 'G-P2MXX4GKND');
-    </script>
-    {% endcomment %}
+    <!-- meta deault -->
+    <meta property="og:url" content={{ request.path }} />
+    <meta property="og:type" content="
+    {% if breadcrumb|length == 1 %}
+        blog
+    {% else %}
+        article
+    {% endfor %}
+    "/>
+    
+    <meta property="og:title" content="
+    {% with breadcrumb|length as el_ %}
+    {% if el_ == 1 %}
+        BOOK I.C. ～本の感想を創造するブログ～ 
+    {% elif el_ == 2 %}
+        {{breadcrumb.1.title_info}} | BOOK I.C. ～本の感想を創造するブログ～ 
+    {% elif el_ == 3 %}
+        {{breadcrumb.2.title_info}} — {{ breadcrumb.1.title_info }} | BOOK I.C. ～本の感想を創造するブログ～ 
+    {% endif %}
+    {% endwith %}
+    " />
+    
+    {% with breadcrumb|length as el_ %}
+    {% if el_ == 1 %}
+    <meta property="og:description" content="
+        BOOK I.C. ～本の感想を創造するブログ～,  
+            {%for item in books_others%}
+                {{item.post_day}} - {{ item.title }} | 
+            {% endfor %}
+    "/>
+    {% elif el_ == 3 %}
+    <meta property="og:description" content="
+        {{breadcrumb.2.title_info}} | {{ breadcrumb.1.title_info }} | BOOK I.C. ～本の感想を創造するブログ～,
+        — あらすじ — {{ book_info.contents_synopsis }}
+
+    "/>
+    {% endif %}
+    {% endwith %}
+
+    <meta property="og:site_name" content="BOOK I.C." />
+    {% comment %} <meta property="og:image" content=" サムネイル画像のURL" /> {% endcomment %}
+
+    <!-- meta twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@BOOK_IC" />
+
+
+
+
 
 </head>

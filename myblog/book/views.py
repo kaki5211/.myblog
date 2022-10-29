@@ -262,9 +262,21 @@ class BookView(ListView):
                 text_ = text_.split(">")
                 # text_[0]
                 contents_split = text_[1].splitlines()
-                contents_ = contents_split[0]
-                for text_el in contents_split[1:]:
-                    contents_ = contents_ + "<br>" + text_el
+                if text_[0] == "blockquote":
+                    contents_ = "<a>" + contents_split[0] + "<br>" + "</a>"
+                    for text_el in contents_split[1:]:
+                        if text_el == "":
+                            continue
+                        contents_ = contents_ + "<a>"+ text_el +"<br>" + "</a>"
+                        print("contents_split", contents_split)
+                else:
+                    contents_ = contents_split[0]
+                    for text_el in contents_split[1:]:
+                        if text_el == "":
+                            continue
+                        contents_ = contents_ + text_el
+                        print("contents_split", contents_split)
+
                 text_[1] = contents_
                 if len(text_) == 3:
                     text_[2] = text_[2].splitlines()[0]

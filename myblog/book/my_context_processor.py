@@ -104,6 +104,7 @@ def common(request):
                     icon = "mdi-checkbox-blank-circle-outline"
                     context['title_info'] = item
                     
+                # context["url_sub"] = item
                 # elif item == "book-ic":
                 #     context['title_info']  = "BOOK I.C.について"
                 # elif item == "profile":

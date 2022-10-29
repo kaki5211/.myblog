@@ -135,25 +135,25 @@
                         </v-btn>
                       </td>
                     </tr>
-                    <tr>
+                    {% comment %} <tr>
                       <td class="text-center font-weight-bold">完読</td>
                       <td width="10" class="text-center font-weight-bold px-0">：</td>
                       <td class="text-center">{{ book_info.fin }}</td>
                     </tr>
-                    <tr>
+                    <tr> {% endcomment %}
                       <td class="text-center font-weight-bold">この記事の閲覧数</td>
                       <td width="10" class="text-center font-weight-bold px-0">：</td>
                       <td class="text-center">
                         <a class="ms-1 me-3 py-2">
                           <v-icon color="#9A9" size="20">mdi-eye</v-icon>
-                          XXX,XXX,XXX
+                          XXX,XXX(準備中...)
                         </a>
                       </td>
                     </tr>
                     <tr>
                       <td class="text-center font-weight-bold">ISBNコード</td>
                       <td width="10" class="text-center font-weight-bold px-0">：</td>
-                      <td class="text-center">{{ book_info.isbn}}</td>
+                      <td class="text-center">{{ book_info.isbn13}}</td>
                     </tr>
                   </tbody>
                 </template>
