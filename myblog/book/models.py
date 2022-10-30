@@ -55,6 +55,9 @@ class Book(models.Model):
 
     book_img_url = models.TextField('商品画像', null=True, blank=True)
 
+    emb_twitter = models.CharField('twitter埋め込み',max_length=10000, null=True, blank=True)
+    emb_instagram = models.CharField('instagram埋め込み',max_length=10000, null=True, blank=True)
+
     def __str__(self):
         return self.title
 

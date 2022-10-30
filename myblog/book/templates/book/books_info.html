@@ -162,7 +162,7 @@
             
 
 
-          <v-col cols="12" class="mx-auto px-0 text-center  my-10" >
+          <v-col cols="12" class="mx-auto px-1 text-center  my-10" >
             {% include 'book_info/contents_subtitle.html' with text='あらすじ' ty="arasuji" %}
             {% include 'book_info/contents_text.html' with text=book_info.contents_synopsis %}
           </v-col>
@@ -172,7 +172,7 @@
 
             {% for contents_ in book_info_contents %}
               {% if contents_.0 != "title" and contents_.0 != "title" and contents_.0 != "blockquote" %}
-                <div class="px-3">
+                <div class="px-1">
               {% endif %} 
 
               {% if contents_.0 == "title" %}
@@ -205,6 +205,18 @@
         </v-row>
       {% comment %} </v-container> {% endcomment %}
 
+      <v-row no-gutters >
 
-{% endblock %}
+        <v-col cols="11" sm="10" md="5" lg="4" class="mx-auto py-10">
+          {{ book_info.emb_twitter | safe}}
+        </v-col>
+        <v-col cols="11" sm="10" md="5" lg="4" class="mx-auto py-10 my-instagram">
+
+          {{ book_info.emb_instagram | safe}}
+        </v-col>
+</v-row>
+
+
+
+{% endblock %}  
 

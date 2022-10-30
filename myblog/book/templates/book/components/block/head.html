@@ -33,7 +33,7 @@
         <meta name="description" content="
             BOOK I.C. ～本の感想を創造するブログ～,  
                 {%for item in books_others%}
-                    {{item.post_day}} - {{ item.title }} | 
+                    {{item.post_day | safe}} - {{ item.title }} | 
                 {% endfor %}
             "/>
             {% elif el_ == 3 %}
@@ -72,6 +72,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <!-- VUETIFY-icon -->
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+
+
 
     {% comment %} <!-- Noto Sans JP -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -116,7 +118,7 @@
     <meta property="og:description" content="
         BOOK I.C. ～本の感想を創造するブログ～,  
             {%for item in books_others%}
-                {{item.post_day}} - {{ item.title }} | 
+                {{item.post_day | safe}} - {{ item.title }} | 
             {% endfor %}
     "/>
     {% elif el_ == 3 %}

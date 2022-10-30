@@ -3,7 +3,12 @@
         {% comment %} $icon-size: 50px; {% endcomment %}
         new Vue({
           el: '#app',
-          vuetify: new Vuetify(),
+          vuetify: new Vuetify({
+            defaultAssets: false,
+            icons: {
+              iconfont: 'mdi', // default - only for display purposes
+            },
+          }),
           methods: {
             onIntersect (entries, observer) {
               // More information about these options
@@ -198,11 +203,28 @@
         {% endif %}
       
 
+          {% comment %} const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+        
+          await _sleep(8  000); {% endcomment %}
+{% comment %}         
+          let el_instagram = document.getElementById("instagram-embed-0");
+          let el_instagram_doc = el_instagram.contentDocument || el_instagram.contentWindow.document;
+          let el_instagram_content = el_instagram_doc.getElementsByClassName('Content EmbedFrame');
+          el_instagram[0].remove(); {% endcomment %}
 
 
 
-      
-      </script>
+          window.onload = function() {
+            let el_twitter = document.getElementsByClassName("twitter-tweet");
+            el_twitter[0].classList.add("mx-auto");
+            let el_instagram = document.getElementById("instagram-embed-0");
+            el_instagram.classList.add("mx-auto");
+            let el_instagram_doc = el_instagram.contentDocument || el_instagram.contentWindow.document;
+            let el_instagram_content = el_instagram_doc.getElementsByClassName('Content EmbedFrame');
+            el_instagram[0].remove();          
+          }          
+
+        </script>
 
       <script async type="application/javascript">
 
