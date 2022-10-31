@@ -28,13 +28,18 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 #     ]
 # else:
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', include('book.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 
 urlpatterns += staticfiles_urlpatterns()
+
+if settings.DEBUG == True:
+    urlpatterns.append(path('admin/', admin.site.urls))
+
+ 
+
 
 
 # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

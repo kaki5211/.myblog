@@ -217,11 +217,19 @@
           window.onload = function() {
             let el_twitter = document.getElementsByClassName("twitter-tweet");
             el_twitter[0].classList.add("mx-auto");
-            let el_instagram = document.getElementById("instagram-embed-0");
+            var el_instagram = document.getElementById("instagram-embed-0");
             el_instagram.classList.add("mx-auto");
-            let el_instagram_doc = el_instagram.contentDocument || el_instagram.contentWindow.document;
-            let el_instagram_content = el_instagram_doc.getElementsByClassName('Content EmbedFrame');
-            el_instagram[0].remove();          
+            {% comment %} var el_instagram_doc = el_instagram.contentDocument || el_instagram.contentWindow.document; {% endcomment %}
+            {% comment %} var el_instagram_doc = el_instagram.contentDocument; {% endcomment %}
+            {% comment %} var el_instagram_doc = el_instagram.contentWindow.document; {% endcomment %}
+            
+
+            {% comment %} el_instagram.parentNode.childNodes[1].ownerDocument {% endcomment %}
+            
+            
+
+            {% comment %} var el_instagram_content = el_instagram_doc.getElementsByClassName('Content EmbedFrame'); {% endcomment %}
+            {% comment %} el_instagram_content[0].remove();           {% endcomment %}
           }          
 
         </script>
