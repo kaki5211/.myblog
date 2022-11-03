@@ -1,11 +1,27 @@
 
-<v-col
-  cols="12"
-  align-self="center"
-  class="mx-auto"
->
-<p class="text-h2 my-text-color-title text-h5 text-md-h4" style="letter-spacing:3px;">
-<v-icon size="40" >{{icon_name}}</v-icon>
 
-{{text}}</p>
-</v-col>
+{% load static %}
+<div style="position:relative; z-index: 1;">
+<div class="my-container-max-width" style="height: 5vh;"></div>
+
+
+
+  <div class="q-py-xl my-container-max-width" style="z-index: 2">
+
+
+    <p class="text-h2 my-text-color-title text-h5 text-md-h4" style="letter-spacing:3px;">
+      <v-icon size="40" >{{icon_name}}</v-icon>
+      {{text}}</p>  </div>
+
+
+
+  <div class="my-container-max-width" style="height: 5vh;"></div>
+
+
+
+  <v-img 
+  {% comment %} :aspect-ratio="1/1" {% endcomment %}
+  :aspect-ratio="16/9"
+  class="my-container-max-width my-w-100" style="z-index: 1;" src="{% static "static/hoge.svg" %}" ></v-img>
+  
+</div>

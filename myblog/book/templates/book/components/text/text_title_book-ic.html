@@ -1,10 +1,20 @@
-<div class="my-container-max-width" style="height: 30vh;"></div>
-
-<div class="q-py-xl my-container-max-width">
-  <div class="">
-  <p id="my-letter-spacing-3" class="text-center my-font-weight-title text-h5 text-md-h4 my-text-color-title my-letter-spacing-3">{{text}}</p>
-  <p id="my-letter-spacing-5" class="text-center text-subtitle-1 text-md-h5 my-text-color-glay">&nbsp;{{text_sub}}</p>
+{% load static %}
+<div style="position:relative; z-index: 1;" class="ma-sm-10 ma-lg-15" >
+<div class="my-container-max-width" style="height: 5vh;"></div>
+<div class="q-py-xl my-container-max-width ma-sm-5 ma-lg-10" style="z-index: 2">
+  <p id="my-letter-spacing-3" style="position:relative; z-index: 2" class="text-center my-font-weight-title text-h5 text-md-h4 my-text-color-title my-letter-spacing-3">{{text}}</p>
+  <p id="my-letter-spacing-3" style="position:relative; z-index: 2" class="text-center text-subtitle-1 text-md-h5 my-text-color-glay">&nbsp;{{text_sub}}</p>
   </div>
+
+
+<div class="my-container-max-width" style="height: 5vh;"></div>
+  <v-img 
+  {% comment %} :aspect-ratio="1/1" {% endcomment %}
+  :aspect-ratio="16/9"
+  :aspect-ratio-md="1/1"
+
+  class="my-container-max-width my-w-100" style="z-index: 1;" src="{% static "static/book-ic_picture.svg" %}" ></v-img>
 </div>
 
-<div class="my-container-max-width" style="height: 50vh;"></div>
+
+<div class="my-container-max-width" style="height: 15vh;"></div>

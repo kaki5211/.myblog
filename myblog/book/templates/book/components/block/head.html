@@ -1,4 +1,6 @@
 <head>
+    {% load static %}
+
     <meta charset="utf-8">
     {% if  DEBUG == False %}
         <!-- Google ADSense -->
@@ -58,6 +60,8 @@
         {% endwith %}
     </title>
 
+    {% comment %} <link rel="shortcut icon" href="{% static "static/media8.jpg" %}" /> {% endcomment %}
+    <link rel="icon" class="my-icon" href="{% static "static/book-ic_icon.svg" %}" type="image/svg+xml">
 
 
 
