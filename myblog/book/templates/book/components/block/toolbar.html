@@ -1,15 +1,19 @@
 {% load static %}
 
 
-<div id="header_menu">
+{% comment %} <div style="height:66px"></div> {% endcomment %}
+
+{% comment %} <div id="header_menu" style="position: fixed; z-index:100;"> {% endcomment %}
+  <div id="header_menu">
     <v-toolbar
+    class="my-w-100"
     color="#f5f8f5"
     flat
-    height="74px"
-    width="100%"
+    height="70px"
+    {% comment %} width="100%" {% endcomment %}
     tile
-    elevation="3"
-    style="background: rgb(245, 248, 245, 0.6);"
+    elevation="2"
+    style="background: rgb(245, 248, 245, 0.9);"
     {% comment %} absolute {% endcomment %}
     class="position: absolute; top:150px; left:100px"
     {% comment %} absolute {% endcomment %}

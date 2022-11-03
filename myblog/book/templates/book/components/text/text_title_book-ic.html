@@ -1,20 +1,41 @@
 {% load static %}
-<div style="position:relative; z-index: 1;" class="ma-sm-10 ma-lg-15" >
-<div class="my-container-max-width" style="height: 5vh;"></div>
-<div class="q-py-xl my-container-max-width ma-sm-5 ma-lg-10" style="z-index: 2">
-  <p id="my-letter-spacing-3" style="position:relative; z-index: 2" class="text-center my-font-weight-title text-h5 text-md-h4 my-text-color-title my-letter-spacing-3">{{text}}</p>
-  <p id="my-letter-spacing-3" style="position:relative; z-index: 2" class="text-center text-subtitle-1 text-md-h5 my-text-color-glay">&nbsp;{{text_sub}}</p>
-  </div>
 
 
-<div class="my-container-max-width" style="height: 5vh;"></div>
+{% comment %} <div class="my-container-max-width" style="height: 38vh;"></div> {% endcomment %}
+
+<div style="position:relative; z-index: 1;" class="my-5 ma-sm-5 ma-lg-10" >
+
+
+  
+{% comment %} <div class="my-container-max-width" style="height: 5vh;"></div> {% endcomment %}
+
   <v-img 
   {% comment %} :aspect-ratio="1/1" {% endcomment %}
   :aspect-ratio="16/9"
   :aspect-ratio-md="1/1"
 
-  class="my-container-max-width my-w-100" style="z-index: 1;" src="{% static "static/book-ic_picture.svg" %}" ></v-img>
+  class="my-container-max-width my-w-100" style="z-index: 1; position: absolute;" src="{% static "static/book-ic_picture.svg" %}" >
+
+    <div class="q-py-xl my-container-max-width ma-sm-5 ma-lg-10 text-center position:relative;" style="z-index: 2; height:50%;">
+      <div style="  position:absolute;
+      top:40%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      width:100%;">
+      <a id="my-letter-spacing-3" style="position:relative; z-index: 2; background: rgb(255, 255, 255, 0.9);" class="text-center my-font-weight-title text-h5 text-md-h4 my-text-color-title my-letter-spacing-3">{{text}}</a></br>
+      <a id="my-letter-spacing-3" style="position:relative; z-index: 2; background: rgb(255, 255, 255, 0.9);" class="text-center text-subtitle-1 text-md-h5 my-text-color-glay">&nbsp;{{text_sub}}</a>
+    </div>
+  </div>
+</v-img>
 </div>
 
 
-<div class="my-container-max-width" style="height: 15vh;"></div>
+<div class="my-container-max-width my-image-top-space"></div>
+
+
+
+
+
+
+
+
