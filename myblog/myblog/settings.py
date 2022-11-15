@@ -84,7 +84,12 @@ SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    # 'django.middleware.common.CommonMiddleware',
+
+    'django.middleware.cache.UpdateCacheMiddleware',  # ここ
+    'django.middleware.common.CommonMiddleware',  # ここ
+    'django.middleware.cache.FetchFromCacheMiddleware',  # ここ
+
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -202,3 +207,12 @@ EMAIL_HOST_PASSWORD = 'grssmskmdsjsqgvp'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+# キャッシュ追加
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'my_cache_table',
+    }
+}

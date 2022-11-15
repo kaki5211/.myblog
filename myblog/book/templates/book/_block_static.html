@@ -29,7 +29,7 @@
         {% include 'block/toolbar.html' %}
 
 
-        {% load static %}
+        {% comment %} {% load static %} {% endcomment %}
 
 
 
@@ -37,11 +37,12 @@
 
         <v-container id="my_container" class="mx-auto"> 
 
-
+          {% comment %} {% load cache %} {% endcomment %}
+          {% comment %} {% cache 600 content %} {% endcomment %}
         <!-- content -->
         {% block contents %}
         {% endblock %}
-
+          {% comment %} {% endcache %} {% endcomment %}
         </v-container>
         
 
