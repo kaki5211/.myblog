@@ -428,15 +428,19 @@
       <!-- image -->
       <script type="application/javascript">
         var book_img_urls = document.getElementsByClassName('my-img-small');
-
+        {% comment %} var book_img_urls = document.getElementsByClassName('v-image__image v-image__image--cover'); {% endcomment %}
+        
         {% load split_tags %}
         for (let i = 0; i < book_img_urls.length; i++) {
-          book_img_url = book_img_urls[i].children[0].children[0].children[1];
+          book_img_url = book_img_urls[i].children[0].children[0].children[2];
+          book_img_url = book_img_urls[i].children[0].children[0];
+          {% comment %} book_img_url = book_img_urls[i]; {% endcomment %}
           {% with request.path|split:"/" as skills %}
             {% if skills.1 == "books" and skills.2 == "" %}
               {% comment %} book_img_url.setAttribute("class", "my-border mt-5 elevation-2 my-w-100 kattene__imgpart_min-height") {% endcomment %}
             {% else %}
-              book_img_url.setAttribute("class", "my-border mt-5 elevation-2 my-w-100 kattene__imgpart_min-height")
+            {% comment %} book_img_url.setAttribute("class", "my-border mt-5 elevation-2 my-w-100 kattene__imgpart_min-height") {% endcomment %}
+            {% comment %} book_img_url.setAttribute("class", "my-border mt-5 elevation-2") {% endcomment %}
             {% endif %}
           {% endwith %}
         }

@@ -43,7 +43,7 @@
     sm="4"
     lg="2"
     class="mx-auto mr-md-auto mb-auto my-auto"
-  >          
+    >          
         <div class="my-img-small">
 
           {% if book_.book_img_url is not None %}
@@ -128,7 +128,7 @@
 
   {% else %}
   <v-card-text class="d-none d-sm-block">
-    
+    <p class="mx-auto mb-2 text-center">— あらすじ —</p>
     {{ book_.contents_synopsis | safe }}
   </v-card-text>
   

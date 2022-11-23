@@ -52,6 +52,7 @@
     
                 {% comment %} </a> {% endcomment %}
               </div>
+{% comment %} 
               <div class="kattene__infopart">
                 <div class="kattene__btns __four" class="d-flex">
                   <div class="d-flex"><v-btn text outlined class="mx-auto my-w-100">
@@ -68,11 +69,12 @@
     
                   <div class="d-flex"><v-btn text outlined class="mx-auto my-w-100">
                     <a class="text-decoration-none" target="_blank" {% if book_info.rakuten_kobo_url != none %}href="{{ book_info.rakuten_kobo_url }}"{% endif %}>{% if book_info.rakuten_kobo_url != none %}楽天KOBO{% else %}none{% endif %}</a></v-btn>
-                    
-                    
+               
                   </div>
-                </div>
+                </div>                
               </div>
+
+               {% endcomment %}
           </div>
         </v-col>
 
@@ -90,23 +92,29 @@
                     <tr>
                       <td class="text-center font-weight-bold">カテゴリー</td>
                       <td width="10" class="text-center font-weight-bold px-0">：</td>
-                      <td class="text-center">
+                      <td class="text-center" style="color:{{book_info.category_info.color_hex}}">
+                      {% comment %}                         
                         <v-btn color="{{book_info.category_info.color_hex}}" class="ma-1" elevation="1" outlined rounded small>
                           <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %}
                             <input type="submit" href="{% url "book:book" %}" value="{{book_info.category_info.get_category_display}}">
                           </form>
-                        </v-btn>
+                        </v-btn> {% endcomment %}
+
+                        {{book_info.category_info.get_category_display}}
                       </td>
                     </tr>
                     <tr>
                       <td class="text-center font-weight-bold">著者</td>
                       <td width="10" class="text-center font-weight-bold px-0">：</td>
                       <td class="text-center">
+                      {% comment %}                         
                         <v-btn color="#464646" class="ma-1" elevation="1" outlined rounded small>
                           <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %}
                           <input type="submit" href="{% url "book:book" %}" value="{{book_info.author_info}}">
                         </form>
-                      </v-btn>
+                      </v-btn> {% endcomment %}
+
+                      {{book_info.author_info}}
                     </td>
                     </tr>
                     <tr>
@@ -128,11 +136,14 @@
                       <td class="text-center font-weight-bold">出版社</td>
                       <td width="10" class="text-center font-weight-bold px-0">：</td>
                       <td class="text-center">
+                      {% comment %}                         
                         <v-btn color="#464646" class="ma-1" elevation="1" outlined rounded small>
                           <form class="d-inline-block" action="{% url 'book:book' %}" method="post">{% csrf_token %}
                             <input type="submit" href="{% url "book:book" %}" value="{{book_info.publisher_info}}">
                           </form>
-                        </v-btn>
+                        </v-btn> {% endcomment %}
+
+                        {{book_info.publisher_info}}
                       </td>
                     </tr>
                     {% comment %} <tr>
