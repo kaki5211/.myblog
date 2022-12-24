@@ -22,6 +22,7 @@ import platform
 
 
 
+
 def common(request):
     # pf = platform.system()    
     

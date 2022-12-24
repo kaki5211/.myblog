@@ -1,0 +1,32 @@
+  <!-- bar -->
+<div>
+<v-row
+no-gutters
+{% comment %} class="my-bg-color-glay my-text-color-light-glay" {% endcomment %}
+class="my-bg-color my-text-color-title py-10 pb-16"
+{% comment %} style="ba" {% endcomment %}
+>
+    <v-col cols="6" sm="6">
+      <v-btn large outlined tile class="my-w-100 my-text-color rounded-tl-xl" href="{% url "book:top"%}"><v-icon>mdi-home</v-icon>ホーム</v-btn>
+    </v-col>
+    <v-col cols="6">
+        <v-btn large outlined tile class="my-w-100 my-text-color rounded-tr-xl" href="{% url "book:book"%}" ><v-icon>mdi-bookshelf</v-icon>書籍一覧</v-btn>
+    </v-col>
+    {% comment %} <v-col cols="4">
+        <v-btn outlined tile class="my-w-100 my-text-color"><v-icon>mdi-dots-horizontal-circle-outline</v-icon>その他 記事</v-btn>
+    </v-col> {% endcomment %}
+    <v-col cols="4">
+        <v-btn outlined tile class="my-w-100 my-text-color" href="{% url "book:book-ic"%}"><v-icon>mdi-office-building-marker-outline</v-icon>BOOK I.C.</v-btn>
+    </v-col>
+    <v-col cols="4">
+        <v-btn outlined tile class="my-w-100 my-text-color" href="{% url "book:profile"%}"><v-icon>mdi-account-circle-outline</v-icon>プロフィール</v-btn>
+    </v-col>
+    <v-col cols="4">
+        <v-btn outlined tile class="my-w-100 my-text-color" href="{% url "book:sitemap_book-ic"%}"><v-icon>mdi-sitemap-outline</v-icon>サイトマップ</v-btn>
+    </v-col>
+</v-row>
+</div>
+
+<div class="py-10">
+
+</div>

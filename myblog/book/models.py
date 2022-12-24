@@ -80,10 +80,10 @@ class Author(models.Model):
         return self.author
     
 class Category(models.Model):
-    CATEGORY_CHOICES = (('action', 'アクション'),('adventure', 'アドベンチャー'),('youth', '青春'),('love', '恋愛'),('sf', 'SF'),('history', '時代'),('mystery', 'ミステリー'),('comedy', 'コメディー'), ('horror', 'ホラー'))
-    CATEGORYENG_CHOICES = (('action_eng', 'action'), ('adventure_eng', 'adventure'), ('youth_eng', 'youth'), ('love_eng', 'love'), ('sf_eng', 'sf'), ('history_eng', 'history'), ('mystery_eng', 'mystery'), ('comedy_eng', 'comedy'), ('horror_eng', 'horror'))
+    CATEGORY_CHOICES = (('action', 'アクション'),('adventure', 'アドベンチャー'),('youth', '青春'),('love', '恋愛'),('sf', 'SF'),('history', '時代'),('mystery', 'ミステリー'),('comedy', 'コメディー'), ('horror', 'ホラー'), ('bungaku', '文学'))
+    CATEGORYENG_CHOICES = (('action_eng', 'action'), ('adventure_eng', 'adventure'), ('youth_eng', 'youth'), ('love_eng', 'love'), ('sf_eng', 'sf'), ('history_eng', 'history'), ('mystery_eng', 'mystery'), ('comedy_eng', 'comedy'), ('horror_eng', 'horror'), (('bungaku_eng', 'bungaku')))
     # CATEGORYENG_CHOICES = (('action', 'アクション'),('adventure', 'アドベンチャー'),('youth', '青春'),('love', '恋愛'),('sf', 'SF'),('history', '時代'),('mystery', 'ミステリー'),('comedy', 'コメディー'), ('horror', 'ホラー'))
-    COLOR_CHOICES = (('red', 'red'), ('orange','orange'),('blue', 'blue'), ('pink', 'pink'),('info','info'), ('green', 'green'), ('purple', 'purple'), ('warning','warning'),('dark', 'dark'))
+    COLOR_CHOICES = (('red', 'red'), ('orange','orange'),('blue', 'blue'), ('pink', 'pink'),('info','info'), ('green', 'green'), ('purple', 'purple'), ('warning','warning'),('dark', 'dark'), ('blue-grey', 'blue-grey'))
 
     category = models.CharField("カテゴリー", choices=CATEGORY_CHOICES, max_length=20, default=None, null=True, blank=True) # 追加していく-----------
     category_eng = models.CharField("カテゴリーeng", choices=CATEGORYENG_CHOICES ,max_length=20, null=True, blank=True) # 追加していく-----------

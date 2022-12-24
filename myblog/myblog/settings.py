@@ -17,6 +17,10 @@ import platform
 
 pf = platform.system()
 
+# from django.core.cache import cache
+# cache.clear()
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 print("■", type(BASE_DIR), BASE_DIR.parent.parent)
@@ -85,17 +89,24 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     # 'django.middleware.common.CommonMiddleware',
-
-    'django.middleware.cache.UpdateCacheMiddleware',  # ここ
-    'django.middleware.common.CommonMiddleware',  # ここ
-    'django.middleware.cache.FetchFromCacheMiddleware',  # ここ
-
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_middleware_global_request.middleware.GlobalRequestMiddleware',
 ]
+
+if pf != 'Windows':
+    MIDDLEWARE += [
+        'django.middleware.cache.UpdateCacheMiddleware',  # ここ
+        'django.middleware.common.CommonMiddleware',  # ここ
+        'django.middleware.cache.FetchFromCacheMiddleware',  # ここ
+    ]
+
+
+
+
+
 
 ROOT_URLCONF = 'myblog.urls'
 

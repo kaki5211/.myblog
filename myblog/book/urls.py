@@ -19,7 +19,6 @@ import datetime
 from django.views.decorators.cache import cache_page
 
 
-# from django.core.cache import cache;cache.clear()
 
 app_name='book'
 

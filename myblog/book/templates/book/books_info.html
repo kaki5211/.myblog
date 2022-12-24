@@ -8,6 +8,8 @@
     <!-- BOOK DB -->
     {% include 'text/text_title.html' with text=book_info.title icon_="mdi-book-open-page-variant" %}
     
+    <!-- bar -->
+    {% include 'block/bar.html' %}
 
     <!-- breadcrumbs -->
     {% include 'block/breadcrumbs.html' %}
@@ -27,15 +29,15 @@
               <p class="my-text-color-title mb-1">
                 <v-icon size="20">mdi-book-edit-outline</v-icon>
                   {{ book_info.post_day | safe }}
-                  <v-icon size="20" class="pl-2">mdi-refresh</v-icon>
-                  {{ book_info.update_day | safe }}   
+                  {% comment %} <v-icon size="20" class="pl-2">mdi-refresh</v-icon> {% endcomment %}
+                  {% comment %} {{ book_info.update_day | safe }}    {% endcomment %}
               </p>        
 {% comment %}                 
             <v-col cols="12" sm="11" md="9" lg="6" class="mt-16 mx-auto px-0" >
               <v-img
               >{{ book_info.book_img_url | safe }}</v-img>  
             </v-col> {% endcomment %}
-            <v-col cols="10" class="mx-auto px-0">
+            <v-col cols="10" class="mx-auto px-0 pt-10">
             <div class="kattene">
               <div class="kattene__imgpart">
                 {% comment %} <a target="_blank" rel="noopener" href="【メインのURL】"> {% endcomment %}

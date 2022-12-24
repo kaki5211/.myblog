@@ -8,7 +8,9 @@
     <!-- BOOK DB -->
     {% include 'text/text_title.html' with text=book_info.title icon_="mdi-checkbox-blank-circle-outline" %}
     
-
+  <!-- bar -->
+  {% include 'block/bar.html' %}
+    
     <!-- breadcrumbs -->
     {% include 'block/breadcrumbs.html' %}
         
@@ -36,7 +38,7 @@
               >{{ book_info.book_img_url | safe }}</v-img>  
             </v-col> {% endcomment %}
 
-            <v-col cols="10" class="mx-auto px-0">
+            <v-col cols="10" class="mx-auto px-0 pt-10">
               <div class="kattene">
                 <div class="kattene__imgpart">
                     {% include 'book_info/contents_img.html' with img_url=book_info.image.url %}

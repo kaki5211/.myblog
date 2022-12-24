@@ -8,8 +8,13 @@
   <!-- title -->
   {% include 'text/text_title.html' with text="書籍一覧" icon_="mdi-bookshelf" %}
 
+  <!-- bar -->
+  {% include 'block/bar.html' %}
+  
   <!-- breadcrumbs -->
   {% include 'block/breadcrumbs.html' with aueiu=book_info.title%}
+
+
 
   <!-- text_title-->
   {% comment %} {% include 'text/text_subtitle.html' with text="フィルター" icon_name="mdi-magnify-expand" %} {% endcomment %}

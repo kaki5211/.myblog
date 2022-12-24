@@ -6,7 +6,8 @@
   <!-- BOOK DB -->
   {% include 'text/text_title.html' with text="BOOK I.C. について" icon_="mdi-office-building-marker-outline" %}
 
-
+  <!-- bar -->
+  {% include 'block/bar.html' %}
 
   <!-- breadcrumbs -->
   {% include 'block/breadcrumbs.html' with aueiu=book_info.title%}
@@ -25,18 +26,30 @@
 
       {% include 'book_info/contents_title.html' with text="BOOK I.C.について" ty=1 %}
       {% include 'book_info/contents_subtitle.html' with text="小説の感想ブログ"  ty=2 %}
-      {% include 'book_info/contents_text.html' with text="　主に、小説の感想ブログです。「書籍一覧」に小説の感想を、「その他 記事」に小説以外の気まぐれ記事を投稿しています。" %}
-      
+      {% comment %} {% include 'book_info/contents_text.html' with text="　主に、小説の感想ブログです。「書籍一覧」に小説の感想を、「その他 記事」に小説以外の気まぐれ記事を投稿しています。" %} {% endcomment %}
+      <div class="mx-auto px-0 py-7 py-lg-10 text-left">
+        <a class="text-my-text-color text-h6_5 text-md-h6 mb-0">
+          　主に、小説の感想ブログです。「
+          <a href="{% url 'book:book' %}" class=" text-h6_5 text-md-h6 mb-0">書籍一覧</a>
+          <a class="text-my-text-color text-h6_5 text-md-h6 mb-0">」に小説の感想を、「</a>
+          <a href="{% url 'book:others' %}" class=" text-h6_5 text-md-h6 mb-0">その他 記事</a>
+          <a class="text-my-text-color text-h6_5 text-md-h6 mb-0">」に小説以外の気まぐれ記事を投稿しています。</a>
+        </a>
+      </div>
+      {% include 'book_info/contents_text.html' with text="　質の高い感想を書きたい思いで、BOOK I.C. （Book Impression Create = 本の感想を創造する） という名前にしました。" %}
+
       {% include 'book_info/contents_subtitle.html' with text="個人で運用"  ty=3 %}
       {% include 'book_info/contents_text.html' with text="　このブログはPythonのフレームワーク「Django」で作成しています。フロントはJavascriptフレームワーク「Vuetify」を採用し、不足部分のcssやjavascriptは自分で組んでいます。サーバー,ドメイン,も個人で選定し契約しています。" %}
-
+      {% include 'book_info/contents_text.html' with text="　サーバー落ちてたりしたらすみません。その時はパワー上げるために２日くらいつながらない時があるかもしれません。" %} 
+      
       {% include 'book_info/contents_title.html' with text="BOOK I.C.今後について" ty=1 %}
 
       {% include 'book_info/contents_subtitle.html' with text="毎週１記事"  ty=4 %}
       {% include 'book_info/contents_text.html' with text="　100記事を目標として、2023年1月1日～2025年1月1日までの間、毎週1記事を基準に投稿していきます。" %}
+      {% include 'book_info/contents_text.html' with text="　（2022/12/22）っと思ったんですが、２週１になるかもしれません。（週１は、思ったよりキツイ...）" %} 
 
       {% include 'book_info/contents_subtitle.html' with text="ブログのブランド化"  ty=5 %}
-      {% include 'book_info/contents_text.html' with text="　さらに並行してブログ自体のユーザビリティやデザインのUPDATE等、ブランド化に向けて強化を継続していきます。" %}
+      {% include 'book_info/contents_text.html' with text="　ブランド化、出来たらいいな。何をもってブランド化か、よくわからんけど。" %} 
 
     </v-col>
       
