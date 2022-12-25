@@ -42,7 +42,7 @@ def common(request):
                                 Author.objects.filter(word_oder='Wa').order_by("author")
                                 ]
     # context['others'] = Other.objects.filter(fin=1)
-    context['others'] = Other.objects.all()
+    context['others'] = Other.objects.all().filter(fin=1).order_by('-post_day')
 
     context['author'] = Author.objects.all()
     context['book'] = Book.objects.filter(fin=1).order_by('-post_day')

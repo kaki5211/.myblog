@@ -103,7 +103,7 @@ urlpatterns = [
     path('profile/', views.ProfileView.as_view(), name="profile"),
     path('book-ic/', views.Book_icView.as_view(), name="book-ic"),
 
-    path('others', views.OthersView.as_view(), name="others"),
+    path('others/', views.OthersView.as_view(), name="others"),
     path('others/<slug:data_info>', views.OthersView.as_view(), name="others_info"),
 
     path('privacypolicy', views.Privacy_policyView.as_view(), name="privacy_policy"),

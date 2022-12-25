@@ -140,6 +140,8 @@ class Other(models.Model):
     contents = models.TextField("コンテンツ", null=True, blank=True)
     contents_synopsis =  models.TextField("あらすじ", null=True, blank=True)
 
+    fin = models.BooleanField('完読', null=True, blank=True)
+
     def __str__(self):
         return self.title
 
