@@ -79,19 +79,19 @@ urlpatterns = [
     path('quasar/', views.TopquasarView.as_view(), name="top_quasar"),
 
     path('categorys/', views.CategoryView.as_view(), name='category'),# 本のカテゴリー
-    path('categorys/<slug:data_info>', views.CategoryView.as_view(), name='category_infprofile', ),
+    path('categorys/<slug:data_info>/', views.CategoryView.as_view(), name='category_infprofile', ),
 
     path('authors/', views.AuthorView.as_view(), name='author'), # 著者について全般
-    path('authors/<data_info>', views.AuthorView.as_view(), name='author_info'),
+    path('authors/<data_info>/', views.AuthorView.as_view(), name='author_info'),
 
     path('publishers/', views.PublisherView.as_view(), name='publisher'), # 出版社情報
-    path('publishers/<slug:data_info>', views.PublisherView.as_view(), name='publisher_info'),
+    path('publishers/<slug:data_info>/', views.PublisherView.as_view(), name='publisher_info'),
 
     path('series/', views.SeriesView.as_view(), name='series'), # シリーズもの本
-    path('series/<slug:data_info>', views.SeriesView.as_view(), name='series_info'), 
+    path('series/<slug:data_info>/', views.SeriesView.as_view(), name='series_info'), 
 
     path('books/', views.BookView.as_view(), name='book'), # 主に本の検索と
-    path('books/<slug:data_info>', views.BookView.as_view(), name='book_info'), 
+    path('books/<slug:data_info>/', views.BookView.as_view(), name='book_info'), 
 
     path('search', views.SearchView.as_view(), name='search' ), # 本の検索全般
 
@@ -104,7 +104,8 @@ urlpatterns = [
     path('book-ic/', views.Book_icView.as_view(), name="book-ic"),
 
     path('others/', views.OthersView.as_view(), name="others"),
-    path('others/<slug:data_info>', views.OthersView.as_view(), name="others_info"),
+    path('others/<slug:data_info>/', views.OthersView.as_view(), name="others_info"),
+
 
     path('privacypolicy', views.Privacy_policyView.as_view(), name="privacy_policy"),
     path('contact', views.ContactView.as_view(), name="contact"),

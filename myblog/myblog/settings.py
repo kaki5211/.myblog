@@ -56,6 +56,8 @@ else:
 
     SECURE_HSTS_PRELOAD = True
 
+APPEND_SLASH = True
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -94,6 +96,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_middleware_global_request.middleware.GlobalRequestMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware', #リダイレクト用追加
 ]
 
 if pf != 'Windows':

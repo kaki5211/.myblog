@@ -57,10 +57,18 @@
             <a {{ book_.book_img_url | get_tag_el:"a"|safe }}>
               {% with book_.book_img_url|get_img_src:'src' as img_url %}
               {% include 'block/img_small.html' with img_url=img_url %}
+              {{img_url}}
               {% endwith %}
             </a>
           {% else %}
+          {% comment %} <a {{ book_.image | get_tag_el:"a"|safe }}> {% endcomment %}
+            {% comment %} {% with book_.image|get_img_src:'src' as img_url %} {% endcomment %}
             {% include 'block/img_small.html' with img_url=book_.image %}
+            {{book_.image}}
+            {% comment %} {% endwith %} {% endcomment %}
+          {% comment %} </a> {% endcomment %}
+
+            {% comment %} {% include 'block/img_small.html' with img_url=book_.image %} {% endcomment %}
           {% endif %}
 
 
@@ -138,8 +146,8 @@
 
 
   {% else %}
-  <v-card-text class="d-none d-sm-block">
-    <p class="mx-auto mb-2 text-center">— あらすじ —</p>
+  <v-card-text class="d-none d-sm-block my-4">
+    {% comment %} <p class="mx-auto mb-2 text-center">— あらすじ —</p> {% endcomment %}
     {{ book_.contents_synopsis | safe }}
   </v-card-text>
   
