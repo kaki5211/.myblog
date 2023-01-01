@@ -57,14 +57,12 @@
             <a {{ book_.book_img_url | get_tag_el:"a"|safe }}>
               {% with book_.book_img_url|get_img_src:'src' as img_url %}
               {% include 'block/img_small.html' with img_url=img_url %}
-              {{img_url}}
               {% endwith %}
             </a>
           {% else %}
           {% comment %} <a {{ book_.image | get_tag_el:"a"|safe }}> {% endcomment %}
             {% comment %} {% with book_.image|get_img_src:'src' as img_url %} {% endcomment %}
             {% include 'block/img_small.html' with img_url=book_.image %}
-            {{book_.image}}
             {% comment %} {% endwith %} {% endcomment %}
           {% comment %} </a> {% endcomment %}
 
