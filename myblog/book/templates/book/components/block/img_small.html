@@ -7,7 +7,7 @@
 {% if img_url|length < 1000 %}
 src="{{ img_url | safe }}"
 {% else %}
-src="{{img_url}}"
+src="/media/{{img_url}}"
 {% endif %}
 
 
@@ -34,5 +34,4 @@ transition="scale-transition"
 </template>
 
 </v-img>
-
 
