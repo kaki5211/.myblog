@@ -63,6 +63,7 @@
           {% comment %} <a {{ book_.image | get_tag_el:"a"|safe }}> {% endcomment %}
             {% comment %} {% with book_.image|get_img_src:'src' as img_url %} {% endcomment %}
             {% include 'block/img_small.html' with img_url=book_.image %}
+            
             {% comment %} {% endwith %} {% endcomment %}
           {% comment %} </a> {% endcomment %}
 
