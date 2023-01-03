@@ -219,6 +219,7 @@
             el_twitter[0].classList.add("mx-auto");
             var el_instagram = document.getElementById("instagram-embed-0");
             el_instagram.classList.add("mx-auto");
+            el_instagram.classList.add("my-position-static");
             {% comment %} var el_instagram_doc = el_instagram.contentDocument || el_instagram.contentWindow.document; {% endcomment %}
             {% comment %} var el_instagram_doc = el_instagram.contentDocument; {% endcomment %}
             {% comment %} var el_instagram_doc = el_instagram.contentWindow.document; {% endcomment %}
@@ -402,15 +403,15 @@
           if ( judge_title != -1) {
               var str_title = `
               <div class="pb-1">                  
-                <p class="text-my-text-color my-contents-title text-h6 text-md-h5 mt-2 mt-md-4 mb-1 mb-md-2">
+                <p class="text-my-text-color my-contents-title text-h6_5 text-md-h6 text-md-h5 mt-2 mt-md-4 mb-1 mb-md-2">
                   <a style="text-decoration: none;" href="#${id_}">${text_}</a>
                 </p>
               </div>
             `
             }else if ( judge_subtitle != -1) {
               var str_title = `
-              <div class="pb-1" style="justify-content: center;">                  
-                <p class="text-my-text-color text-h6_5 text-md-h6 pl-3 mb-1 mb-md-2">
+              <div class="pb-1 pb-md-1" style="justify-content: center;">                  
+                <p class="text-my-text-color text-h7 text-md-h6_5 text-md-h6 pl-3 mb-0 mb-md-1">
                   ${v_icon_right}
                   <a style="text-decoration: none;" href="#${id_}">${text_}</a>
                 </p>
