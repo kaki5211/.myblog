@@ -121,6 +121,8 @@ urlpatterns = [
 
     ]
 
+if settings.DEBUG == True:
+    urlpatterns.append(path('sns/books/<slug:data_info>/', views.Picture_snsView.as_view(),  name='picture_sns'))
 
 
 
