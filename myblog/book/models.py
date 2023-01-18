@@ -49,6 +49,7 @@ class Book(models.Model):
     fin = models.BooleanField('完読', null=True, blank=True)
 
     amazon_url = models.CharField('アマゾンURL', max_length=1000, null=True, blank=True)
+    amazon_url_text = models.CharField('アマゾンURL_text', max_length=1000, null=True, blank=True)
     kindle_url = models.CharField('kindleURL', max_length=1000, null=True, blank=True)
     rakuten_url = models.CharField('楽天URL', max_length=1000, null=True, blank=True)
     rakuten_kobo_url = models.CharField('楽天KOBOURL', max_length=1000, null=True, blank=True)

@@ -532,6 +532,9 @@ blockquote cite {
 .my-w-100 {
   width: 100%;
 }
+.my-w-50 {
+  width: 50%;
+}
 
 .my-position-static {
   position: static!important;
@@ -947,7 +950,15 @@ label input[type="checkbox"]:checked {
           margin-right: 0.2em; }
         </style>
 
-
+<style>
+  .VueCarousel-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    box-sizing:border-box;
+  }
+</style>
         {% comment %} <style>
           .application {
             font-family: Sawarabi Gothic', 'Noto Sans JP','Noto Sans',sans-serif !important;

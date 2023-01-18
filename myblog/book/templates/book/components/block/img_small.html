@@ -9,16 +9,24 @@ src="{{ img_url | safe }}"
 {% else %}
 src="/media/{{img_url}}"
 {% endif %}
-
+{% if book_ is not None %}
+{% comment %} href="{% if amazon_url_text is not None %}{% url 'book:book_info' book_.post_day %}{%else%}{% url 'book:others_info' book_.post_day %}{%endif%}" {% endcomment %}
+{% endif %}
 
 
 
 
 lazy-src="{% static "static/book-ic_picture_wings.svg" %}"
 {% comment %} aspect-ratio="1" {% endcomment %}
-class="lighten-2 ml-4 mx-3 mb-3 mt-3 mt-md-5 mt-lg-7 my-border mt-5 elevation-2"
+class="lighten-2 ma-3 mt-3 mt-sm-10 mt-md-11 mt-lg-12 mb-md-5 mb-lg-3 ml-4 ml-sm-5 ml-md-7 my-border mt-5 elevation-2"
 transition="scale-transition"
 >
+
+<a href="{% if amazon_url_text is not None %}{% url 'book:book_info' book_.post_day %}{%else%}{% url 'book:others_info' book_.post_day %}{%endif%}" class="my-w-100 my-h-100" style="position: absolute">
+  <div>
+  
+  </div>
+  </a>
 
 <template v-slot:placeholder>
 <v-row
@@ -33,5 +41,21 @@ transition="scale-transition"
 </v-row>
 </template>
 
+
+
+{%if amazon_url_text is not None %}
+
+{% include 'block/img_amazon_text.html' with amazon_url_text=amazon_url_text %}
+
+
+{% comment %} <a class="mr-0 ml-auto mt-auto mb-0">
+  {{amazon_url_text}}
+</a> {% endcomment %}
+{% endif %}
+
+
+
 </v-img>
+
+
 

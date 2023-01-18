@@ -2,6 +2,9 @@
 {% extends 'book/_block_static.html' %}
 
 {% block contents %}
+{% load get_img_src %}
+{% load get_tag_el %}
+
 
 
 
@@ -38,22 +41,34 @@
               >{{ book_info.book_img_url | safe }}</v-img>  
             </v-col> {% endcomment %}
             <v-col cols="10" class="mx-auto px-0 pt-10">
-            <div class="kattene">
-              <div class="kattene__imgpart">
+            {% comment %} <div class="kattene"> {% endcomment %}
+              {% comment %} <div class="kattene__imgpart"> {% endcomment %}
                 {% comment %} <a target="_blank" rel="noopener" href="【メインのURL】"> {% endcomment %}
                 {% comment %} <img src="" width="160" height="160" loading="lazy" class="kattene__shadow"> {% endcomment %}
                 <div>
+                  {% comment %} {% spaceless %} {% endcomment %}
+                  {% comment %} {{ book_info.book_img_url | safe}} {% endcomment %}
+                  {% comment %} {% endspaceless %} {% endcomment %}
+            {% comment %} <a {{ book_.image | get_tag_el:"a"|safe }}> {% endcomment %}
+
+
+
+            {% comment %} {% with book_info.book_img_url|get_img_src:'src' as img_url %} {% endcomment %}
+            {% comment %} {% include 'block/img_small.html' with img_url=img_url amazon_url_text=book_info.amazon_url_text post_day=book_info.post_day %} {% endcomment %}
+            {% comment %} {% endwith %} {% endcomment %}
                   {% spaceless %}
-                  {{ book_info.book_img_url | safe}}
+
+            {% include 'book_info/contents_img.html' with img_url=book_info.book_img_url|get_img_src:"src"|safe amazon_url_text=book_info.amazon_url_text post_day=book_info.post_day %}
+
                   {% endspaceless %}
-                </div>
+                {% comment %} </div> {% endcomment %}
     
     
     
                   {% comment %} <a href="https://www.amazon.co.jp/%E4%BD%95%E3%82%82%E3%81%8B%E3%82%82%E6%86%82%E9%AC%B1%E3%81%AA%E5%A4%9C%E3%81%AB-%E9%9B%86%E8%8B%B1%E7%A4%BE%E6%96%87%E5%BA%AB-%E4%B8%AD%E6%9D%91-%E6%96%87%E5%89%87/dp/4087467988?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&crid=22P8P409551PY&keywords=%E4%BD%95%E3%82%82%E3%81%8B%E3%82%82%E6%86%82%E9%AC%B1%E3%81%AA%E5%A4%9C%E3%81%AB&qid=1664892669&qu=eyJxc2MiOiIxLjA2IiwicXNhIjoiMC40NiIsInFzcCI6IjAuNDkifQ%3D%3D&s=instant-video&sprefix=%E4%BD%95%E3%82%82%E3%81%8B%E3%82%82%E6%86%82%E9%AC%B1%E3%81%AA%E5%A4%9C%E3%81%AB%2Cinstant-video%2C178&sr=1-1-catcorr&linkCode=li2&tag=bookic-22&linkId=3b66b22a86ce0d296bde27c76521a4b0&language=ja_JP&ref_=as_li_ss_il" target="_blank"><img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=4087467988&Format=_SL160_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=bookic-22&language=ja_JP" ></a> {% endcomment %}
     
                 {% comment %} </a> {% endcomment %}
-              </div>
+              {% comment %} </div> {% endcomment %}
 {% comment %} 
               <div class="kattene__infopart">
                 <div class="kattene__btns __four" class="d-flex">

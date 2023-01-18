@@ -39,12 +39,13 @@
             </v-col> {% endcomment %}
 
             <v-col cols="10" class="mx-auto px-0 pt-10">
-              <div class="kattene">
-                <div class="kattene__imgpart">
-                    {% include 'book_info/contents_img.html' with img_url=book_info.image.url %}
-                
+              <div>
+              {% spaceless %}
+
+              {% include 'book_info/contents_img.html' with img_url=book_info.image.url post_day=book_info.post_day %}
+  
+                    {% endspaceless %}
               </div>
-          </div>
         </v-col>
 
 

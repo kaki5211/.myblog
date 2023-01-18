@@ -3,7 +3,7 @@
 
 {% comment %} <div class="my-container-max-width" style="height: 38vh;"></div> {% endcomment %}
 
-<div style="position:relative; z-index: 1;" class="my-5 ma-sm-5 ma-lg-10" >
+<div style="position:relative; z-index: 1;" class="my-5 ma-sm-5 ma-lg-10 rounded-lg v-card v-sheet theme--light" >
 
 
   
@@ -14,7 +14,7 @@
   :aspect-ratio="16/9"
   :aspect-ratio-md="1/1"
 
-  class="my-container-max-width my-w-100" style="z-index: 1; position: absolute;" src="{% static "static/book-ic_picture.svg" %}" >
+  class="my-container-max-width my-w-100" style="z-index: 1;" src="{% static "static/book-ic_picture.svg" %}" >
 
     <div class="q-py-xl my-container-max-width ma-sm-5 ma-lg-10 text-center position:relative;" style="z-index: 2; height:50%;">
       <div style="  position:absolute;
@@ -30,7 +30,8 @@
 </div>
 
 
-<div class="my-container-max-width my-image-top-space"></div>
+
+{% comment %} <div class="my-container-max-width my-image-top-space"></div> {% endcomment %}
 
 
 

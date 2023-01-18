@@ -1,3 +1,5 @@
+{% load static %}
+
 
 
 <v-img
@@ -9,13 +11,19 @@ style="max-width:360px; width: auto;"
 transition="scale-transition"
 center
 >
-
+<a href="/aa" class="my-w-100 my-h-100" style="position: absolute">
+  <div>
+  
+  </div>
+  </a>
 <template v-slot:placeholder>
 <v-row
   class="fill-height ma-0"
   align="center"
   justify="center"
 >
+
+
   <v-progress-circular
     indeterminate
     color="grey lighten-5"
@@ -23,6 +31,24 @@ center
 </v-row>
 </template>
 
+{% if amazon_url_text is not NONE %}
+<div class="my-h-100 my-w-100">
+<a d-flex class="my-h-100 my-w-100">
+</a>
+
+<div class="d-flex my-h-100 my-w-100">
+  <div class="ml-auto mt-auto mb-0 my-w-50 mr-0 ml-auto " style="">
+      <a href="{{amazon_url_text}}" class="my-w-100" target="_blank" style="z-index: 100; position: relative;" >
+        <img
+          class="my-w-100 my-h-100" style="left: auto; right: auto; background: rgba(255,255,255,.3);z-index: 100; max-height: 150px;"  src="{% static "static/amazon-ar21.svg" %}">
+        </img>
+      </a>
+  </div>
+</div>
+
+</div>
+
+{% endif %}
 </v-img>
 
 

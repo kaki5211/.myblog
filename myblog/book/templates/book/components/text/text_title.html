@@ -1,13 +1,25 @@
-  <div>
-<div class="my-container-max-width" style="height: 28vh;"></div>
 
-      <div class="q-py-xl my-container-max-width">
-        <div class="d-flex">
-        <p id="my-letter-spacing-3" class="d-inline-flex mx-auto text-center my-font-weight-title text-h5 text-md-h4 my-text-color-title my-letter-spacing-3">
+
+<template>
+  <div class="my-5 ma-sm-5 ma-lg-10">
+      <v-responsive :aspect-ratio="16/9" class="rounded-lg">
+
+
+        <div class="d-flex my-h-100 my-bg-color">
+        <p id="my-letter-spacing-3" class="d-inline-flex mx-auto my-auto text-center my-font-weight-title text-h5 text-md-h4 my-text-color-title my-letter-spacing-3"
+        style="box-shadow:0 3px 0 0 rgb(0 0 0 / 20%), 0 0px 0 0 rgb(0 0 0 / 14%), 0 0px 0 0 rgb(0 0 0 / 12%)">
           <v-icon size="36" class="mr-5" style="align-items: center;">{{ icon_ }}</v-icon>
           {{text}}</p>
-        </div>
       </div>
 
+    </v-responsive>
+</div>
+</template>
+
+
+{% comment %} 
+<div class="rounded-lg" style="border: double 5px #455045;">
+  <div class="my-container-max-width" style="height: 28vh;"></div>
       <div class="my-container-max-width" style="height: 40vh;"></div>
   </div>
+   {% endcomment %}

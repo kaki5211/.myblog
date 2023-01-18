@@ -24,7 +24,7 @@
     cols="12"
     sm="12"
     lg="11"
-    class="px-3 mx-auto mr-md-auto mt-3 mb-auto mt-sm-4"
+    class="px-1 py-2 mx-auto mr-md-auto mb-auto mt-sm-2"
   >
 
 
@@ -54,11 +54,11 @@
         <div class="my-img-small">
 
           {% if book_.book_img_url is not None %}
-            <a {{ book_.book_img_url | get_tag_el:"a"|safe }}>
+            {% comment %} <a {{ book_.book_img_url | get_tag_el:"a"|safe }}> {% endcomment %}
               {% with book_.book_img_url|get_img_src:'src' as img_url %}
-              {% include 'block/img_small.html' with img_url=img_url %}
+              {% include 'block/img_small.html' with img_url=img_url amazon_url_text=book_.amazon_url_text post_day=book_.post_day %}
               {% endwith %}
-            </a>
+            {% comment %} </a> {% endcomment %}
           {% else %}
           {% comment %} <a {{ book_.image | get_tag_el:"a"|safe }}> {% endcomment %}
             {% comment %} {% with book_.image|get_img_src:'src' as img_url %} {% endcomment %}
@@ -138,7 +138,7 @@
     <v-card-actions class="d-none d-md-block mt-auto mb-0 text-end my-w-100" style="align-items:flex-end;vertical-align:bottom">
       <div class="my-w-100" style="height:100%">
         <v-btn color="#1aa179" outlined class="mx-auto" style="width:100%;" href ="{% url 'book:book_info' book_.post_day %}">
-        この記事を読む
+        この記事を読む...
       </v-btn>
     </div>
   </v-card-actions>
@@ -154,7 +154,7 @@
   <v-card-actions class="d-none d-md-block mt-auto mb-0 text-end my-w-100" style="align-items:flex-end;vertical-align:bottom">
     <div class="my-w-100" style="height:100%">
       <v-btn color="#1aa179" outlined class="mx-auto" style="width:100%;" href ="{% url 'book:others_info' book_.post_day %}">
-      この記事を読む
+      この記事を読む...
     </v-btn>
   </div>
 </v-card-actions>
@@ -171,7 +171,7 @@
 <v-col
 cols="12"
 class="px-1 py-0 mx-auto mr-md-auto mb-auto d-md-none"
-style="border-top: dashed 0.1em #455045;"
+style="border-top: dashed 0.0875em #455045;"
 >            <v-expand-transition>
 <div v-show="show{{ forloop.counter }}">
 
@@ -187,7 +187,7 @@ style="border-top: dashed 0.1em #455045;"
 <v-card-actions>
   <div class="my-w-100">
   <v-btn color="#1aa179" outlined class="mx-auto" style="width:100%;" href ="{% if book_.book_img_url is not None %}{% url 'book:book_info' book_.post_day %}{%else%}{% url 'book:others_info' book_.post_day %}{%endif%}">
-  この記事を読む
+  この記事を読む...
 </v-btn>
 </div>
 <div class="pl-3 pr-1 d-sm-none">

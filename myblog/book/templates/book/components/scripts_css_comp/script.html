@@ -9,17 +9,43 @@
               iconfont: 'mdi', // default - only for display purposes
             },
           }),
+          components: {
+            'carousel-3d': Carousel3d.Carousel3d,
+            'slide': Carousel3d.Slide
+          },
+        
           methods: {
             onIntersect (entries, observer) {
               // More information about these options
               // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
               this.isIntersecting = entries[0].isIntersecting
             },
+            slidePrev() {
+              this.$refs.carousel.slidePrev();
+            },
+            slideNext() {
+              this.$refs.carousel.slideNext();
+            },
+            updateCarousel(payload) {
+              this.myCarouselData = payload.currentSlide;
+            }
           },
-      
+          watch: {
+            carouselData () {
+              this.$refs.carousel.slideTo(this.carouselData);
+            }
+          },
         data () {
           return {
+            slides: 5,
             isHidden: true,
+            model: 0,
+            obj_ranking: [
+            {% for item in book %}
+              { title: '{{ item.title }}', url: '{{ item.book_img_url|safe}}'},
+            {% endfor %}
+            ],
+    
             {% for a in books_others %}
             show{{ forloop.counter }}: false,
             {% endfor %}
@@ -166,7 +192,6 @@
 
 
 
-
             breadcrumb_items: [
             {% for item_ in breadcrumb %}
             {
@@ -187,12 +212,22 @@
   
         })
 
-
+{% comment %} 
         let elements = document.getElementsByTagName("img");
         Array.prototype.forEach.call(elements, function (element) {
             element.classList.add("my-w-100")
         });
+
+
+        elements = document.getElementsByClassName("my-ranking");
+        Array.prototype.forEach.call(elements, function (element) {
+          element.classList.add("my-h-100");
+        });        
         
+ {% endcomment %}
+
+
+        {% comment %} 
         {% if url_main == None %}
           {% if url_sub == None %}
           elements = document.getElementsByClassName("v-responsive__content");
@@ -201,7 +236,16 @@
           });
           {% endif %}
         {% endif %}
-      
+         {% endcomment %}
+
+         {% if url_main == None %}
+         {% if url_sub == None %}
+         elements = document.getElementsByClassName("v-responsive");
+         Array.prototype.forEach.call(elements, function (element) {
+           element.classList.add("my-h-100");
+         });
+         {% endif %}
+       {% endif %}      
 
           {% comment %} const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
         
@@ -490,7 +534,9 @@
 
 
   </style>
-    
+  {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script> {% endcomment %}
+  {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hooper@0.2.1/dist/hooper.css"> {% endcomment %}
+  {% comment %} <script src="https://cdn.jsdelivr.net/npm/hooper@0.2.1/dist/hooper.min.js"></script>     {% endcomment %}
 
 
 

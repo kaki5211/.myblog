@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     {% if  DEBUG == False %}
         <!-- Google ADSense -->
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1203419703310974"
-        crossorigin="anonymous"></script>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1203419703310974" crossorigin="anonymous"></script>
 
         
         <!-- Google tag (gtag.js) -->
@@ -142,6 +141,20 @@
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@BOOK_IC" />
 
+        {% comment %} <!-- hooper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hooper@0.2.1/dist/hooper.css">
+    <script src="https://cdn.jsdelivr.net/npm/hooper@0.2.1/dist/hooper.min.js"></script> {% endcomment %}
+
+{% comment %} 
+    <!-- vue carousel -->
+    <script src="https://cdn.jsdelivr.net/npm/vue-carousel@0.18.0/dist/vue-carousel.min.js"></script>
+     {% endcomment %}
+
+    <!-- vue-carousel-3d -->
+    <script src="https://cdn.jsdelivr.net/npm/vue-carousel-3d@0.2.0/dist/vue-carousel-3d.min.js"></script>
+
+    <!-- 正規化 -->
+    <link rel="canonical" href={{ request.build_absolute_uri }} />
 
 
 

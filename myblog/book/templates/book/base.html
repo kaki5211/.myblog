@@ -7,14 +7,15 @@
   {% include 'text/text_title_book-ic.html' with text="BOOK I.C." text_sub="～本の感想を創造するブログ～" %}
 
 
-{% comment %} 
-  <!-- ランキング -->
-  {% include 'block/ranking.html' %}
- {% endcomment %}
+
 
   <!-- bar -->
   {% include 'block/bar.html' %}
 
+  {% comment %} 
+  <!-- ランキング -->
+  {% include 'block/ranking.html' %}
+ {% endcomment %}
   <!-- breadcrumbs -->
   {% include 'block/breadcrumbs.html' with aueiu=book_info.title%}
 
