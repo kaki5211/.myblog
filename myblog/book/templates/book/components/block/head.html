@@ -50,11 +50,11 @@
     <title>
         {% with breadcrumb|length as el_ %}
         {% if el_ == 1 %}
-            BOOK I.C. ～本の感想を創造するブログ～ 
+            BOOK I.C.
         {% elif el_ == 2 %}
-            {{breadcrumb.1.title_info}} | BOOK I.C. ～本の感想を創造するブログ～ 
+            {{breadcrumb.1.title_info}} | BOOK I.C.
         {% elif el_ == 3 %}
-            {{breadcrumb.2.title_info}} — {{ breadcrumb.1.title_info }} | BOOK I.C. ～本の感想を創造するブログ～ 
+            【書籍 感想】{{breadcrumb.2.title_info}} — {{ breadcrumb.1.title_info }} | BOOK I.C.
         {% endif %}
         {% endwith %}
     </title>
@@ -133,6 +133,8 @@
     "/>
     {% endif %}
     {% endwith %}
+
+    {{breadcrumb.2.title_info}}
 
     <meta property="og:site_name" content="BOOK I.C." />
     {% comment %} <meta property="og:image" content=" サムネイル画像のURL" /> {% endcomment %}

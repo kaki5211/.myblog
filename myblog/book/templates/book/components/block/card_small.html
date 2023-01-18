@@ -48,14 +48,14 @@
         class="mx-auto mr-md-auto mb-auto my-auto"
       >          
             <div class="my-img-small">
+              
 
-            <a {{ book_.book_img_url | get_tag_el:"a"|safe }}>
-   
 
-            {% with book_.book_img_url|get_img_src:'src' as img_url %}
-            {% include 'block/img_small.html' with img_url=img_url %}
-            {% endwith %}
-      </a>
+              {% with book_.book_img_url|get_img_src:'src' as img_url %}
+              {% include 'block/img_small.html' with img_url=img_url amazon_url_text=book_.amazon_url_text post_day=book_.post_day %}
+              {% endwith %}            
+
+          
     </div>
 
 
