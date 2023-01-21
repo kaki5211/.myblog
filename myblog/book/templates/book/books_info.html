@@ -211,9 +211,6 @@
                 {% include 'book_info/contents_title.html' with text=contents_.1 ty=forloop.counter %}
                 
               {% elif contents_.0 == "subtitle" %}
-                {% if count_subtitle ==  forloop.counter %}
-                  {% include 'google/adsense_article.html' %}
-                {% endif %}
                 {%if forloop.counter > 2  %}
                 <v-divider class="pb-0 mb-0"></v-divider>
                 {% endif %}
