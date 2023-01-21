@@ -204,7 +204,7 @@
               {% endif %} 
 
               {% if contents_.0 == "title" %}
-                {% if forloop.counter < 3 %}
+                {% if forloop.counter > 3 %}
                   {% include 'google/adsense_article.html' %}
                 {% endif %}
 
