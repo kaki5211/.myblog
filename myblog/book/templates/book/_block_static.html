@@ -46,6 +46,9 @@
         </v-container>
         
 
+        <!-- google広告_multiplex -->
+        {% comment %} {% if request.path != %} {% endcomment %}
+        {% if breadcrumb.2.title_info is not "None" and breadcrumb.1.title_info is not "書籍一覧" %}
         <v-row no-gutters>
           <v-col
             cols="12"
@@ -56,6 +59,7 @@
           {% include 'google/adsense_multiplex.html' %}
           </v-col>
       </v-row>
+      {% endif %}
 
         <v-divider class="py-10 my-10" style="border-color: #f5f8f5; height: 30vh;"></v-divider>
 

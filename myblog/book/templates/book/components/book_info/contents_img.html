@@ -11,7 +11,7 @@ style="max-width:360px; width: auto;"
 transition="scale-transition"
 center
 >
-<a href="/aa" class="my-w-100 my-h-100" style="position: absolute">
+<a href="{% if book_info.amazon_url_text is not None %}{% url 'book:book_info' book_info.post_day %}{%else%}{% url 'book:others_info' book_info.post_day %}{%endif%}" class="my-w-100 my-h-100" style="position: absolute">
   <div>
   
   </div>
