@@ -204,6 +204,10 @@
               {% endif %} 
 
               {% if contents_.0 == "title" %}
+                {% if forloop.counter < 3 %}
+                  {% include 'google/adsense_article.html' %}
+                {% endif %}
+
                 {% include 'book_info/contents_title.html' with text=contents_.1 ty=forloop.counter %}
                 
               {% elif contents_.0 == "subtitle" %}
@@ -233,6 +237,9 @@
         </v-row>
       {% comment %} </v-container> {% endcomment %}
 
+      {% include 'google/adsense_multiplex.html' %}
+
+      
       <v-row no-gutters >
 
         <v-col cols="11" sm="10" md="5" lg="4" class="mx-auto py-10">
