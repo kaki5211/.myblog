@@ -48,7 +48,7 @@
 
         <!-- google広告_multiplex -->
         {% comment %} {% if request.path != %} {% endcomment %}
-        {% if breadcrumb.2.title_info is not "None" and breadcrumb.1.title_info is not "書籍一覧" %}
+          {% if breadcrumb.2.title_info == None and breadcrumb.1.title_info is not "書籍一覧" %}
         <v-row no-gutters>
           <v-col
             cols="12"
@@ -83,11 +83,14 @@
 <!-- script -->
 {% include 'scripts_css_comp/script.html' %}
 
+{% if  DEBUG == False %}
 <script>
   [].forEach.call(document.querySelectorAll('.adsbygoogle'), function(){
       (adsbygoogle = window.adsbygoogle || []).push({});
   });
 </script>
+{% endif %}      
+
 
 <style scoped>
   #app /deep/ .v-application {

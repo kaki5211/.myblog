@@ -1,0 +1,33 @@
+{% comment %} 
+<div class="text-center">
+<v-list>
+    <v-list-item v-for="list in displayLists" :key="list.index">
+        <v-list-item-content>
+        <v-list-item-title>[[ list.title ]]</v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
+  </v-list>
+
+<div class="text-center my-pagenation">
+      <v-pagination
+        v-model="page"
+        :length="length"
+        color="#1aa179"
+        @input = "pageChange"
+
+      ></v-pagination>
+    </div>
+</div>
+
+ {% endcomment %}
+
+{% comment %} 
+        page="1"
+        v-model="page"
+        total-visible="7"
+        value="4"
+        color="#1aa179"
+        length="5"
+        @input = "getNumber"
+
+{% endcomment %}
