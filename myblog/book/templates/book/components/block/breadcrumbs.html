@@ -1,6 +1,7 @@
 
-{% if url_main == None %}
-<h1>{{url_main}}</h1>
+
+{% if request.path != "/"  %}
+<h1>{{ request.path }}</h1>
 <v-row
   no-gutters
   style="min-width: 250px; max-width:100%;"
@@ -8,7 +9,7 @@
   
 >
   <v-col
-  cols="10"
+  cols="12"
   align-self="center"
   style="min-width: 250px;"
   class="mx-auto my-auto"
