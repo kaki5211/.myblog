@@ -54,11 +54,6 @@
 
     </v-app>    
   </div>
-  <script>
-    [].forEach.call(document.querySelectorAll('.adsbygoogle'), function(){
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    });
-</script>
 </body>
 
 
@@ -74,7 +69,11 @@
 <!-- script -->
 {% include 'scripts_css_comp/script.html' %}
 
-
+<script>
+  [].forEach.call(document.querySelectorAll('.adsbygoogle'), function(){
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  });
+</script>
 
 <style scoped>
   #app /deep/ .v-application {
