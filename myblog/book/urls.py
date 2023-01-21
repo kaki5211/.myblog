@@ -57,7 +57,7 @@ class StaticSitemap(Sitemap):
     priority = 0.5
 
     def items(self):
-        name_list = ['profile', 'book-ic', 'others', 'privacy_policy', 'contact', 'book', 'top', 'sitemap_book-ic']
+        name_list = ['profile', 'book-ic', 'others', 'privacy_policy', 'contact', 'book', 'top', 'sitemap_book-ic', 'ads']
         items = []
         for name_ in name_list:
             items.append("book:{}".format(name_))          
@@ -113,6 +113,8 @@ urlpatterns = [
 
     path('sitemap.xml/', sitemap, {'sitemaps': sitemaps},  name='sitemap'),
     path('sitemap/', views.SitemapView.as_view(),  name='sitemap_book-ic'),
+
+    path('ads.txt/', views.ads, name='ads'),
 
     path('test/', views.test_,  name='test_'),
     

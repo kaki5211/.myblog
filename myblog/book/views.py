@@ -879,6 +879,8 @@ class Picture_snsView(ListView):
         except:
             return data_info
 
+def ads(request):
+    return render(request, 'ads.txt')
 
 
 # def sitemap(request):

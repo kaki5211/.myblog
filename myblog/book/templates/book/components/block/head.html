@@ -50,11 +50,11 @@
     <title>
         {% with breadcrumb|length as el_ %}
         {% if el_ == 1 %}
-            BOOK I.C.
+            BOOK I.C. ～本の感想を創造するブログ～
         {% elif el_ == 2 %}
             {{breadcrumb.1.title_info}} | BOOK I.C.
         {% elif el_ == 3 %}
-            【書籍 感想】{{breadcrumb.2.title_info}} — {{ breadcrumb.1.title_info }} | BOOK I.C.
+        【感想ブログ】 {{breadcrumb.2.title_info}} | BOOK I.C.
         {% endif %}
         {% endwith %}
     </title>
@@ -108,11 +108,11 @@
     <meta property="og:title" content="
     {% with breadcrumb|length as el_ %}
     {% if el_ == 1 %}
-        BOOK I.C. ～本の感想を創造するブログ～ 
+        BOOK I.C. ～本の感想を創造するブログ～
     {% elif el_ == 2 %}
-        {{breadcrumb.1.title_info}} | BOOK I.C. ～本の感想を創造するブログ～ 
+        {{breadcrumb.1.title_info}} | BOOK I.C.
     {% elif el_ == 3 %}
-        {{breadcrumb.2.title_info}} — {{ breadcrumb.1.title_info }} | BOOK I.C. ～本の感想を創造するブログ～ 
+        【感想ブログ】 {{breadcrumb.2.title_info}} | BOOK I.C.
     {% endif %}
     {% endwith %}
     " />
@@ -121,20 +121,22 @@
     {% if el_ == 1 %}
     <meta property="og:description" content="
         BOOK I.C. ～本の感想を創造するブログ～,  
-            {%for item in books_others%}
-                {{item.post_day | safe}} - {{ item.title }} | 
-            {% endfor %}
-    "/>
-    {% elif el_ == 3 %}
+            {% comment %} 
+                {%for item in books_others%}
+                    {{item.post_day | safe}} - {{ item.title }} | 
+                {% endfor %}
+            {% endcomment %}
+            本の感想を書くブログです！。小説を読み終えた人向けに、思ったこと等の感想をこのブログにUPしています！。タグ | 小説,文庫,ブログ,感想,読書,書評,書籍,記録,ネタバレ | BOOK I.C.
+        "/>
+        {% elif el_ == 3 %}
     <meta property="og:description" content="
-        {{breadcrumb.2.title_info}} | {{ breadcrumb.1.title_info }} | BOOK I.C. ～本の感想を創造するブログ～,
+        {{breadcrumb.2.title_info}} | BOOK I.C. ～本の感想を創造するブログ～,
         — あらすじ — {{ book_info.contents_synopsis }}
 
     "/>
     {% endif %}
     {% endwith %}
 
-    {{breadcrumb.2.title_info}}
 
     <meta property="og:site_name" content="BOOK I.C." />
     {% comment %} <meta property="og:image" content=" サムネイル画像のURL" /> {% endcomment %}
