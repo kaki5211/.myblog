@@ -494,7 +494,9 @@
 
       <!-- adsense -->
       <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
+          [].forEach.call(document.querySelectorAll('.adsbygoogle'), function(){
+              (adsbygoogle = window.adsbygoogle || []).push({});
+          });
       </script>
 
       <!-- data-table -->
