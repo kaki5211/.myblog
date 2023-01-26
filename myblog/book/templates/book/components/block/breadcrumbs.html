@@ -27,25 +27,27 @@
 
 <v-row
 no-gutters
+class="pb-5"
 >
 
 <v-col
   cols="12"
-  align-self="center">
+  align-self="center"
+  class="my-bg-color-glay rounded-lg">
   <div style="display: inline-block;">
-        <v-breadcrumbs :items="breadcrumb_items" large class="my-text-color py-2 pl-0">
-            <template v-slot:item="{ item }" class="my-text-color">
+        <v-breadcrumbs :items="breadcrumb_items" large class="my-text-color-light-glay py-2 pl-0">
+            <template v-slot:item="{ item }" class="my-text-color-light-glay">
               <v-breadcrumbs-item
                 :href="item.href"
                 :disabled="item.disabled"
-                class="my-text-color"
+                class="my-text-color-light-glay-breadcrumb"
             >
-            <v-icon size="22px">[[ item.icon]]</v-icon>
+            <v-icon size="22px" class="my-text-color-light-glay">[[ item.icon]]</v-icon>
                 [[ item.text.toUpperCase() ]]
               </v-breadcrumbs-item>
             </template>
-            <template v-slot:divider>
-                <v-icon>mdi-chevron-right</v-icon>
+            <template v-slot:divider class="my-text-color-light-glay">
+                <v-icon class="my-text-color-light-glay">mdi-chevron-right</v-icon>
             </template>
           </v-breadcrumbs>
 

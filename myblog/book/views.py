@@ -22,10 +22,21 @@ from django.urls import reverse_lazy
 
 from django.http import request
 
+import json
+from django.db.models.query import QuerySet
+from django.db import models as django_models
+
+
 
 # Create your views here
 
-
+class MyJsonEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, django_models.Model) and hasattr(obj, 'to_dict'):
+            return obj.to_dict()
+        if isinstance(obj, QuerySet):
+            return list(obj)
+        json.JSONEncoder.default(self, obj)
 
 class MyListView(ListView):
     template_list = ['authors', 'categorys', 'publishers', 'top', 'books']
@@ -300,7 +311,26 @@ class BookView(ListView):
             self.request.session['office'] = "office"
         context['DEBUG'] = settings.DEBUG
 
+
+
+        # book_obj = Book.objects.filter(fin=1)
+
+        # index_list = ['title', 'post_day', 'author_info', 'category_info', 'amazon_url_text', 'book_img_url', 'contents_synopsis']
+        # context['book_json'] = [Book.to_dict(i, index_list, self) for i, obj_ in enumerate(book_obj)]
+        
+
+        # rdict = {}
+        # exec("result_and = {}".format(result_q), locals(), rdict)
+        # result = Book.objects.select_related().filter(rdict["result_and"])
+        
+        
+
         return context
+
+    def to_dict(self, *args, **kwargs):
+        return {'user_id':self.user_id,
+                'password':self.password}
+
 
     def get_queryset(self, *args, **kwargs):
         # ■■■ urlの文字列で、クエリセットの分岐 ■■■
@@ -353,6 +383,9 @@ class BookView(ListView):
             return data_info
         except:
             return data_info
+
+
+
 
     # def get(self, request, *args, **kwargs):
         # form = self.form_class(initial=self.initial)

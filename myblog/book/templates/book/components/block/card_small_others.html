@@ -1,22 +1,20 @@
 {% load static %}
 
 
-
+<div class="my-contents-list">
   {% for book_ in others %}
   
 
-  {% comment %} 
-      {% if forloop.counter == 2 %}
-      <v-col
-      cols="12"
-      sm="12"
-      lg="11"
-      class="px-1 py-2 mx-auto mr-md-auto mb-auto mt-sm-2"
-    >
+  {% if forloop.counter == 1 %}
+  <v-col
+  cols="12"
+  sm="12"
+  lg="11"
+  class="px-1 py-2 mx-auto mr-md-auto mb-auto mt-sm-2">
+
     {% include 'google/adsense_infeed.html' %}
     </v-col>
     {% endif %}
- {% endcomment %}
 
 
     <v-col
@@ -226,9 +224,13 @@
   <p>該当書籍が見つかりません。</p>
     </v-col>
     {% endfor %}
+    <v-row no-gutters>
+      <v-col>
+        {% include 'block/pagenation.html' %}
+      </v-col>
+    </v-row>
 
-
-
+  </div>
 
 {% comment %}   
     <template>

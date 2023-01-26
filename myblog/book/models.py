@@ -7,6 +7,7 @@ from django.db.models.fields import SmallIntegerField, TimeField
 from django.db.models.fields.related import ForeignKey
 from django.db.models.fields.reverse_related import ManyToOneRel
 from django.core.validators import MinLengthValidator, RegexValidator
+import datetime
 
 
 # いらないｰｰｰｰｰｰｰｰ
@@ -58,6 +59,22 @@ class Book(models.Model):
 
     emb_twitter = models.CharField('twitter埋め込み',max_length=10000, null=True, blank=True)
     emb_instagram = models.CharField('instagram埋め込み',max_length=10000, null=True, blank=True)
+
+    def to_dict(i, idex_list, self):
+        dict_r = {}
+        for index in idex_list:
+            dict_ = {}
+            # query_ = 'obj_.values_list("{}")[0]'.format(index)
+            query_ = 'Book.objects.filter(fin=1).values_list("{}")[{}][0]'.format(index, i)
+            if index == "category_info":
+                query_ = 'Category.objects.get(id=Book.objects.filter(fin=1).values_list("{}")[{}][0]).get_category_display()'.format(index, i)
+            elif index == "author_info":
+                query_ = 'Author.objects.get(id=Book.objects.filter(fin=1).values_list("{}")[{}][0]).author'.format(index, i)
+            elif index == "post_day":
+                query_ = 'Book.objects.filter(fin=1).values_list("{}")[{}][0].strftime("%Y-%m-%d")'.format(index, i)
+            exec("{} = {}".format(index, query_), globals(), dict_)
+            dict_r = dict_r | dict_
+        return dict_r
 
     def __str__(self):
         return self.title

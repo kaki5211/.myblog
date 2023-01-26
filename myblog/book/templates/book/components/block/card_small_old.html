@@ -5,11 +5,10 @@
 
 
 
-<div class="my-contents-list">
 
   {% for book_ in book_list reversed %}
 
-  {% if forloop.counter == 1 %}
+  {% if forloop.counter == 2 %}
   <v-col
   cols="12"
   sm="12"
@@ -206,14 +205,6 @@
     </v-col>
     {% endfor %}
 
-      
-      
-      
-      
-      
-            
-
-  </div>
 
 
     <v-row no-gutters>
@@ -221,6 +212,14 @@
         {% include 'block/pagenation.html' %}
       </v-col>
     </v-row>
+
+    <v-row no-gutters>
+      <v-col>
+
+    {{book_json}}
+
+  </v-col>
+</v-row>
 
 
 {% comment %}   

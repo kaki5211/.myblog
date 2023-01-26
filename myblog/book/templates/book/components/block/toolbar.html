@@ -4,9 +4,9 @@
 {% comment %} <div style="height:66px"></div> {% endcomment %}
 
 {% comment %} <div id="header_menu" style="position: fixed; z-index:100;"> {% endcomment %}
-  <div id="header_menu">
+  <div id="header_menu" class="">
     <v-toolbar
-    class="my-w-100"
+    class="my-w-100 my-bg-color-glay"
     color="#f5f8f5"
     flat
     height="70px"
@@ -20,19 +20,19 @@
     {% comment %} prominent {% endcomment %}
     {% comment %} src="{% static "static/media.jpg" %}" {% endcomment %}
     >
-      <v-toolbar-title onclick="location.href='{% url "book:top" %}'" style="cursor:pointer" id="my-letter-spacing-title" class="text-h5_5 text-md-h5 my-text-color-title my-font-weight-title">BOOK I.C.</v-toolbar-title>
+      <v-toolbar-title onclick="location.href='{% url "book:top" %}'" style="cursor:pointer" id="my-letter-spacing-title" class="text-h5_5 text-md-h5 my-text-color-title my-text-color-light-glay my-font-weight-title">BOOK I.C.</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <v-btn icon fab dark class="my-text-color" href="https://twitter.com/BOOK_IC">
+      <v-btn icon fab dark class="my-text-color-light-glay" href="https://twitter.com/BOOK_IC">
         <v-icon size="32" >mdi-twitter</v-icon>
       </v-btn>
-      <v-btn icon fab dark class="my-text-color me-5" href="https://www.instagram.com/BOOK_I.C/">
+      <v-btn icon fab dark class="my-text-color-light-glay me-5" href="https://www.instagram.com/BOOK_I.C/">
         <v-icon size="32" >mdi-instagram</v-icon>
       </v-btn>
 
 
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer">
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="my-text-color-light-glay">
                 <v-icon size="32">mdi-format-list-bulleted</v-icon>
 
       </v-app-bar-nav-icon>

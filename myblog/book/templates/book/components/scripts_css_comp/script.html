@@ -30,7 +30,28 @@
               this.myCarouselData = payload.currentSlide;
             },
             pageChange: function(pageNumber){
-              this.displayLists = this.lists.slice(this.pageSize*(pageNumber -1), this.pageSize*(pageNumber));
+              this.item_google = this.item_google.parentNode.removeChild(this.item_google);
+              lists = document.getElementsByClassName("my-contents-list");
+              
+              this.list_children = lists[0].children
+
+
+    
+
+              for (let i = 0; i < this.lists_children.length; i++) {
+                this.lists_children[i].style.display = "none";
+              };
+              if (this.lists_children.length % this.pageSize == 1 && pageNumber == this.length ) {
+                for (let i = this.pageSize*(pageNumber -1); i < this.lists_children.length; i++) {
+                this.lists_children[i].style.display = "block";
+                };
+                lists[0].insertBefore(this.item_google, this.lists_children[this.pageSize*(this.page -1)+1]);
+              } else {
+                for (let i = this.pageSize*(pageNumber -1); i < this.pageSize*(pageNumber); i++) {
+                  this.lists_children[i].style.display = "block";
+                };
+                lists[0].insertBefore(this.item_google, this.lists_children[this.pageSize*(this.page -1)+1]);
+              };
             },
             getNumber: function(number){
               console.log(number)
@@ -46,11 +67,12 @@
         data () {
           return {
             page: 1,
-            length:0,
+            length:2,
             lists: [],
             displayLists: [],
-            pageSize: 10,
-
+            pageSize: 5,
+            item_google: "", 
+            list_children: "",
 
             slides: 5,
             isHidden: true,
@@ -225,15 +247,40 @@
         },
 
         mounted : function(){
-          this.lists = new Array(99).fill().map((v,i)=> {
-            return { id : i,title : 'Title' + i };
-          });
+          {% comment %} this.item_google = this.item_google.parentNode.removeChild(item_google); {% endcomment %}
+          let lists = document.getElementsByClassName("my-contents-list");
+          this.lists_children = lists[0].children;
+          this.item_google = this.lists_children[0].parentNode.removeChild(this.lists_children[0]);
+          lists = document.getElementsByClassName("my-contents-list");
+          this.lists_children = lists[0].children;
+
+
+          
+          for (let i = 0; i < this.lists_children.length; i++) {
+            this.lists_children[i].style.display = "none";
+          };
+                
+          this.length = Math.ceil(this.lists_children.length/this.pageSize);
       
-          this.length = Math.ceil(this.lists.length/this.pageSize);
-      
-          this.displayLists = this.lists.slice(this.pageSize*(this.page -1), this.pageSize*(this.page));
+          {% comment %} this.displayLists = this.lists.slice(this.pageSize*(this.page -1), this.pageSize*(this.page)); {% endcomment %}
+          for (let i = this.pageSize*(this.page -1); i < this.pageSize*(this.page); i++) {
+            this.lists_children[i].style.display = "block";
+          };
+          {% comment %} this.lists.item(this.pageSize*(this.page -1)+1).appendChild(this.item_google); {% endcomment %}
+          if (this.pageSize*(this.page -1)+1 == this.lists_children.length ) {
+            lists[0].insertBefore(this.item_google, this.lists_children[this.pageSize*(this.page -1)]);
+          } else {
+            lists[0].insertBefore(this.item_google, this.lists_children[this.pageSize*(this.page -1)+1]);
+          }
+
 
         },
+        created : function(){
+
+
+        },
+
+
 
 
         
