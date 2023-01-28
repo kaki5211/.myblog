@@ -275,19 +275,21 @@
 </v-btn>
 
 
+
+
+<v-row no-gutters>
+  <v-col col="12" col-md="10" col-lg="8">
+    {% include 'block/bottom_navigation.html' %}
+  </v-col>
+</v-row>
+
 {% include 'google/adsense_multiplex.html' %}
 
 
 
-      <v-row no-gutters>
-        <v-col col="12" col-md="10" col-lg="8">
-          {% include 'block/bottom_navigation.html' %}
-        </v-col>
-      </v-row>
-
 
       
-      <v-row no-gutters >
+      <v-row no-gutters clas="py-3">
 
         <v-col cols="11" sm="10" md="5" lg="4" class="mx-auto py-10">
           {{ book_info.emb_twitter | safe}}
