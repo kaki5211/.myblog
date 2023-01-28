@@ -56,7 +56,15 @@
             getNumber: function(number){
               console.log(number)
             },
-
+            scrollWindow() {
+              const top = 200
+              this.scroll = window.scrollY
+              if (top <= this.scroll) { // 200px以上スクロールした場合のみボタンを表示
+                this.buttonActive = true
+              } else {
+                this.buttonActive = false
+              }
+            },
             
           },
           watch: {
@@ -73,6 +81,11 @@
             pageSize: 5,
             item_google: "", 
             list_children: "",
+            value: 0,
+
+            buttonActive: false,
+            scroll: 0,
+                  
 
             slides: 5,
             isHidden: true,
@@ -248,12 +261,15 @@
 
         mounted : function(){
           {% comment %} this.item_google = this.item_google.parentNode.removeChild(item_google); {% endcomment %}
+          {% with breadcrumb|length as el_ %}
+          {% if el_ == 1%}
+  
           let lists = document.getElementsByClassName("my-contents-list");
           this.lists_children = lists[0].children;
           this.item_google = this.lists_children[0].parentNode.removeChild(this.lists_children[0]);
           lists = document.getElementsByClassName("my-contents-list");
           this.lists_children = lists[0].children;
-
+          
 
           
           for (let i = 0; i < this.lists_children.length; i++) {
@@ -273,6 +289,37 @@
             lists[0].insertBefore(this.item_google, this.lists_children[this.pageSize*(this.page -1)+1]);
           }
 
+          {% elif el_ == 2 %}
+            {% if breadcrumb.1.title_info == "書籍一覧" or breadcrumb.1.title_info == "その他 記事" %}
+            let lists = document.getElementsByClassName("my-contents-list");
+            this.lists_children = lists[0].children;
+            this.item_google = this.lists_children[0].parentNode.removeChild(this.lists_children[0]);
+            lists = document.getElementsByClassName("my-contents-list");
+            this.lists_children = lists[0].children;
+            
+  
+            
+            for (let i = 0; i < this.lists_children.length; i++) {
+              this.lists_children[i].style.display = "none";
+            };
+                  
+            this.length = Math.ceil(this.lists_children.length/this.pageSize);
+        
+            {% comment %} this.displayLists = this.lists.slice(this.pageSize*(this.page -1), this.pageSize*(this.page)); {% endcomment %}
+            for (let i = this.pageSize*(this.page -1); i < this.pageSize*(this.page); i++) {
+              this.lists_children[i].style.display = "block";
+            };
+            {% comment %} this.lists.item(this.pageSize*(this.page -1)+1).appendChild(this.item_google); {% endcomment %}
+            if (this.pageSize*(this.page -1)+1 == this.lists_children.length ) {
+              lists[0].insertBefore(this.item_google, this.lists_children[this.pageSize*(this.page -1)]);
+            } else {
+              lists[0].insertBefore(this.item_google, this.lists_children[this.pageSize*(this.page -1)+1]);
+            }
+            {% endif %}
+          {% endif %}
+          {% endwith %}
+            
+          window.addEventListener('scroll', this.scrollWindow);
 
         },
         created : function(){
@@ -366,11 +413,10 @@
 
 
 
-
+{% comment %} 
       <script async type="application/javascript">
 
         
-        {% comment %} var els_tag_input = document.getElementsByClassName("checkbox_category"); {% endcomment %}
         var els_input_all = document.querySelectorAll('.checkbox_category, .checkbox_author, .checkbox_publisher');
         var els_input_category = document.querySelectorAll('.checkbox_category')
         var els_input_author = document.querySelectorAll('.checkbox_author')
@@ -379,6 +425,8 @@
         var els_tag_vbtn = document.getElementsByClassName("my-checkbox");
 
         var els_card = document.getElementsByClassName("my-books");
+
+        
 
         if (els_tag_vbtn){
           for (let i = 0; i < els_input_all.length; i++) {
@@ -497,7 +545,7 @@
 
       </script>
 
-
+ {% endcomment %}
 
 
 

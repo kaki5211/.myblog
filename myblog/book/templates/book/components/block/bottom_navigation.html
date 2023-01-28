@@ -1,0 +1,34 @@
+<template>
+    <v-bottom-navigation
+      :value="value"
+      {% comment %} color="primary" {% endcomment %}
+      class="my-bg-color-glay rounded-lg"
+      {% comment %} active-class="my-text-color-light-glay" {% endcomment %}
+      color="#f5f8f5"
+      grow
+>      
+
+      {%if book_info_prev.title != None %}
+    
+      <v-btn style="display: inline; text-align: center;" href="{% url 'book:book_info' data_info=book_info_prev.post_day %}" class="px-2 mx-auto">
+        <v-text class="my-text-color-light-glay" style="overflow: hidden; width: 100%; text-overflow: ellipsis;">({{ book_info_prev.title }})</v-text>
+        <span class="my-text-color-light-glay">前の記事</span>
+        <v-icon class="my-text-color-light-glay">mdi-arrow-left-thick</v-icon>
+      </v-btn>
+      {% endif %}
+
+      <v-btn class="px-2 mx-auto" href="{% url 'book:book' %}">
+        <span class="my-text-color-light-glay">書籍一覧</a></span>
+
+        <v-icon class="my-text-color-light-glay">mdi-bookshelf</v-icon>
+      </v-btn>
+  
+      {%if book_info_next.title != None %}
+      <v-btn style="display: inline; text-align: center;" href="{% url 'book:book_info' data_info=book_info_next.post_day %}" class="px-2 mx-auto">
+          <v-text class="my-text-color-light-glay" style="overflow: hidden; width: 100%; text-overflow: ellipsis;">({{ book_info_next.title }})</v-text>
+          <span class="my-text-color-light-glay my-w-100">次の記事</span>  
+          <v-icon class="my-text-color-light-glay my-w-100">mdi-arrow-right-thick</v-icon>
+      </v-btn>
+      {% endif %}
+    </v-bottom-navigation>
+  </template>

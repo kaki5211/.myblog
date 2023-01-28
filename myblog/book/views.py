@@ -247,8 +247,9 @@ class BookView(ListView):
         context['category_d'] = data_info['category_d']
         context['myform'] = [BookForm(), CategoryForm() ,AuthorForm(), PublisherForm()]
         context['status_book_info'] = 0
+        book_obj = Book.objects
         try:
-            context['book_info'] = Book.objects.get(post_day=datetime.date(int(data_info['category_y']), int(data_info['category_m']), int(data_info['category_d'])))
+            context['book_info'] = book_obj.get(post_day=datetime.date(int(data_info['category_y']), int(data_info['category_m']), int(data_info['category_d'])))
         except:pass
         # context['form_author'] = AuthorForm()
         # context['form_category'] = CategoryForm()
@@ -259,12 +260,12 @@ class BookView(ListView):
             pass
         try:
             if context['date'] != None:
-                context['book_info'] = Book.objects.get(post_day=context['date'])
+                context['book_info'] = book_obj.get(post_day=context['date'])
                 context['status_book_info'] = 1
         except:
             pass
         try:
-            context['book_list'] = Book.objects.filter(fin=1)
+            context['book_list'] = book_obj.filter(fin=1)
             context['contents_text'] = context['book_info'].contents
             list_ = []
             count = 0
@@ -310,6 +311,13 @@ class BookView(ListView):
         else:
             self.request.session['office'] = "office"
         context['DEBUG'] = settings.DEBUG
+        
+        if context['date'] != None:
+            if (context['book_info'].id) != book_obj.all().count():
+                context['book_info_next'] = book_obj.get(id=(context['book_info'].id+1))
+            if (context['book_info'].id) != 1:
+                context['book_info_prev'] = book_obj.get(id=(context['book_info'].id-1))
+
 
 
 
