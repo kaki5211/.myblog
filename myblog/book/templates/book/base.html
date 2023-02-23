@@ -16,15 +16,115 @@
   <!-- ランキング -->
   {% include 'block/ranking.html' %}
  {% endcomment %}
+
+
+
+
+
+
+
+<!-- トピックス -->
+  {% include 'block/topix.html' %}
+
   <!-- breadcrumbs -->
   {% include 'block/breadcrumbs.html' with aueiu=book_info.title%}
 
   <!-- title -->
   {% comment %} {% include 'text/text_subtitle.html' with text="最近の投稿" icon_name="mdi-book-open-page-variant" %} {% endcomment %}
-  {% include 'book_info/contents_title.html' with text="最近の投稿" %}
+  {% comment %} {% include 'book_info/contents_title.html' with text="最近の投稿" %} {% endcomment %}
 
   <!-- card -->
-  {% include 'block/card.html' %}
+  {% comment %} {% include 'block/card.html' %} {% endcomment %}
+
+  
+  {% include 'book_info/contents_title.html' with text="書籍一覧" %}
+
+
+  <div class="d-flex justify-end my-w-100 mb-3">
+    
+    <v-btn 
+    color="#455045"
+    class="mr-4"
+    outlined
+    v-on:click="show_card = !show_card, show_list = !show_list"
+    >
+    <v-icon>mdi-format-list-bulleted</v-icon>
+      リスト
+    </v-btn>
+
+
+  </div>
+
+
+
+  <!-- card -->
+  <div v-show="show_card">
+  {% include 'block/card_judge.html' %}
+  </div>
+
+
+
+
+  {% comment %} {% include 'book_info/contents_subtitle.html' with text="[検索] 書籍一覧" ty=3 %} {% endcomment %}
+    
+
+
+  <template>
+    <v-card tile elevation="0"  class="my-bg-color" v-show="show_list">
+        {% include 'book_info/contents_subtitle.html' with text="[リスト] 書籍一覧" %}
+        <v-text-field
+        style="width: 45%; max-width: 460px;"
+        class="my-bg-color mr-0 ml-auto"
+        color="#1aa179"
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+      <v-data-table
+      class="my-bg-color"
+        style="width: 100%;
+        border-collapse: collapse;
+        white-space: nowrap;"
+        :headers="headers"
+        :items="desserts"
+        :search="search"
+        :sort-by="['post_day']"
+        :sort-desc="[true]"
+        hide-default-footer
+        dense
+        loading-text="$vuetify.dataIterator.loadingText"
+        mobile-breakpoint="50"
+      >
+      <template #item.title="{ item }">
+        <a target="_self" :href="item.url" class="v-breadcrumbs__item {{ text_color }} my-border-bottom">
+        <a target="_self" :href="item.url" class="v-breadcrumbs__item {{ text_color }}">
+          {% comment %} <v-icon size="22px">mdi-book-open-page-variant</v-icon> {% endcomment %}
+      [[ item.title ]]
+    </a>
+    </template>    
+
+    <template #item.category="{ item }" class='{ item.text_color_rgb }'>
+        <a :class=[[item.text_color_rgb]]>
+            [[item.category]]
+    </a>
+    </template>    
+
+    
+
+
+    </v-data-table>
+    </v-card>
+    <v-divider></v-divider>
+
+  </template>
+
+
+
+  
+
+
 
 
 {% endblock %}

@@ -151,11 +151,13 @@ class TopView(MyListView): # TopView
     template_name = 'book/base.html'
 
     def get_context_data(self, *args, **kwargs):
-        context = {}
+        context = super().my_get_context_data(self, *args, **kwargs)
+        context['book_list'] = Book.objects.filter(fin=1)
         return context
 
     def get_queryset(self):
-        return
+        q = Book.objects.filter(fin=1).order_by("post_day")
+        return q
 
 class TopquasarView(MyListView): # TopView
     model = Book
@@ -224,9 +226,6 @@ class ArticlesView(MyListView):
         template_name = self.my_get_template_names(self, *args, **kwargs)
         return template_name
     
-
-
-
 class BookView(ListView):
     model = Book
     template_name = 'book/books.html'
@@ -234,66 +233,164 @@ class BookView(ListView):
     # form_class = BookForm
     # object_list = Book
     def get_context_data(self, *args, **kwargs):
-        context = {}
-
-        # ----閲覧数で必要かも（セッション）----
-        # if 'office' in self.request.session:
-        #     print('セッション名officeは存在します')
-        #     del self.request.session['office']
-        # else:
-        #     self.request.session['office'] = "office"
-
-        context['DEBUG'] = settings.DEBUG
-        
-
-
-
-        # ---- 書籍一覧の検索フォーム使うときに必要 ----
         # if self.request.method != "POST":
         #     context = super().get_context_data()
         # else:
         #     context = self.context
         #     return context
         # context = super().get_context_data()
+        context = {}
+        data_info = self.get_date()
+        context['view'] = [0,1,0,1,1] # [ブログ紹介, メインコンテンツ+サイドバー, メインコンテンツのみ, トピックス, メインコンテンツタイトル]
+        context['category_y'] = data_info['category_y']
+        context['category_m'] = data_info['category_m']
+        context['category_d'] = data_info['category_d']
+        context['myform'] = [BookForm(), CategoryForm() ,AuthorForm(), PublisherForm()]
+        context['status_book_info'] = 0
+        book_obj = Book.objects
+        try:
+            context['book_info'] = book_obj.get(post_day=datetime.date(int(data_info['category_y']), int(data_info['category_m']), int(data_info['category_d'])))
+        except:pass
+        # context['form_author'] = AuthorForm()
+        # context['form_category'] = CategoryForm()
+        try:
+            context['template_pages'] = [()]
+            context['date'] = data_info['data_info']
+        except:
+            pass
+        try:
+            if context['date'] != None:
+                context['book_info'] = book_obj.get(post_day=context['date'])
+                context['status_book_info'] = 1
+        except:
+            pass
+        try:
+            context['book_list'] = book_obj.filter(fin=1)
+            context['contents_text'] = context['book_info'].contents
+            list_ = []
+            count = 0
+            for text_ in context['contents_text'].split('<')[1:]:
+                count += 1
+                text_ = text_.split(">")
+                # text_[0]
+                contents_split = text_[1].splitlines()
+                if text_[0] == "blockquote":
+                    contents_ = "<a>" + contents_split[0] + "<br>" + "</a>"
+                    for text_el in contents_split[1:]:
+                        if text_el == "":
+                            continue
+                        contents_ = contents_ + "<a>"+ text_el +"<br>" + "</a>"
+                        # print("contents_split", contents_split)
+                else:
+                    contents_ = contents_split[0]
+                    for text_el in contents_split[1:]:
+                        if text_el == "":
+                            continue
+                        contents_ = contents_ + text_el
+                        # print("contents_split", contents_split)
+
+                text_[1] = contents_
+                if len(text_) == 3:
+                    text_[2] = text_[2].splitlines()[0]
+                list_.append(text_)
+            context['book_info_contents'] = list_
+            count = 0
+            count_subtitle = 0
+            for text_ in list_:
+                count += 1
+                if text_[0] == "subtitle":
+                    count_subtitle += 1
+                    if count_subtitle == 3:
+                        break
+            context['count_subtitle'] = count
+        except:
+            pass
+        if 'office' in self.request.session:
+            print('セッション名officeは存在します')
+            del self.request.session['office']
+        else:
+            self.request.session['office'] = "office"
+        context['DEBUG'] = settings.DEBUG
+        
+        if context['date'] != None:
+            if (context['book_info'].id) != book_obj.all().count():
+                context['book_info_next'] = book_obj.get(id=(context['book_info'].id+1))
+            if (context['book_info'].id) != 1:
+                context['book_info_prev'] = book_obj.get(id=(context['book_info'].id-1))
+
+
+
+
         # book_obj = Book.objects.filter(fin=1)
+
         # index_list = ['title', 'post_day', 'author_info', 'category_info', 'amazon_url_text', 'book_img_url', 'contents_synopsis']
         # context['book_json'] = [Book.to_dict(i, index_list, self) for i, obj_ in enumerate(book_obj)]
+        
+
         # rdict = {}
         # exec("result_and = {}".format(result_q), locals(), rdict)
         # result = Book.objects.select_related().filter(rdict["result_and"])
+        
+        
+
         return context
 
+    def to_dict(self, *args, **kwargs):
+        return {'user_id':self.user_id,
+                'password':self.password}
 
 
     def get_queryset(self, *args, **kwargs):
         # ■■■ urlの文字列で、クエリセットの分岐 ■■■
-        return
+        data_info = self.get_date()
+        if data_info['category_d'] != None:
+            q = Book.objects.filter(post_day=datetime.date(int(data_info['category_y']), int(data_info['category_m']), int(data_info['category_d'])))
+        else:
+            q =  Book.objects.filter(fin=1)
+        return q
 
     def get_template_names(self, *args, **kwargs):
         # ■■■ urlの文字列で、テンプレートの分岐 ■■■
-        url_path=self.request.path
-        url_split = url_path.split('/')
-        
+        data_info = self.get_date()
         template_name = 'book/books_err.html'
-
-        if len(url_split) == 3:
-            try:
-                if url_split[1] == "books":
-                    template_name = 'book/books.html'
-            except:pass
-
-        elif len(url_split) == 4:
-            datetime_info = datetime.datetime.strptime(url_split[2], '%Y-%m-%d')
-            date_info = datetime.date(int(datetime_info.year), int(datetime_info.month), int(datetime_info.day))
-            
-            try:
-                if Book.objects.get(post_day=date_info):
-                    template_name = 'book/books_info.html'
-                print("template_name", template_name)
-
-            except:pass
+        try:
+            if data_info['data_info'] == None:
+                template_name = 'book/books.html'
+                return template_name
+        except:
+            pass
+        try:
+            if Book.objects.get(post_day=datetime.date(int(data_info['category_y']), int(data_info['category_m']), int(data_info['category_d']))):
+                template_name = 'book/books_info.html'
+        except:
+            pass
+            print(datetime.date(int(data_info['category_y']), int(data_info['category_m']), int(data_info['category_d'])))
         return template_name
     
+    def get_date(self, *args, **kwargs):
+        # ■■■ urlから日付データ取得 ■■■
+        data_info = {}
+        data_info['category_y'] = None
+        data_info['category_m'] = None
+        data_info['category_d'] = None
+        data_info['data_info'] = None
+        try:
+            date_kwd = self.kwargs['data_info']
+            data_info['data_info'] = date_kwd
+            date_split = re.split(r"[-]", date_kwd)
+            if len(str(date_split[0])) == 4:
+                category_y = date_split[0]
+                data_info['category_y'] = category_y
+                if len(str(date_split[1])) == 2:
+                    category_m = date_split[1]
+                    data_info['category_m'] = category_m
+                    if len(str(date_split[2])) == 2:
+                        category_d = date_split[2]
+                        data_info['category_d'] = category_d    
+                        data_info['data_info'] = "{}-{}-{}".format(category_y, category_m, category_d)
+            return data_info
+        except:
+            return data_info
 
 
 
@@ -318,16 +415,23 @@ class BookView(ListView):
     #     self.request.POST.clear()
     #     return render(request, 'hello/index.html', self.params)
 
-
-'''
     def post(self, request, *args, **kwargs):
-
-        # ---- 書籍一覧の検索フォーム使うときに必要 ----
-        # 一覧表示からの遷移や、確認画面から戻った時
+            # 一覧表示からの遷移や、確認画面から戻った時
         context = self.get_context_data(self, request, *args, **kwargs)
         # context['myform'] = [BookForm(request.POST), CategoryForm(request.POST) ,AuthorForm(request.POST)]
         data_info = self.get_date()
+        
+
+
         # con22 = self.context
+
+
+
+        print("■■■■■resultresultresultresultresultresultresult■■■■")
+
+
+
+
         # context['myform'] = [BookForm(request.POST), CategoryForm(request.POST) ,AuthorForm(request.POST)]
         # context2 = context['myform'][1].__dict__
         # if 'issue_low_year' in request.POST and 'issue_low_month' in request.POST and 'issue_low_day' in request.POST:
@@ -335,6 +439,8 @@ class BookView(ListView):
         print(request.POST)
 
         # aaa = BookForm(request.POST)
+        # aa
+
         # sessionに値がある場合、その値でクエリ発行する。
         # if 'form_value' in self.request.session and self.request.session['form_value'] != None:
         # form_value = self.request.session['form_value']
@@ -457,15 +563,9 @@ class BookView(ListView):
             
             return render(request, 'book/books.html', context)
 
-        # ---- ↑↑↑↑書籍一覧の検索フォーム使うときに必要↑↑↑↑ ----
+
 
         # コンテキストにフォームのオブジェクトを指定してレンダリング
-'''
-
-
-
-
-
 
 
 
@@ -521,7 +621,61 @@ class OthersView(MyListView,):
     context_object_name = 'other_list'
 
     def get_context_data(self, *args, **kwargs):
-        context={}
+        # if self.request.method != "POST":
+        #     context = super().get_context_data()
+        # else:
+        #     context = self.context
+        #     return context
+        # context = super().get_context_data()
+        context = {}
+        data_info = self.get_date()
+        url_path = self.request.path
+        url_split = url_path.split('/')
+
+        other_obj = Other.objects.all()
+
+        try:
+            context['book_info'] = Other.objects.get(post_day=url_split[2])
+        except:pass
+
+        try:
+            context['template_pages'] = [()]
+            context['date'] = data_info['data_info']
+        except:
+            pass
+        try:
+            context['contents_text'] = context['book_info'].contents
+            list_ = []
+            count = 0
+            for text_ in context['contents_text'].split('<')[1:]:
+                count += 1
+                text_ = text_.split(">")
+                # text_[0]
+                contents_split = text_[1].splitlines()
+                contents_ = contents_split[0]
+                for text_el in contents_split[1:]:
+                    contents_ = contents_ + "<br>" + text_el
+                text_[1] = contents_
+                if len(text_) == 3:
+                    text_[2] = text_[2].splitlines()[0]
+                list_.append(text_)
+            context['book_info_contents'] = list_
+            count = 0
+            count_subtitle = 0
+            for text_ in list_:
+                count += 1
+                if text_[0] == "subtitle":
+                    count_subtitle += 1
+                    if count_subtitle == 3:
+                        break
+            context['count_subtitle'] = count
+        except:
+            pass
+        # if 'office' in self.request.session:
+        #     print('セッション名officeは存在します')
+        #     del self.request.session['office']
+        # else:
+        #     self.request.session['office'] = "office"
         context['DEBUG'] = settings.DEBUG
 
                 
@@ -546,33 +700,24 @@ class OthersView(MyListView,):
 
     def get_template_names(self, *args, **kwargs):
         # ■■■ urlの文字列で、テンプレートの分岐 ■■■
-        url_path=self.request.path
-        url_split = url_path.split('/')
+        data_info = self.get_date()
+        template_name = 'book/err.html'
+        print("data_info['data_info']", data_info['data_info'])
         
-        template_name = 'book/books_err.html'
-
-        if len(url_split) == 3:
-            try:
-                if url_split[1] == "others":
-                    template_name = 'book/others.html'
-            except:pass
-
-        elif len(url_split) == 4:
-            datetime_info = datetime.datetime.strptime(url_split[2], '%Y-%m-%d')
-            date_info = datetime.date(int(datetime_info.year), int(datetime_info.month), int(datetime_info.day))
-            
-            try:
-                if Other.objects.get(post_day=date_info):
-                    template_name = 'book/others_info.html'
-                print("template_name", template_name)
-
-            except:pass
+        try:
+            if data_info['data_info'] == None:
+                template_name = 'book/others.html'
+                return template_name
+        except:
+            pass
+        try:
+            if Other.objects.get(post_day=datetime.date(int(data_info['category_y']), int(data_info['category_m']), int(data_info['category_d']))):
+                template_name = 'book/others_info.html'
+        except:
+            pass
+            print(datetime.date(int(data_info['category_y']), int(data_info['category_m']), int(data_info['category_d'])))
         return template_name
-
-
-
-        
-            
+    
     def get_date(self, *args, **kwargs):
         # ■■■ urlから日付データ取得 ■■■
         data_info = {}

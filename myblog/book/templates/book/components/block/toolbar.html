@@ -24,11 +24,14 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon fab dark class="my-text-color-light-glay" href="https://twitter.com/BOOK_IC">
+      <v-btn icon fab dark color="#55acee" href="https://twitter.com/BOOK_IC">
         <v-icon size="32" >mdi-twitter</v-icon>
       </v-btn>
-      <v-btn icon fab dark class="my-text-color-light-glay me-5" href="https://www.instagram.com/BOOK_I.C/">
-        <v-icon size="32" >mdi-instagram</v-icon>
+      <v-btn icon fab dark class="me-5" href="https://www.instagram.com/BOOK_I.C/">
+        {% comment %} <v-icon size="32" >mdi-instagram</v-icon> {% endcomment %}
+        <img height="32px" width="32px"
+          src="{% static "static/instagram.svg" %}">
+        </img>
       </v-btn>
 
 
@@ -169,14 +172,28 @@
       <v-divider class="my-2"></v-divider>
       
 
+      {% comment %} 
 
-
-      <v-btn icon fab class="my-text-color" href="https://twitter.com/BOOK_IC">
+      <v-btn icon fab color="#55acee" href="https://twitter.com/BOOK_IC">
         <v-icon size="28" >mdi-twitter</v-icon>
       </v-btn>
       <v-btn icon fab class="my-text-color me-5" href="https://www.instagram.com/BOOK_I.C/">
         <v-icon size="28" >mdi-instagram</v-icon>
       </v-btn>
+
+ {% endcomment %}
+
+      <v-btn icon fab dark color="#55acee" href="https://twitter.com/BOOK_IC">
+        <v-icon size="28" >mdi-twitter</v-icon>
+      </v-btn>
+      <v-btn icon fab dark class="me-5" href="https://www.instagram.com/BOOK_I.C/">
+        {% comment %} <v-icon size="32" >mdi-instagram</v-icon> {% endcomment %}
+        <img height="28px" width="28px"
+          src="{% static "static/instagram.svg" %}">
+        </img>
+      </v-btn>
+
+
 
       
 {% comment %} 

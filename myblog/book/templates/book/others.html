@@ -34,7 +34,8 @@
 
   <!-- card -->
   <div v-show="show_card">
-    {% include 'block/card_small_others.html' %}
+    {% comment %} {% include 'block/card_small_others.html' %} {% endcomment %}
+    {% include 'block/card_judge.html' %}
   </div>
 
 
@@ -76,8 +77,9 @@
           >
 
           <template #item.title="{ item }" class="">
-            <a target="_self" :href="item.url" class="v-breadcrumbs__item {{ text_color }} my-border-bottom">
-            <v-icon size="22px">mdi-checkbox-blank-circle-outline</v-icon>
+            {% comment %} <a target="_self" :href="item.url" class="v-breadcrumbs__item {{ text_color }} my-border-bottom"> {% endcomment %}
+            <a target="_self" :href="item.url" class="v-breadcrumbs__item {{ text_color }}">
+              {% comment %} <v-icon size="22px">mdi-checkbox-blank-circle-outline</v-icon> {% endcomment %}
           [[ item.title ]]
         </a>
         </template> 

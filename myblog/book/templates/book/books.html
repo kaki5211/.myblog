@@ -106,7 +106,8 @@
 
   <!-- card -->
   <div v-show="show_card">
-  {% include 'block/card_small.html' %}
+    {% comment %} {% include 'block/card_small.html' %} {% endcomment %}
+    {% include 'block/card_judge.html' %}
   </div>
 
 
@@ -146,7 +147,8 @@
       >
       <template #item.title="{ item }">
         <a target="_self" :href="item.url" class="v-breadcrumbs__item {{ text_color }} my-border-bottom">
-        <v-icon size="22px">mdi-book-open-page-variant</v-icon>
+        <a target="_self" :href="item.url" class="v-breadcrumbs__item {{ text_color }}">
+          {% comment %} <v-icon size="22px">mdi-book-open-page-variant</v-icon> {% endcomment %}
       [[ item.title ]]
     </a>
     </template>    

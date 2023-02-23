@@ -1,0 +1,24 @@
+{% load static %}
+
+
+
+
+
+
+  {% if url_sub == "ホーム" %}
+    {% with items=book_other_list %}
+      {% include 'block/bottom_navigation_.html' with items=book_other_list item_info="" %}
+    {% endwith%}
+
+  {% elif url_sub == "書籍一覧" %}
+    {% with items=book_list %}
+      {% include 'block/bottom_navigation_.html' with item_prev=book_info_prev item_next=book_info_next sub_text="書籍一覧" mdi_bottom_navigation="mdi-bookshelf" url_='book:book_info' url_2='book:book' %}
+    {% endwith%}
+
+    {% elif url_sub == "その他 記事" %}
+      {% with items=other_list %}
+        {% include 'block/bottom_navigation_.html' with item_prev=other_info_prev item_next=other_info_next sub_text="その他 記事一覧" mdi_bottom_navigation="mdi-dots-horizontal-circle-outline" url_='book:others_info' url_2='book:others' %}
+      {% endwith%}
+  {% endif %}
+
+

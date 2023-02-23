@@ -27,19 +27,19 @@
       {% include 'book_info/contents_subtitle.html' with text="小説の感想ブログ"  ty=2 %}
       {% comment %} {% include 'book_info/contents_text.html' with text="　主に、小説の感想ブログです。「書籍一覧」に小説の感想を、「その他 記事」に小説以外の気まぐれ記事を投稿しています。" %} {% endcomment %}
       <div class="mx-auto px-0 py-7 py-lg-10 text-left">
-        <a class="text-my-text-color text-h6_5 text-md-h6 mb-0">
-          　主に、小説の感想ブログです。「
-          <a href="{% url 'book:book' %}" class=" text-h6_5 text-md-h6 mb-0">書籍一覧</a>
-          <a class="text-my-text-color text-h6_5 text-md-h6 mb-0">」に小説の感想を、「</a>
-          <a href="{% url 'book:others' %}" class=" text-h6_5 text-md-h6 mb-0">その他 記事</a>
-          <a class="text-my-text-color text-h6_5 text-md-h6 mb-0">」に小説以外の気まぐれ記事を投稿しています。</a>
-        </a>
+        <a class="text-my-text-color text-my-text-color text-h7 text-md-h6 mb-0">
+          　主に、小説の感想ブログです。「        </a>
+
+          <a href="{% url 'book:book' %}" class=" text-my-text-color text-h7 text-md-h6 mb-0">書籍一覧</a>
+          <a class="text-my-text-color text-my-text-color text-h7 text-md-h6 mb-0">」に小説の感想を、「</a>
+          <a href="{% url 'book:others' %}" class=" text-my-text-color text-h7 text-md-h6 mb-0">その他 記事</a>
+          <a class="text-my-text-color text-my-text-color text-h7 text-md-h6 mb-0">」に小説以外の気まぐれ記事を投稿しています。</a>
       </div>
       {% include 'book_info/contents_text.html' with text="　質の高い感想を書きたい思いで、BOOK I.C. （Book Impression Create = 本の感想を創造する） という名前にしました。" %}
 
       {% include 'book_info/contents_subtitle.html' with text="個人で運用"  ty=3 %}
       {% include 'book_info/contents_text.html' with text="　このブログはPythonのフレームワーク「Django」で作成しています。フロントはJavascriptフレームワーク「Vuetify」を採用し、不足部分のcssやjavascriptは自分で組んでいます。サーバー,ドメイン,も個人で選定し契約しています。" %}
-      {% include 'book_info/contents_text.html' with text="　サーバー落ちてたりしたらすみません。その時はパワー上げるために２日くらいつながらない時があるかもしれません。" %} 
+      {% comment %} {% include 'book_info/contents_text.html' with text="　サーバー落ちてたりしたらすみません。その時はパワー上げるために２日くらいつながらない時があるかもしれません。" %}  {% endcomment %}
       
       {% include 'book_info/contents_title.html' with text="BOOK I.C.今後について" ty=1 %}
 

@@ -78,7 +78,7 @@
             length:2,
             lists: [],
             displayLists: [],
-            pageSize: 5,
+            pageSize: 7,
             item_google: "", 
             list_children: "",
             value: 0,
@@ -90,15 +90,64 @@
             slides: 5,
             isHidden: true,
             model: 0,
+{% comment %} 
+
+            topixs: [
+            {% for item in book %}
+            { post_day: '{{ item.post_day | safe }}', title: '{{ item.title }}'},
+            {% endfor %}
+            ],
+
+
+            {% endcomment %}            
+            
+
+            topixs: [
+            {% load split_tags %}
+              {% for item in book_other_list %}
+              {% if forloop.counter <= 6 %}
+                {% with item.category_info.color_hex|split:'#' as color_ %}
+                  {
+                    title: '{{ item.title }}',
+                    category: '{{ item.category_info.get_category_display }}',
+                    author: '{{ item.author_info }}',
+                    issue: '{{ item.publisher_info }}',
+                    post_day: '{{ item.post_day | safe}}',
+                    {% if item.author_info is not None %}
+                    url:"{% url 'book:book_info' data_info=item.post_day %}",
+                    {% else %}
+                    url:"{% url 'book:others_info' data_info=item.post_day %}",
+                    {%endif%}
+                    count: "{{ forloop.counter}}",
+                    
+                  },
+                {% endwith %}
+              {% endif %}
+              {% endfor %}
+              ],
+
+
+
+
+
+
+
+
+            headers_topixs: [
+            { text: '投稿日', value: 'post_day', sortable: true },
+            { text: 'タイトル', value: 'title',},
+            ],
+
             obj_ranking: [
             {% for item in book %}
               { title: '{{ item.title }}', url: '{{ item.book_img_url|safe}}'},
             {% endfor %}
             ],
-    
-            {% for a in books_others %}
+
+            {% for a in book_other_list %}
             show{{ forloop.counter }}: false,
             {% endfor %}
+
             show_card: true,
             show_list: false,
             hover: false,
@@ -113,25 +162,21 @@
               { text: '著者', value: 'author' },
               { text: '出版社', value: 'issue' },
             ],
+
             desserts: [
             {% load split_tags %}
               {% for item in book_list %}
-
               {% with item.category_info.color_hex|split:'#' as color_ %}
+                {
+                  title: '{{ item }}',
+                  category: '{{ item.category_info.get_category_display }}',
+                  author: '{{ item.author_info }}',
+                  issue: '{{ item.publisher_info }}',
+                  post_day: '{{ item.post_day | safe}}',
+                  url:"{% url 'book:book_info' data_info=item.post_day %}",
+                  text_color_rgb:'text-color-{{ color_.1 }}',
 
-
-
-
-              {
-                title: '{{ item }}',
-                category: '{{ item.category_info.get_category_display }}',
-                author: '{{ item.author_info }}',
-                issue: '{{ item.publisher_info }}',
-                post_day: '{{ item.post_day | safe}}',
-                url:"{% url 'book:book_info' data_info=item.post_day %}",
-                text_color_rgb:'text-color-{{ color_.1 }}',
-
-              },
+                },
               {% endwith %}
               {% endfor %}
               ],

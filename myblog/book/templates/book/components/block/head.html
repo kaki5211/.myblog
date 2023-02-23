@@ -112,7 +112,7 @@
     {% elif el_ == 2 %}
         {{breadcrumb.1.title_info}} | BOOK I.C.
     {% elif el_ == 3 %}
-        【感想ブログ】 {{breadcrumb.2.title_info}} | BOOK I.C.
+        【本 感想ブログ】 {{breadcrumb.2.title_info}} | BOOK I.C.
     {% endif %}
     {% endwith %}
     " />
@@ -136,6 +136,13 @@
     "/>
     {% endif %}
     {% endwith %}
+
+    <meta name="keywords" content="book-ic,本,本感想,感想,書評,書店,小説,文庫,ブログ,個人ブログ,読書,書籍,記録,ネタバレ読書,読書記録">
+
+    <!-- SEO サムネイル画像-->
+    <meta name="thumbnail" content="{% static "static/book-ic_picture.svg" %}" />
+
+    
 
 
     <meta property="og:site_name" content="BOOK I.C." />

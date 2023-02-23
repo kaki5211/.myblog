@@ -1,0 +1,28 @@
+{% load static %}
+
+
+
+
+
+
+  {% if title_info == "ホーム" %}
+    {% comment %} {% with items=book_other_list %} {% endcomment %}
+      {% comment %} {% include 'block/card_.html' with items=book_other_list item_info="" %} {% endcomment %}
+    {% comment %} {% endwith%} {% endcomment %}
+    {% with items=book_list %}
+      {% include 'block/card_.html' with items=book_list item_info=book_info %}
+    {% endwith%}
+    
+
+  {% elif title_info == "書籍一覧" %}
+    {% with items=book_list %}
+      {% include 'block/card_.html' with items=book_list item_info=book_info %}
+    {% endwith%}
+
+    {% elif title_info == "その他 記事" %}
+      {% with items=other_list %}
+        {% include 'block/card_.html' with items=other_list item_info=other_info%}
+      {% endwith%}
+  {% endif %}
+
+

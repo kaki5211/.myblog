@@ -16,6 +16,7 @@ import platform
 
 
 
+from django.conf import settings
 
 
 
@@ -24,13 +25,12 @@ import platform
 
 
 def common(request):
-    # pf = platform.system()    
-    
+    # pf = platform.system()
+
+    # ----  基本リスト取得-----
     context = {}
-    # context['primary'] = Category.objects.all().first()
-    # context['date_now'] = datetime.datetime.now()
-    context['category'] = Category.objects.all().order_by('category')
-    context['author_Aa'] = [Author.objects.filter(word_oder='Aa').order_by("author"),
+    context['category_list'] = Category.objects.all().order_by('category')
+    context['author_list_Aa'] = [Author.objects.filter(word_oder='Aa').order_by("author"),
                                 Author.objects.filter(word_oder='Ka').order_by("author"),
                                 Author.objects.filter(word_oder='Sa').order_by("author"),
                                 Author.objects.filter(word_oder='Ta').order_by("author"),
@@ -41,35 +41,27 @@ def common(request):
                                 Author.objects.filter(word_oder='Ra').order_by("author"),
                                 Author.objects.filter(word_oder='Wa').order_by("author")
                                 ]
-    # context['others'] = Other.objects.filter(fin=1)
-    context['others'] = Other.objects.all().filter(fin=1).order_by('-post_day')
+    context['other_list'] = Other.objects.all().filter(fin=1).order_by('-post_day')
 
-    context['author'] = Author.objects.all()
-    context['book'] = Book.objects.filter(fin=1).order_by('-post_day')
+    context['author_list'] = Author.objects.all()
+    context['book_list'] = Book.objects.filter(fin=1).order_by('-post_day')
 
-    dict_ = {x:x.post_day for x in context['book']} | {x:x.post_day for x in context['others']}
+    dict_ = {x:x.post_day for x in context['book_list']} | {x:x.post_day for x in context['other_list']}
     list_ = sorted(dict_.items(), key=lambda x:x[1] ,reverse=True)
     list_to_dict_ = dict(list_)
-    context['books_others'] = list_to_dict_.keys()
+    context['book_other_list'] = list_to_dict_.keys()
 
-        
-        
+    context['publisher_list'] = Publisher.objects.all()
 
-    # context['author'] = []
-    # set_count = [Book.objects.filter(author_info=a).count for a in Author.objects.all()]
-    # if pf == 'Windows':
-    #     context['google_analytics'] = 0
-    # else:
-    #     context['google_analytics'] = 1
-        
-    # for a in range(1, len(Author.objects.all())):
-        # context['author'].append(Author.objects.values()[a] | {'category_count':set_count[a-1]})
+
+    context['book_info'] = ""
+    context['other_info'] = ""
+
+    #-------------
 
 
 
 
-    context['publisher'] = Publisher.objects.all()
-    # context['templates'] = Templates.objects.all()
 
     #---  パンくずリスト作成　---
     url_path = request.path
@@ -77,6 +69,7 @@ def common(request):
     url_path = ""
     url_dict = {}
     url_dict = {"ホーム": "{0}://{1}/".format(request.scheme, request.get_host())}
+    context['title_info'] = "ホーム"
     url_list = [{
                 "title_info": "ホーム",
                 "url_path_":"{0}://{1}/".format(request.scheme, request.get_host()),
@@ -85,6 +78,9 @@ def common(request):
 
     flag = 0
     url_path = "{0}://{1}/".format(request.scheme, request.get_host())
+
+    context["url_sub"] = ""
+
     try:
 
         context["url_main"] = None
@@ -93,31 +89,21 @@ def common(request):
             if item == "" :
                 continue
             url_path += item + "/"
-
-            if flag != 0:
+            if flag != 0:                
                 if context['title_info']  == "書籍一覧":
+                    context['book_info'] = Book.objects.get(post_day=item)
                     item = Book.objects.get(post_day=item).title
                     context['title_info'] = item
                     icon = "mdi-book-open-page-variant"
 
+
                 elif context['title_info']  == "その他 記事":
+                    context['other_info'] = Other.objects.get(post_day=item)
                     item = Other.objects.get(post_day=item).title
-                    icon = "mdi-checkbox-blank-circle-outline"
+                    # icon = "mdi-checkbox-blank-circle-outline"
+                    icon = ""
                     context['title_info'] = item
-                    
-                # context["url_sub"] = item
-                # elif item == "book-ic":
-                #     context['title_info']  = "BOOK I.C.について"
-                # elif item == "profile":
-                #     context['title_info']  = "プロフィール"
-                # elif item == "books":
-                #     context['title_info']  = "書籍一覧"
-                # elif item == "others":
-                #     context['title_info']  = "その他 記事"
-                # elif item == "privacypolicy":
-                #     context['title_info']  = "プライバシーポリシー"
-                # elif item == "contact":
-                #     context['title_info']  = "問い合わせ"
+
 
 
                 url_list.append({
@@ -126,6 +112,7 @@ def common(request):
                     "icon_":icon,
                     })
                 context['breadcrumb'] = url_list # パンくずリスト完成
+                break
                 return context
 
             if item == "book":
@@ -169,6 +156,149 @@ def common(request):
     except:
         context['breadcrumb'] = url_list
         pass
+
+    # ------------
+
+
+
+
+    # ----  book_info_next and book_info_prev 作成 （book_info and other_info） ---- #
+    if context['other_info'] != None and context['other_info'] != "":
+        context['other_info_prev'] = ""
+        context['other_info_next'] = ""
+        flag = False
+        for item in context['other_list']:
+            if flag:
+                context['other_info_prev'] = item
+                break
+            if item.title == context['other_info'].title:
+                flag = True
+                continue
+            context['other_info_next'] = item    
+
+    if context['book_info'] != None and context['book_info'] != "":
+        context['book_info_prev'] = ""
+        context['book_info_next'] = ""
+        flag = False
+        for item in context['book_list']:
+            print(item)
+            if flag:
+                context['book_info_prev'] = item
+                break
+            if item.title == context['book_info'].title:
+                flag = True
+                continue
+            context['book_info_next'] = item    
+
+
+    # --------------------------------------------------------------------------------
+
+
+
+    # ----- contents text ------
+
+
+    if context["url_sub"] == "書籍一覧":
+        item = context['book_info']
+    elif context["url_sub"] == "その他 記事":
+        item = context['other_info']
+
+        
+    try:
+        context['contents_text'] = item.contents
+        list_ = []
+        count = 0
+        for text_ in context['contents_text'].split('<')[1:]:
+            count += 1
+            text_ = text_.split(">")
+            # text_[0]
+            contents_split = text_[1].splitlines()
+            if text_[0] == "blockquote":
+                contents_ = "<a>" + contents_split[0] + "<br>" + "</a>"
+                for text_el in contents_split[1:]:
+                    if text_el == "":
+                        continue
+                    contents_ = contents_ + "<a>"+ text_el +"<br>" + "</a>"
+                    # print("contents_split", contents_split)
+            else:
+                contents_ = contents_split[0]
+                for text_el in contents_split[1:]:
+                    if text_el == "":
+                        continue
+                    contents_ = contents_ + text_el
+                    # print("contents_split", contents_split)
+
+            text_[1] = contents_
+            if len(text_) == 3:
+                text_[2] = text_[2].splitlines()[0]
+            list_.append(text_)
+        context['book_info_contents'] = list_
+        count = 0
+        count_subtitle = 0
+        for text_ in list_:
+            count += 1
+            if text_[0] == "subtitle":
+                count_subtitle += 1
+                if count_subtitle == 3:
+                    break
+        context['count_subtitle'] = count
+    except:
+        pass
+
+
+
+
+        '''
+
+        context['contents_text'] = context['book_info'].contents
+        list_ = []
+        count = 0
+        for text_ in context['contents_text'].split('<')[1:]:
+            count += 1
+            text_ = text_.split(">")
+            # text_[0]
+            contents_split = text_[1].splitlines()
+            if text_[0] == "blockquote":
+                contents_ = "<a>" + contents_split[0] + "<br>" + "</a>"
+                for text_el in contents_split[1:]:
+                    if text_el == "":
+                        continue
+                    contents_ = contents_ + "<a>"+ text_el +"<br>" + "</a>"
+                    # print("contents_split", contents_split)
+            else:
+                contents_ = contents_split[0]
+                for text_el in contents_split[1:]:
+                    if text_el == "":
+                        continue
+                    contents_ = contents_ + text_el
+                    # print("contents_split", contents_split)
+
+            text_[1] = contents_
+            if len(text_) == 3:
+                text_[2] = text_[2].splitlines()[0]
+            list_.append(text_)
+        context['book_info_contents'] = list_
+        count = 0
+        count_subtitle = 0
+        for text_ in list_:
+            count += 1
+            if text_[0] == "subtitle":
+                count_subtitle += 1
+                if count_subtitle == 3:
+                    break
+        context['count_subtitle'] = count
+    except:
+        pass
+
+
+
+        '''
+
+
+    # --------------------------------------------------------------------------------
+
+    context['DEBUG'] = settings.DEBUG
+    
     
     return context
 

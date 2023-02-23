@@ -3,7 +3,10 @@
 
 
 <v-img
-src="{{ img_url | safe}}"
+{% comment %} src="{{ img_url | safe}}" {% endcomment %}
+{% comment %} src="/media/{{ img_url | safe}}" {% endcomment %}
+
+src={% if amazon_url_text != "" %}"{{ img_url | safe}}"{%else%}"/media/{{ img_url | safe}}"{%endif%}
 {% comment %} lazy-src="" {% endcomment %}
 {% comment %} aspect-ratio="1" {% endcomment %}
 class="grey lighten-2 mb-3 mt-3 mx-auto"
@@ -11,7 +14,10 @@ style="max-width:360px; width: auto;"
 transition="scale-transition"
 center
 >
-<a href="{% if book_info.amazon_url_text is not None %}{% url 'book:book_info' book_info.post_day %}{%else%}{% url 'book:others_info' book_info.post_day %}{%endif%}" class="my-w-100 my-h-100" style="position: absolute">
+
+
+
+<a href="{% if amazon_url_text != "" %}{% url 'book:book_info' item.post_day %}{%else%}{% url 'book:others_info' item.post_day %}{%endif%}" class="my-w-100 my-h-100" style="position: absolute">
   <div>
   
   </div>
@@ -31,7 +37,7 @@ center
 </v-row>
 </template>
 
-{% if amazon_url_text is not NONE %}
+{% if amazon_url_text != "" %}
 <div class="my-h-100 my-w-100">
 <a d-flex class="my-h-100 my-w-100">
 </a>
