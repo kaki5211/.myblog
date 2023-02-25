@@ -80,12 +80,7 @@
 
     
     
-    {% with breadcrumb|length as el_ %}
-        {% if el_ == 1 %}<meta property="og:title" content="BOOK I.C. ～本の感想を創造するブログ～"/>
-        {% elif el_ == 2 %}<meta property="og:title" content="{{breadcrumb.1.title_info}} | BOOK I.C."/>
-        {% elif el_ == 3 %}<meta property="og:title" content="【本 感想ブログ】 {{breadcrumb.2.title_info}} | BOOK I.C."/>
-        {% endif %}
-    {% endwith %}
+
 
 
 
@@ -136,7 +131,12 @@
 {% else %}<meta property="og:type" content="article"/>
 {% endif %}
 <!-- ２．title -->
-<meta property="og:title" content="(2)ページタイトル" />
+{% with breadcrumb|length as el_ %}
+    {% if el_ == 1 %}<meta property="og:title" content="BOOK I.C. ～本の感想を創造するブログ～"/>
+    {% elif el_ == 2 %}<meta property="og:title" content="{{breadcrumb.1.title_info}} | BOOK I.C."/>
+    {% elif el_ == 3 %}<meta property="og:title" content="【本 感想ブログ】 {{breadcrumb.2.title_info}} | BOOK I.C."/>
+    {% endif %}
+{% endwith %}
 <!-- ３．ページ説明文 -->
 {% with breadcrumb|length as el_ %}
     {% if el_ == 1 %}<meta property="og:description" content="BOOK I.C. ～本の感想を創造するブログ～,本の感想を書くブログです！。小説を読み終えた人向けに、思ったこと等の感想をこのブログにUPしています！。タグ | 小説,文庫,ブログ,感想,読書,書評,書籍,記録,ネタバレ | BOOK I.C."/>
@@ -153,8 +153,9 @@
 <!-- ６．その他 -->
 {% comment %} <meta property="article:publisher" content="(6)FacebookページのURL" /> {% endcomment %}
 <!-- ７．表示画像 -->
-<meta property="og:image" content="{% static "static/book-ic_icon.svg" %}" />
+<meta property="og:image" content="{% static "static/book-ic.png" %}" />
 
 <!-- Twitterカードの設定 -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@BOOK_IC" />
+
