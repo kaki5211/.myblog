@@ -11,13 +11,13 @@ import datetime
 from .models import Book, Category, Author, Publisher, Series, Templates, Other
 
 
+
 import os
 import platform
 
 
 
 from django.conf import settings
-
 
 
 
@@ -95,6 +95,17 @@ def common(request):
                     item = Book.objects.get(post_day=item).title
                     context['title_info'] = item
                     icon = "mdi-book-open-page-variant"
+
+                    url_list.append({
+                        "title_info": context['title_info'],
+                        "url_path_":url_path,
+                        "icon_":icon,
+                        })
+
+                    
+
+
+                    break
 
 
                 elif context['title_info']  == "その他 記事":
@@ -181,7 +192,6 @@ def common(request):
         context['book_info_next'] = ""
         flag = False
         for item in context['book_list']:
-            print(item)
             if flag:
                 context['book_info_prev'] = item
                 break
@@ -241,9 +251,12 @@ def common(request):
                 count_subtitle += 1
                 if count_subtitle == 3:
                     break
-        context['count_subtitle'] = count
+        # context['count_subtitle'] = count
     except:
         pass
+
+
+    
 
 
 
@@ -296,6 +309,39 @@ def common(request):
 
 
     # --------------------------------------------------------------------------------
+
+
+
+
+    # print("context['book_info_contents'] ===", context['book_info_contents'])
+
+
+    # ----- book_info_content page取得 ------
+    # book_info_content = []
+    # book_info_content_page = url_split[3]
+    # count = 0
+    # try:
+    #     if url_split[3] != "":
+    #         book_info_content_page = url_split[3]
+
+    #         for item in context['book_info_contents']:
+    #             if item[0] == "title":
+    #                 print("flagtitle", count)
+    #                 count += 1
+    #             if int(book_info_content_page) == count:
+    #                 book_info_content.append(item)
+    #     context['book_info_contents'] = book_info_content
+            
+
+    # except:pass
+        
+        
+    
+
+
+
+
+
 
     context['DEBUG'] = settings.DEBUG
     

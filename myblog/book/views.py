@@ -38,198 +38,158 @@ class MyJsonEncoder(json.JSONEncoder):
             return list(obj)
         json.JSONEncoder.default(self, obj)
 
-class MyListView(ListView):
-    template_list = ['authors', 'categorys', 'publishers', 'top', 'books']
+# class MyListView(ListView):
+#     template_list = ['authors', 'categorys', 'publishers', 'top', 'books']
     
-    # request = get_request()
-    def my_get_data(self, *args, **kwargs):
-        # get_data = super().aet_data(self, request, *args, **kwargs)
-        request = get_request()
-        print(request)
-        get_data = {}
-        get_data['url_sub'] = None
-        get_data['url_main'] = None
+#     # request = get_request()
+#     def my_get_data(self, *args, **kwargs):
+#         # get_data = super().aet_data(self, request, *args, **kwargs)
+#         request = get_request()
+#         print(request)
+#         get_data = {}
+#         get_data['url_sub'] = None
+#         get_data['url_main'] = None
         
-        url_path = request.path
-        url_split = url_path.split('/')
-        url_dict = {}
-        flag = 0
-        url_path = "{0}://{1}/".format(request.scheme, request.get_host())
-        # try:
-        get_data['contents'] = None
-        get_data['book_info'] = None
-        get_data['category_info'] = None
-        get_data['author_info'] = None
-        get_data['publisher_info'] = None
-        for item in url_split[1:]:
-            if item == "":
-                continue
+#         url_path = request.path
+#         url_split = url_path.split('/')
+#         url_dict = {}
+#         flag = 0
+#         url_path = "{0}://{1}/".format(request.scheme, request.get_host())
+#         # try:
+#         get_data['contents'] = None
+#         get_data['book_info'] = None
+#         get_data['category_info'] = None
+#         get_data['author_info'] = None
+#         get_data['publisher_info'] = None
+#         for item in url_split[1:]:
+#             if item == "":
+#                 continue
 
-            if flag != 0 :
-                if flag == 1:
-                    q = Book.objects.get(post_day=item)
-                    get_data['book_info'] = q.title
-                    get_data['contents'] = q.contents
-                    get_data['title_info'] = q.title
-                if flag == 2:
-                    q = Category.objects.get(category=item)
-                    get_data['category_info'] = q.get_category_display
-                    get_data['contents'] = q.contents
-                    get_data['title_info'] = q.title
-                if flag == 3:
-                    q = Author.objects.get(author_eng=item)
-                    get_data['author_info'] = q.author
-                    get_data['contents'] = q.contents
-                    get_data['author_info_q'] = Book.objects.filter(author_info=q.id)
-                    get_data['title_info'] = q.title
-                if flag == 4:
-                    q = Publisher.objects.get(publisher_eng=item)
-                    get_data['publisher_info'] = q.publisher
-                    get_data['contents'] = q.contents
-                    get_data['title_info'] = q.title
-                get_data["url_main"] = item
-                return get_data
+#             if flag != 0 :
+#                 if flag == 1:
+#                     q = Book.objects.get(post_day=item)
+#                     get_data['book_info'] = q.title
+#                     get_data['contents'] = q.contents
+#                     get_data['title_info'] = q.title
+#                 if flag == 2:
+#                     q = Category.objects.get(category=item)
+#                     get_data['category_info'] = q.get_category_display
+#                     get_data['contents'] = q.contents
+#                     get_data['title_info'] = q.title
+#                 if flag == 3:
+#                     q = Author.objects.get(author_eng=item)
+#                     get_data['author_info'] = q.author
+#                     get_data['contents'] = q.contents
+#                     get_data['author_info_q'] = Book.objects.filter(author_info=q.id)
+#                     get_data['title_info'] = q.title
+#                 if flag == 4:
+#                     q = Publisher.objects.get(publisher_eng=item)
+#                     get_data['publisher_info'] = q.publisher
+#                     get_data['contents'] = q.contents
+#                     get_data['title_info'] = q.title
+#                 get_data["url_main"] = item
+#                 return get_data
 
-            if item == "books":
-                flag = 1
-            if item == "categorys":
-                flag = 2
-            if item == "authors":
-                flag = 3
-            if item == "publishers":
-                flag = 4
+#             if item == "books":
+#                 flag = 1
+#             if item == "categorys":
+#                 flag = 2
+#             if item == "authors":
+#                 flag = 3
+#             if item == "publishers":
+#                 flag = 4
 
-            get_data["url_sub"] = item
-        return get_data
+#             get_data["url_sub"] = item
+#         return get_data
 
-    def my_get_context_data(self, *args, **kwargs):
-        #---  テンプレートブロック選択---
-        context = super().get_context_data()
-        get_data = self.my_get_data(self, **kwargs)
-        try:
-            context['contents'] = get_data['contents']
-            context['book_info'] = get_data['book_info']
-            context['category_info'] = get_data['category_info']
-            context['author_info'] = get_data['author_info']
-            context['publisher_info'] = get_data['publisher_info']
-            context['DEBUG'] = settings.DEBUG
+#     def my_get_context_data(self, *args, **kwargs):
+#         #---  テンプレートブロック選択---
+#         context = super().get_context_data()
+#         get_data = self.my_get_data(self, **kwargs)
+#         try:
+#             context['contents'] = get_data['contents']
+#             context['book_info'] = get_data['book_info']
+#             context['category_info'] = get_data['category_info']
+#             context['author_info'] = get_data['author_info']
+#             context['publisher_info'] = get_data['publisher_info']
+#             context['DEBUG'] = settings.DEBUG
 
-        except:
-            pass
-        context['view'] = [1,1,1,1,1] # [ブログ紹介, メインコンテンツ+サイドバー, メインコンテンツのみ, トピックス] 
-        # context['author'] = {}
-        # context['author']['author_in_category'] = [Book.objects.filter(Author_info=a).count for a in Author.objects.all()]
-        return context
+#         except:
+#             pass
+#         context['view'] = [1,1,1,1,1] # [ブログ紹介, メインコンテンツ+サイドバー, メインコンテンツのみ, トピックス] 
+#         # context['author'] = {}
+#         # context['author']['author_in_category'] = [Book.objects.filter(Author_info=a).count for a in Author.objects.all()]
+#         return context
 
-    def my_get_template_names(self, *args, **kwargs):
-        # ■■■ urlの文字列で、テンプレートの分岐 ■■■
-        # get_rquest = super().get_request()
-        get_data = self.my_get_data(self, **kwargs)
-        url_sub = [s for s in self.template_list if get_data['url_sub'] in s][0]
-        template_name = 'book/{}_err.html'.format(url_sub)
-        judge = dict()
-        url_main = get_data['url_main']
+#     def my_get_template_names(self, *args, **kwargs):
+#         # ■■■ urlの文字列で、テンプレートの分岐 ■■■
+#         # get_rquest = super().get_request()
+#         get_data = self.my_get_data(self, **kwargs)
+#         url_sub = [s for s in self.template_list if get_data['url_sub'] in s][0]
+#         template_name = 'book/{}_err.html'.format(url_sub)
+#         judge = dict()
+#         url_main = get_data['url_main']
 
-        # try:
-        if get_data['url_main'] == None:
-            template_name = 'book/{}.html'.format(url_sub)
-        else:
-            try:
-                hensu = "{}.objects.get({}_eng='{}')".format(url_sub.capitalize()[:-1], url_sub[:-1], url_main)
-                exec("aiueo = {}".format(hensu), globals(), judge)
-                judge_info = judge["aiueo"]
-                template_name = 'book/{}_info.html'.format(url_sub)
-            except:
-                pass
-        return template_name
-
-
+#         # try:
+#         if get_data['url_main'] == None:
+#             template_name = 'book/{}.html'.format(url_sub)
+#         else:
+#             try:
+#                 hensu = "{}.objects.get({}_eng='{}')".format(url_sub.capitalize()[:-1], url_sub[:-1], url_main)
+#                 exec("aiueo = {}".format(hensu), globals(), judge)
+#                 judge_info = judge["aiueo"]
+#                 template_name = 'book/{}_info.html'.format(url_sub)
+#             except:
+#                 pass
+#         return template_name
 
 
-class TopView(MyListView): # TopView
+
+
+class TopView(ListView): # TopView
     model = Book
     template_name = 'book/base.html'
+    context_object_name = "_"
 
-    def get_context_data(self, *args, **kwargs):
-        context = {}
-        return context
 
-    def get_queryset(self):
-        return
 
-class TopquasarView(MyListView): # TopView
+class TopquasarView(ListView): # TopView
     model = Book
     template_name = 'book/base_quasar.html'
+    context_object_name = "_"
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().my_get_context_data(self, *args, **kwargs)
-        return context
-
-    def get_queryset(self):
-        q = Book.objects.filter(fin=1).order_by("post_day")
-        return q        
-
-
-
-class CategoryView(MyListView):
+class CategoryView(ListView):
     model = Book
     template_name = 'book/categorys_info.html'
-    def get_context_data(self, *args, **kwargs):
-        context = super().my_get_context_data(self, *args, **kwargs)
-        context['view'] = [0,1,0,1,0] # [ブログ紹介, メインコンテンツ+サイドバー, メインコンテンツのみ, トピックス]
-        return context
+    context_object_name = "_"
 
-    def get_template_names(self, *args, **kwargs):
-        # ■■■ urlの文字列で、テンプレートの分岐 ■■■
-        template_name = self.my_get_template_names(self, *args, **kwargs)
-        return template_name
-
-class AuthorView(MyListView):
+class AuthorView(ListView):
     model = Book
     template_name = 'book/authors.html'
-    def get_context_data(self, **kwargs):
-        context = super().my_get_context_data(self, **kwargs)
-        context['view'] = [0,1,0,1,0] # [ブログ紹介, メインコンテンツ+サイドバー, メインコンテンツのみ, トピックス]
-        return context
-    def get_template_names(self, *args, **kwargs):
-        # ■■■ urlの文字列で、テンプレートの分岐 ■■■
-        template_name = self.my_get_template_names(self, *args, **kwargs)
-        return template_name
+    context_object_name = "_"
 
-class PublisherView(MyListView):
+class PublisherView(ListView):
     model = Book
     template_name = 'book/publishers.html'
-    def get_context_data(self, **kwargs):
-        context = super().my_get_context_data(self, **kwargs)
-        context['view'] = [0,1,0,1,0] # [ブログ紹介, メインコンテンツ+サイドバー, メインコンテンツのみ, トピックス]
-        return context
-    def get_template_names(self, *args, **kwargs):
-        # ■■■ urlの文字列で、テンプレートの分岐 ■■■
-        template_name = self.my_get_template_names(self, *args, **kwargs)
-        return template_name
+    context_object_name = "_"
 
 class SeriesView(ListView):
     model = Series
     template_name = 'book/base.html'
+    context_object_name = "_"
 
-class ArticlesView(MyListView):
+class ArticlesView(ListView):
     model = Book
     template_name = 'book/books.html'
-    def get_context_data(self, **kwargs):
-        context = super().my_get_context_data(self, **kwargs)
-        context['view'] = [0,1,0,1,0] # [ブログ紹介, メインコンテンツ+サイドバー, メインコンテンツのみ, トピックス]
-        return context
-    def get_template_names(self, *args, **kwargs):
-        # ■■■ urlの文字列で、テンプレートの分岐 ■■■
-        template_name = self.my_get_template_names(self, *args, **kwargs)
-        return template_name
-    
+    context_object_name = "_"
+
 
 
 
 class BookView(ListView):
     model = Book
     template_name = 'book/books.html'
+    context_object_name = "_"
     success_url = '/books/'
     # form_class = BookForm
     # object_list = Book
@@ -265,9 +225,9 @@ class BookView(ListView):
 
 
 
-    def get_queryset(self, *args, **kwargs):
+    # def get_queryset(self, *args, **kwargs):
         # ■■■ urlの文字列で、クエリセットの分岐 ■■■
-        return
+        # return
 
     def get_template_names(self, *args, **kwargs):
         # ■■■ urlの文字列で、テンプレートの分岐 ■■■
@@ -282,7 +242,7 @@ class BookView(ListView):
                     template_name = 'book/books.html'
             except:pass
 
-        elif len(url_split) == 4:
+        elif len(url_split) == 4 or len(url_split) == 5:
             datetime_info = datetime.datetime.strptime(url_split[2], '%Y-%m-%d')
             date_info = datetime.date(int(datetime_info.year), int(datetime_info.month), int(datetime_info.day))
             
@@ -473,6 +433,7 @@ class BookView(ListView):
 class Schedule(ListView):
     model = Book
     template_name = 'book/schedule.html'
+    context_object_name = "_"
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context['view'] = [0,1,0,1,0] # [ブログ紹介, メインコンテンツ+サイドバー, メインコンテンツのみ, トピックス]
@@ -481,6 +442,7 @@ class Schedule(ListView):
 class SearchView(ListView):
     model = Book
     temlate_name = 'book/search.html'
+    context_object_name = "_"
 
 
 def test_(request):
@@ -490,56 +452,32 @@ def test_(request):
 
 
     
-class TestView(MyListView): # TopView
+class TestView(ListView): # TopView
     model = Book
     template_name = 'book/base4.html'
-
-    def get_context_data(self, *args, **kwargs):
-        context = super().my_get_context_data(self, *args, **kwargs)
-        return context
+    context_object_name = "_"
 
 
-class ProfileView(MyListView):
+class ProfileView(ListView):
     model = Book
     template_name = 'book/profile.html'
-
-    def get_context_data(self, *args, **kwargs):
-        context = super().my_get_context_data(self, *args, **kwargs)
-        return context
+    context_object_name = "_"
         
-class Book_icView(MyListView):
+class Book_icView(ListView):
     model = Book
     template_name = 'book/book-ic.html'
+    context_object_name = "_"
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().my_get_context_data(self, *args, **kwargs)
-        return context
-
-class OthersView(MyListView,):
+class OthersView(ListView,):
     model = Other
     template_name = 'book/others.html'
+    context_object_name = "_"
     context_object_name = 'other_list'
 
     def get_context_data(self, *args, **kwargs):
         context={}
         context['DEBUG'] = settings.DEBUG
-
-                
-        
-
-                
-
-
-        # if context['date'] != None:
-        #     print(context['book_info'])
-        #     print(other_obj.all().count())
-        #     print((context['book_info'].id))
-        #     print(other_obj.get(id=5))
-        #     if (context['book_info'].id) != other_obj.all().count():
-        #         context['other_info_next'] = other_obj.get(id=(context['book_info'].id+1))
-        #     if (context['other_info'].id) != 1:
-        #         context['other_info_prev'] = other_obj.get(id=(context['book_info'].id-1))
-        
+      
 
         return context
 
@@ -573,74 +511,48 @@ class OthersView(MyListView,):
 
         
             
-    def get_date(self, *args, **kwargs):
-        # ■■■ urlから日付データ取得 ■■■
-        data_info = {}
-        data_info['category_y'] = None
-        data_info['category_m'] = None
-        data_info['category_d'] = None
-        data_info['data_info'] = None
-        try:
-            date_kwd = self.kwargs['data_info']
-            data_info['data_info'] = date_kwd
-            date_split = re.split(r"[-]", date_kwd)
-            if len(str(date_split[0])) == 4:
-                category_y = date_split[0]
-                data_info['category_y'] = category_y
-                if len(str(date_split[1])) == 2:
-                    category_m = date_split[1]
-                    data_info['category_m'] = category_m
-                    if len(str(date_split[2])) == 2:
-                        category_d = date_split[2]
-                        data_info['category_d'] = category_d    
-                        data_info['data_info'] = "{}-{}-{}".format(category_y, category_m, category_d)
-            return data_info
-        except:
-            return data_info
 
 
 
 
-class Privacy_policyView(MyListView):
+class Privacy_policyView(ListView):
     model = Book
     template_name = 'book/privacy_policy.html'
-    def get_context_data(self, *args, **kwargs):
-        context = super().my_get_context_data(self, *args, **kwargs)
-        return context
+    context_object_name = "_"
 
-class ContactView(FormView, MyListView):
+class ContactView(FormView, ListView):
     model = Book
     template_name = 'book/contact.html'
+    context_object_name = "_"
     object_list = None
     success_url = reverse_lazy('book:contact')
     form_class = forms.Contactform
     def get_context_data(self, *args, **kwargs):
-        context = super().my_get_context_data(self, *args, **kwargs)
+        context = {}
         form = Contactform()
         context['form'] = form
         return context
 
-    def post(self, request, *args, **kwargs):
-        object_list = None
-        context = super().my_get_context_data(self, *args, **kwargs)
+    # def post(self, request, *args, **kwargs):
+    #     object_list = None
+    #     context = super().my_get_context_data(self, *args, **kwargs)
 
-        print("■■■", request.method)
         
-        if request.method == 'POST':
-            print("■■■", request.POST)            
-            form = Contactform(request.POST)
+    #     if request.method == 'POST':
+    #         print("■■■", request.POST)            
+    #         form = Contactform(request.POST)
             
-            if form.is_valid():
+    #         if form.is_valid():
                 
-                No_ = Inquiry.objects.count()
-                form.send_email(No_)
-                form.save()
-                return render(request, 'book/contact.html', context)
-                # return redirect('contact')
+    #             No_ = Inquiry.objects.count()
+    #             form.send_email(No_)
+    #             form.save()
+    #             return render(request, 'book/contact.html', context)
+    #             # return redirect('contact')
 
 
-        print(request.POST)
-        return render(request, 'book/contact.html', context)
+        # print(request.POST)
+        # return render(request, 'book/contact.html', context)
         # if 'age_high_year' in request.POST and 
     def form_valid(self,forms):
         forms.send_email()
@@ -648,16 +560,15 @@ class ContactView(FormView, MyListView):
 
 
 
-class SitemapView(MyListView):
+class SitemapView(ListView):
     model = Book
     template_name = 'book/sitemap.html'
-    def get_context_data(self, *args, **kwargs):
-        context = super().my_get_context_data(self, *args, **kwargs)
-        return context
+    context_object_name = "_"
 
 class Picture_snsView(ListView):
     model = Book
     template_name = 'book/books_picture_sns.html'
+    context_object_name = "_"
     success_url = '/books/'
     # form_class = BookForm
     # object_list = Book

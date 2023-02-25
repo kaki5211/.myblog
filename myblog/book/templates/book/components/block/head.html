@@ -29,33 +29,15 @@
     {% endif %}      
 
 
-        {% with breadcrumb|length as el_ %}
-        {% if el_ == 1 %}
-        <meta name="description" content="
-            BOOK I.C. ～本の感想を創造するブログ～,  
-                {%for item in books_others%}
-                    {{item.post_day | safe}} - {{ item.title }} | 
-                {% endfor %}
-            "/>
-            {% elif el_ == 3 %}
-        <meta name="description" content="
-            {{breadcrumb.2.title_info}} | {{ breadcrumb.1.title_info }} | BOOK I.C. ～本の感想を創造するブログ～,
-            — あらすじ — {{ book_info.contents_synopsis }}
 
-        "/>
-        {% endif %}
-    {% endwith %}
     
 
     <title>
         {% with breadcrumb|length as el_ %}
-        {% if el_ == 1 %}
-            BOOK I.C. ～本の感想を創造するブログ～
-        {% elif el_ == 2 %}
-            {{breadcrumb.1.title_info}} | BOOK I.C.
-        {% elif el_ == 3 %}
-        【感想ブログ】 {{breadcrumb.2.title_info}} | BOOK I.C.
-        {% endif %}
+            {% if el_ == 1 %}BOOK I.C. ～本の感想を創造するブログ～
+            {% elif el_ == 2 %}{{breadcrumb.1.title_info}} | BOOK I.C.
+            {% elif el_ == 3 %}【感想ブログ】 {{breadcrumb.2.title_info}} | BOOK I.C.
+            {% endif %}
         {% endwith %}
     </title>
 
@@ -95,62 +77,28 @@
     <meta name="theme-color" content="#455045">
 
 
-    <!-- meta deault -->
-    <meta property="og:url" content={{ request.path }} />
-    <meta property="og:type" content="
-    {% if breadcrumb|length == 1 %}
-        blog
-    {% else %}
-        article
-    {% endif %}
-    "/>
-    
-    <meta property="og:title" content="
-    {% with breadcrumb|length as el_ %}
-    {% if el_ == 1 %}
-        BOOK I.C. ～本の感想を創造するブログ～
-    {% elif el_ == 2 %}
-        {{breadcrumb.1.title_info}} | BOOK I.C.
-    {% elif el_ == 3 %}
-        【本 感想ブログ】 {{breadcrumb.2.title_info}} | BOOK I.C.
-    {% endif %}
-    {% endwith %}
-    " />
-    
-    {% with breadcrumb|length as el_ %}
-    {% if el_ == 1 %}
-    <meta property="og:description" content="
-        BOOK I.C. ～本の感想を創造するブログ～,  
-            {% comment %} 
-                {%for item in books_others%}
-                    {{item.post_day | safe}} - {{ item.title }} | 
-                {% endfor %}
-            {% endcomment %}
-            本の感想を書くブログです！。小説を読み終えた人向けに、思ったこと等の感想をこのブログにUPしています！。タグ | 小説,文庫,ブログ,感想,読書,書評,書籍,記録,ネタバレ | BOOK I.C.
-        "/>
-        {% elif el_ == 3 %}
-    <meta property="og:description" content="
-        {{breadcrumb.2.title_info}} | BOOK I.C. ～本の感想を創造するブログ～,
-        — あらすじ — {{ book_info.contents_synopsis }}
 
-    "/>
-    {% endif %}
+    
+    
+    {% with breadcrumb|length as el_ %}
+        {% if el_ == 1 %}<meta property="og:title" content="BOOK I.C. ～本の感想を創造するブログ～"/>
+        {% elif el_ == 2 %}<meta property="og:title" content="{{breadcrumb.1.title_info}} | BOOK I.C."/>
+        {% elif el_ == 3 %}<meta property="og:title" content="【本 感想ブログ】 {{breadcrumb.2.title_info}} | BOOK I.C."/>
+        {% endif %}
     {% endwith %}
+
+
 
     <meta name="keywords" content="book-ic,本,本感想,感想,書評,書店,小説,文庫,ブログ,個人ブログ,読書,書籍,記録,ネタバレ読書,読書記録">
+
+
 
     <!-- SEO サムネイル画像-->
     <meta name="thumbnail" content="{% static "static/book-ic_picture.svg" %}" />
 
-    
 
-
-    <meta property="og:site_name" content="BOOK I.C." />
-    {% comment %} <meta property="og:image" content=" サムネイル画像のURL" /> {% endcomment %}
 
     <!-- meta twitter -->
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@BOOK_IC" />
 
         {% comment %} <!-- hooper -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hooper@0.2.1/dist/hooper.css">
@@ -175,3 +123,38 @@
 
 
 </head>
+
+
+
+
+
+
+
+<!-- og 設定 -->
+<!-- １．page type -->
+{% if breadcrumb|length == 1 %}<meta property="og:type" content="website" />
+{% else %}<meta property="og:type" content="article"/>
+{% endif %}
+<!-- ２．title -->
+<meta property="og:title" content="(2)ページタイトル" />
+<!-- ３．ページ説明文 -->
+{% with breadcrumb|length as el_ %}
+    {% if el_ == 1 %}<meta property="og:description" content="BOOK I.C. ～本の感想を創造するブログ～,本の感想を書くブログです！。小説を読み終えた人向けに、思ったこと等の感想をこのブログにUPしています！。タグ | 小説,文庫,ブログ,感想,読書,書評,書籍,記録,ネタバレ | BOOK I.C."/>
+    {% elif el_ == 3 %}
+        {% if breadcrumb.1.title_info == "書籍一覧" %}<meta property="og:description" content="{{breadcrumb.2.title_info}} | BOOK I.C. ～本の感想を創造するブログ～, — あらすじ — {{ book_info.contents_synopsis }}"/>
+        {% elif breadcrumb.1.title_info == "その他 記事" %}<meta property="og:description" content="{{breadcrumb.2.title_info}} | BOOK I.C. ～本の感想を創造するブログ～,{{ other_info.contents_synopsis }}"/>
+        {% endif %}
+    {% endif %}
+{% endwith %}
+<!-- ４．URL -->
+<meta property="og:url" content="{{ request.build_absolute_uri }}" />
+<!-- ５．サイト名 -->
+<meta property="og:site_name" content="BOOK I.C." />
+<!-- ６．その他 -->
+{% comment %} <meta property="article:publisher" content="(6)FacebookページのURL" /> {% endcomment %}
+<!-- ７．表示画像 -->
+<meta property="og:image" content="{% static "static/book-ic_icon.svg" %}" />
+
+<!-- Twitterカードの設定 -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@BOOK_IC" />
