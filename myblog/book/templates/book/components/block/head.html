@@ -108,7 +108,8 @@
     <script src="https://cdn.jsdelivr.net/npm/vue-carousel-3d@0.2.0/dist/vue-carousel-3d.min.js"></script>
 
     <!-- 正規化 -->
-    <link rel="canonical" href={{ request.build_absolute_uri }} />
+    {% comment %} <link rel="canonical" href={{ request.build_absolute_uri }} /> {% endcomment %}
+    <link rel="canonical" href={{ request.scheme }}://{{ request.get_host }}{{ request.path }} />
 
     <!-- adsense 広告-->
     {% if  DEBUG == False %}

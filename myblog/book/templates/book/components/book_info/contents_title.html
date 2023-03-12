@@ -1,7 +1,27 @@
 {% comment %} <div class="my-container-max-width" style=""></div> {% endcomment %}
+<div id="{{ty}}" class="my-text-color d-inline mx-auto px-0 pt-5 pt-lg-10 pb-3 pb-lg-5 text-left">
 
-<div id="{{ty}}" class="mx-auto px-0 pt-5 pt-lg-10 pb-3 pb-lg-5 text-left">
+    {% if url_sub == "書籍一覧" and breadcrumb|length == 3%}
+    <a class="d-inline-block font-weight-black my-text-color text-h5_5 text-md-h4 mb-0 mt-auto pr-2">{{ty_title}}.</a>
+    {% endif %}
+
+        <a class="d-inline-block my-text-color my-contents-title text-h5_5 text-md-h4 mb-0 mt-auto my_contents_title" style="text-decoration: none; {% if url_sub == "書籍一覧" and breadcrumb|length == 3%}width: 85%;{%else%}width: 100%;{% endif %}">{{text}}</a>
+
+
+    {% comment %} 
+    <p class="d-inline-block font-weight-black my-text-color text-h5_5 text-md-h4 mb-0 mt-auto pr-2">{{ty}}.</p>
+    <a class="d-inline-block my-text-color my-contents-title text-h5_5 text-md-h4 mb-0 mt-auto my_contents_title" style="width:85%">
+        {{text}}
+    </a>
+
+ {% endcomment %}
+
+{% comment %} 
+ <div id="{{ty}}" class="mx-auto px-0 pt-5 pt-lg-10 pb-3 pb-lg-5 text-left">
     <a class="text-my-text-color my-contents-title text-h5_5 text-md-h4 mb-0 mt-auto my_contents_title my-w-100 d-block">
         {{text}}
     </a>
+</div>
+ {% endcomment %}
+
 </div>

@@ -21,12 +21,56 @@
     <!-- mokuji -->
     {% include 'block/mokuji.html' %}
 
+
+    <!-- top navigation -->
+    {% comment %} {% include 'text/text_title.html' with text=book_info.title icon_="mdi-book-open-page-variant" %} {% endcomment %}
+
+
+
+
+<!-- pages -->
+    <v-row no-gutters>
+      <v-col col="12" col-md="10" col-lg="8" class="my-10">
+
+          <div class="d-flex my-h-100">
+            <div class="ma-auto mb-0 text-center">
+            {% include 'block/pagenation_top.html' %}
+            <a >{{ book_info.title }}   {{ contents_page }} / {{ contents_pages_max }} Page</a>
+            </div>
+
+          </div>
+              {% comment %} <p class="ma-auto mb-5 text-h5 text-md-h4 my-text-color my-letter-spacing-3 my-font-weight-title">コンビニ人間 {% endcomment %}
+          {% comment %} </p> {% endcomment %}
+          {% comment %} {% include 'block/bottom_navigation.html' with prev=book_info_prev.title next=book_info_next.title sub_text="書籍一覧" mdi_bottom_navigation="mdi-bookshelf" %} {% endcomment %}
+          {% comment %} {% include 'block/bottom_navigation_judge.html' %} {% endcomment %}
+
+
+
+    </v-col>
+
+    </v-row>
+    <!-- pages -->
+
+    
+
+
+
+
+
+
+
+
+
+
+    {% comment %} {% include 'text/text_title.html' with text=book_info.title icon_="mdi-book-open-page-variant" %} {% endcomment %}
+
       <!-- contents -->
         <v-row no-gutters >
 
+          {% if contents_page == "1" %}
             <v-col cols="12" class="mx-auto px-0">
               {% comment %} <a class="text-my-text-color my-contents-title text-h5 text-md-h4 mb-0"> {% endcomment %}
-                {% include 'book_info/contents_title.html' with text=book_info.title ty="title" %}
+                {% include 'book_info/contents_title.html' with text=book_info.title ty="title" ty_title=1 %}
                 <!-- title -->
               {% comment %} </a> {% endcomment %}
               <p class="my-text-color-title mb-1">
@@ -189,35 +233,37 @@
             </v-col>
             
 
-
-          <v-col cols="12" class="mx-auto px-1 text-center  my-10" >
-            {% include 'book_info/contents_subtitle.html' with text='あらすじ' ty="arasuji" %}
-            {% include 'book_info/contents_text.html' with text=book_info.contents_synopsis %}
-          </v-col>
-          
+            <v-col cols="12" class="mx-auto px-1 text-center  my-10" >
+              {% include 'book_info/contents_subtitle.html' with text='あらすじ' ty="arasuji" %}
+              {% include 'book_info/contents_text.html' with text=book_info.contents_synopsis %}
+            </v-col>
+            {% endif %}
 
           <v-col cols="12" class="mx-auto px-0 py-10">
 
-            {% for contents_ in book_info_contents %}
+            {% for contents_ in book_info_contents_page %}
               {% if contents_.0 != "title" and contents_.0 != "title" and contents_.0 != "blockquote" %}
                 <div class="px-1">
               {% endif %} 
 
               {% if contents_.0 == "title" %}
-                {% if forloop.counter > 3 %}
-                  <div class="py-5"></div>
-                  {% include 'google/adsense_article.html' %}
-                  <div class="py-5"></div>
-                {% endif %}
 
-                {% include 'book_info/contents_title.html' with text=contents_.1 ty=forloop.counter %}
+                {% include 'book_info/contents_title.html' with text=contents_.1 ty=forloop.counter ty_title=contents_.2 %}
                 
               {% elif contents_.0 == "subtitle" %}
                 {%if forloop.counter > 2  %}
                 <v-divider class="pb-0 mb-0"></v-divider>
                 {% endif %}
+                {% if contents_subtitle_first == contents_.3 %}
+                  <div class="py-5"></div>
+                    {% include 'google/adsense_article.html' %}
+                  <div class="py-5"></div>
+                {% endif %}
 
                 {% include 'book_info/contents_subtitle.html' with text=contents_.1  ty=forloop.counter %}
+
+
+
                 {% comment %} <v-divider class="pt-0 mt-0"></v-divider> {% endcomment %}
               {% elif contents_.0 == "text" %}
                 {% include 'book_info/contents_text.html' with text=contents_.1 %}
@@ -234,27 +280,39 @@
           </v-col>
             
         </v-row>
-      {% comment %} </v-container> {% endcomment %}
-      
-{% comment %} 
-      <v-btn
-      elevation="2"
-      fab
-      small
-      fixed
-      right
-      bottom
-      color="#455045"
-      class="my-bg-color-glay my-text-color-light-glay d-inline"
-      @click="$vuetify.goTo(0)"
-      v-show="buttonActive"
-      style="transition: opacity 300ms;"
-    >
-    <v-icon>
-      mdi-plus
-    </v-icon>  
-  </v-btn>
- {% endcomment %}
+
+
+
+        <!-- pages -->
+    <v-row no-gutters>
+      <v-col col="12" col-md="10" col-lg="8" class="my-10">
+
+          <div class="d-flex my-h-100">
+            <div class="ma-auto mb-0 text-center">
+            {% include 'block/pagenation_top.html' %}
+            <a >{{ book_info.title }}   {{ contents_page }} / {{ contents_pages_max }} Page</a>
+            </div>
+
+          </div>
+              {% comment %} <p class="ma-auto mb-5 text-h5 text-md-h4 my-text-color my-letter-spacing-3 my-font-weight-title">コンビニ人間 {% endcomment %}
+          {% comment %} </p> {% endcomment %}
+          {% comment %} {% include 'block/bottom_navigation.html' with prev=book_info_prev.title next=book_info_next.title sub_text="書籍一覧" mdi_bottom_navigation="mdi-bookshelf" %} {% endcomment %}
+          {% comment %} {% include 'block/bottom_navigation_judge.html' %} {% endcomment %}
+
+
+
+    </v-col>
+
+    </v-row>
+    <!-- pages -->
+
+
+    {% if contents_subtitle_first == contents_.3 %}
+    <div class="py-5"></div>
+      {% include 'google/adsense_article.html' %}
+    <div class="py-5"></div>
+  {% endif %}
+
 
 
   <v-btn
@@ -267,9 +325,9 @@
   class="my-bg-color-glay my-text-color-light-glay d-inline"
   @click="$vuetify.goTo(0)"
   v-show="buttonActive"
-  style="transition: opacity 300ms;"
+  style="transition: opacity 300ms; "
 >
-<v-icon>
+<v-icon style="opacity: .62;">
   mdi-chevron-up
 </v-icon>  
 </v-btn>

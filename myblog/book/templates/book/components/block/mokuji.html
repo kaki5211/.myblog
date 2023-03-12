@@ -44,10 +44,46 @@
 
 
             <!-- mokuji -->
+            {% if url_sub == "書籍一覧" %}
+            <v-card-text class="pl-6 pr-10 py-6 pb-8">
+
+              <div class="pb-1 {% if contents_page != "1" %}my-opacity{%endif%}">
+                <p class="d-inline-block my-text-color text-h6_5 text-md-h6 text-md-h5 mt-2 mt-md-4 mb-1 mb-md-2 pr-2 font-weight-black">1.</p><p class="d-inline-block text-my-text-color my-contents-title text-h6_5 text-md-h6 text-md-h5 mt-2 mt-md-4 mb-1 mb-md-2" style="width: 85%">
+                  <a style="text-decoration: none;" href="{% url 'book:book_info_content' book_info.post_day 1 %}#title">{{ book_info.title }}</a>
+                </p>
+              </div>
+              <div class="pb-0 {% if contents_page != "1" %}my-opacity{%endif%}" style="justify-content: center;">                  
+                <p class="my-text-color text-h7 text-md-h6_5 text-md-h6 pl-3 mb-0 d-inline">
+                  <i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-right theme--light" style="font-size: 25px;"></i>
+                </p>
+                <a class="d-inline my-text-color text-h7 text-md-h6_5 text-md-h6" style="text-decoration: none;" href="{% url 'book:book_info_content' book_info.post_day 1 %}#arasuji">あらすじ</a>
+              </div>              
+
+              {% for item in book_info_contents %} 
+                {% if item.0 == "title" %}
+                <div class="pb-1 {% if contents_page != item.2 %}my-opacity{%endif%}">
+                  <p class="d-inline-block my-text-color text-h6_5 text-md-h6 text-md-h5 mt-2 mt-md-4 mb-1 mb-md-2 pr-2 font-weight-black {% if contents_page != item.2 %}my-opacity{% endif %}">{{item.2}}.</p><p class="d-inline-block my-text-color my-contents-title text-h6_5 text-md-h6 text-md-h5 mt-2 mt-md-4 mb-1 mb-md-2" style="width: 85%">
+                    {% comment %} <a style="text-decoration: none;" href="{% url 'book:book_info_content' book_info.post_day item.2 %}#{{forloop.counter}}">{{ item.1 }}</a> {% endcomment %}
+                    <a class="{% if contents_page != item.2 %}my-opacity{% endif %}" style="text-decoration: none;" href="{% url 'book:book_info_content' book_info.post_day item.2 %}#{{ item.3 }}">{{ item.1 }}</a>
+                  </p>
+
+
+                </div>
+                {% elif item.0 == "subtitle" %}
+                  <div class="pb-0 {% if contents_page != item.2 %}my-opacity{% endif %}" style="justify-content: center;">                  
+                    <p class="my-text-color text-h7 text-md-h6_5 text-md-h6 pl-3 mb-0 d-inline">
+                      <i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-right theme--light" style="font-size: 25px;"></i>
+                    </p>
+                    <a class="d-inline my-text-color text-h7 text-md-h6_5 text-md-h6" style="text-decoration: none;" href="{% url 'book:book_info_content' book_info.post_day item.2 %}#{{ item.3 }}">{{item.1}}</a>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </v-card-text>
+            {% else %}
+
             <v-card-text class="pl-6 pr-10 py-6 pb-8 my_mokuji">  
             </v-card-text>
-
-
+            {% endif %}
 
       
             <v-spacer></v-spacer>

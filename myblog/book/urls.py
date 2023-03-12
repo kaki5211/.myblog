@@ -91,8 +91,8 @@ urlpatterns = [
     path('series/<slug:data_info>/', views.SeriesView.as_view(), name='series_info'), 
 
     path('books/', views.BookView.as_view(), name='book'), # 主に本の検索と
-    path('books/<slug:data_info>/', views.BookView.as_view(), name='book_info'), 
-    # path('books/<slug:data_info>/<int:data_info_page>/', views.BookView.as_view(), name='book_info_content'), 
+    path('books/<slug:data_info>/', views.BookrView.as_view(), name='book_info'), 
+    path('books/<slug:data_info>/<int:data_info_page>/', views.BookView.as_view(), name='book_info_content'), 
 
     path('search', views.SearchView.as_view(), name='search' ), # 本の検索全般
 

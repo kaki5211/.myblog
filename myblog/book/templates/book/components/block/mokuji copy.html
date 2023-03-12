@@ -1,0 +1,59 @@
+
+{% load split_tags %}
+
+            <v-row
+              no-gutters
+            >
+
+            <v-col
+            cols="12"
+            sm="10"
+            md="10"
+            lg="8"
+            align-self="center"
+            class="mx-auto mb-14"
+            style=""
+          >
+        
+      
+          <v-card
+            class="mx-auto my-bg-color my-border-width my-border-color"
+            outlined
+            tile
+
+            >
+{% comment %}             
+            {% with request.path|split:"/" as skills %}
+              {{skills.1}}
+            {% endwith %}
+         {% endcomment %}
+
+            <v-card-text class="py-0 my-text-color">
+
+            </v-card-text>
+      
+      
+            <v-card-title class="py-0 px-0 mx-0">
+              <p class="text-h2 my-text-color text-h6 text-md-h5 py-0 px-0 my-2 mx-auto" style="letter-spacing:3px;">
+                {% comment %} <v-icon size="40">mdi-format-list-bulleted</v-icon> {% endcomment %}
+                －目次－
+              </p>
+            </v-card-title>
+      
+            <v-divider></v-divider>
+
+
+            <!-- mokuji -->
+            <v-card-text class="pl-6 pr-10 py-6 pb-8 my_mokuji">  
+            </v-card-text>
+
+
+
+      
+            <v-spacer></v-spacer>
+        
+      
+
+          </v-card>
+        </v-col>
+</v-row>

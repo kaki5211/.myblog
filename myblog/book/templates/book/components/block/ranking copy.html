@@ -1,0 +1,86 @@
+<v-container id="my_container" class="my-16">
+  <v-row
+    no-gutters
+  >
+  <v-col
+      cols="12"
+      align-self="center"
+      class="mx-auto pb-15"
+    >
+  <p class="text-h2 my-text-color-title text-h5 text-md-h4" style="letter-spacing:3px;">
+    <v-icon size="40" >mdi-crown</v-icon>
+
+    ランキング（週間）</p>
+</v-col>
+  <v-col
+      cols="10"
+      md="6"
+      align-self="center"
+      class="mx-auto"
+    >
+    <v-card
+    elevation="15"
+  >
+
+
+{% comment %} 
+    <v-responsive :aspect-ratio="16/9" style="max-height: 300px;" class="rounded-lg" style="border: double 5px #455045;">
+
+      <v-carousel v-model="model" height="100%" progress="true" hide-delimiters interval="3000" progress-color="#1aa179" class="my-ranking">
+        <v-carousel-item
+          v-for="(obj,  i) in obj_ranking"
+          :key="obj"
+        >
+          <v-sheet
+            :color="#455045"
+            height="100%"
+            tile
+            class="my-bg-color"
+          >
+            <v-row
+              class="fill-height"
+              align="center"
+              justify="center"
+              no-gutters
+              style="max-height: 300px;"
+            >
+                <v-responsive :aspect-ratio="10/14" style="max-height: 300px;" class="mx-auto my-w-100" v-html="obj.url">
+
+                </v-responsive>
+            </v-row>
+
+
+              <div class="v-carousel__controls my-text-color-light-glay" style="left: auto; right: auto;">
+                [[ obj.title ]]
+              </div>              
+          </v-sheet>
+        </v-carousel-item>
+      </v-carousel>
+
+
+  </v-responsive>  
+  {% endcomment %}
+
+  <carousel-3d :controls-visible="true" :clickable="false" :autoplay="true">
+    <slide v-for="(slide, i) in slides" :index="i">
+      <img src="https://placehold.jp/360x270.png">
+    </slide>
+</carousel-3d>
+
+
+
+
+
+</v-card>
+
+
+
+
+
+
+
+</v-col>
+
+</v-row>
+</v-container>        
+

@@ -1,3 +1,7 @@
+{% load get_img_src %}
+{% load get_tag_el %}
+
+
 
     <script async type="application/javascript">
         {% comment %} $icon-size: 50px; {% endcomment %}
@@ -66,6 +70,7 @@
               }
             },
             
+            
           },
           watch: {
             carouselData () {
@@ -87,10 +92,28 @@
             scroll: 0,
                   
 
-            slides: 5,
+            slides: [
+            {% for item in book_list %}
+            {% with item.book_img_url|get_img_src:'src' as img_url %}
+                {
+                  img_url: "{{ img_url | safe }}",
+                  url: "{% url 'book:book_info' item.post_day %}",
+                  title: '{{ item.title }}',
+                  amazon_url: 
+                  `
+                  {% include 'block/img_amazon_text.html' with amazon_url_text=item.amazon_url_text %}
+                  `,
+                  div_: '<div></div>',
+                                    
+                },
+            {% endwith %}
+            {% endfor %}            
+            ],
             isHidden: true,
             model: 0,
-{% comment %} 
+
+
+      {% comment %} 
 
             topixs: [
             {% for item in book %}
@@ -125,12 +148,21 @@
               {% endif %}
               {% endfor %}
               ],
+            book_pagenation_max_pages: 5,
+            book_pagenation_top: [
 
+              {% with ''|center:contents_pages_max as range %}
+                {% for _ in range %}
+                  {% if forloop.counter != "0" %}
 
+                    { text: '{{ forloop.counter}}',
+                      url: "{% url 'book:book_info_content' data_info=book_info.post_day data_info_page=forloop.counter %}",
+                      color: "" },
 
-
-
-
+                {% endif %}
+                {% endfor %}
+              {% endwith %}
+            ],
 
 
             headers_topixs: [
@@ -365,6 +397,7 @@
           {% endwith %}
             
           window.addEventListener('scroll', this.scrollWindow);
+          this.componentKey += 1
 
         },
         created : function(){
@@ -595,6 +628,7 @@
 
 
       <!-- mokuji -->
+      {% if url_sub != "書籍一覧" %}
       <script async type="application/javascript">
         var my_mokuji = document.getElementsByClassName("my_mokuji");
         var my_contents = document.querySelectorAll('.my_contents_title, .my_contents_subtitle');
@@ -604,6 +638,8 @@
         var judge_subtitle = "";
         var my_mokuji_str = "";
         var v_icon_right = '<i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-right theme--light" style="font-size: 25px;"></i>';
+        var count_page = 0
+        var count_title = 0
 
         for (let i = 0; i < my_contents.length; i++) {
           class_ = my_contents[i]._prevClass;
@@ -611,12 +647,16 @@
           judge_subtitle = class_.indexOf('my_contents_subtitle');
           id_ = my_contents[i].parentNode.id
           text_ = my_contents[i].text.replace(/\n+/g,"")
+          count_title = 0
 
+          
 
           if ( judge_title != -1) {
+            count_page = count_page + 1
               var str_title = `
-              <div class="pb-1">                  
-                <p class="text-my-text-color my-contents-title text-h6_5 text-md-h6 text-md-h5 mt-2 mt-md-4 mb-1 mb-md-2">
+              <div class="pb-1">
+                {% comment %} <p class="d-inline-block text-my-text-color text-h6_5 text-md-h6 text-md-h5 mt-2 mt-md-4 mb-1 mb-md-2 pr-2 font-weight-black">${count_page}.</p> {% endcomment %}
+                <p class="d-inline-block text-my-text-color my-contents-title text-h6_5 text-md-h6 text-md-h5 mt-2 mt-md-4 mb-1 mb-md-2" style="width: 85%">
                   <a style="text-decoration: none;" href="#${id_}">${text_}</a>
                 </p>
               </div>
@@ -631,12 +671,13 @@
               </div>
             `
             }
+            
           str_title = str_title.replace(/\n+/g,"");
           my_mokuji_str =  my_mokuji_str + str_title;
         }
         my_mokuji[0].innerHTML = my_mokuji_str;
       </script>
-
+      {% endif %}
 
 
       <!-- image -->

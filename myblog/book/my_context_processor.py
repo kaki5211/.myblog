@@ -206,106 +206,168 @@ def common(request):
 
 
     # ----- contents text ------
+    context['contents_pages_max'] = 0
+
+    if len(url_list)==3:
+        try:
+            if context["url_sub"] == "書籍一覧":
+                item = context['book_info']
+            elif context["url_sub"] == "その他 記事":
+                item = context['other_info']
+
+            contents_page = request.path.split("/")[-2]
+            contents_list_index = [0]
+            count_title = 1
+
+                
+            context['contents_text'] = item.contents
+            list_ = []
+            count = 0
+            for text_,i in zip(context['contents_text'].split('<')[1:], range(len(context['contents_text'].split('<')[1:]))):
+                count += 1
+                text_ = text_.split(">")
+                # text_[0]
+                contents_split = text_[1].splitlines()
+                if text_[0] == "blockquote":
+                    contents_ = "<a>" + contents_split[0] + "<br>" + "</a>"
+                    for text_el in contents_split[1:]:
+                        if text_el == "":
+                            continue
+                        contents_ = contents_ + "<a>"+ text_el +"<br>" + "</a>"
+                        # print("contents_split", contents_split)
+                else:
+                    contents_ = contents_split[0]
+                    for text_el in contents_split[1:]:
+                        if text_el == "":
+                            continue
+                        contents_ = contents_ + text_el
+                        # print("contents_split", contents_split)
+
+                text_[1] = contents_
+                
+                if len(text_) == 3 and text_[0] == "blockquote":
+                    text_[2] = text_[2].splitlines()[0]
+
+                if text_[0] == "title":
+                    count_title += 1
+                    contents_list_index.append(count)
+                    text_.append(str(count_title))
+                    text_.append(str(count-contents_list_index[int(count_title-1)]+1))
+                    # print("!!!count", count)
+                    # print("!!!count_title", count_title)
+                    # print("!!!contents_list_index[int(count_title-1)])", contents_list_index[int(count_title-1)]+1)
+
+                if text_[0] == "subtitle":
+                    text_.append(str(count_title))
+                    try:
+                        if count_title != 1:
+                            text_.append(str(count-contents_list_index[int(count_title-1)]+1))
+                        else: 
+                            text_.append(str(count-contents_list_index[int(count_title-1)]))
+                    except:
+                        text_.append(str(count))
+                        
+
+                    # print("!!!!!!count", count)
+                    # print("!!!!!!count_title", count_title)
+                    # print("!!!!!!contents_list_index[int(count_title-1)])", contents_list_index[int(count_title-1)]+1)
+
+                # print(text_)
+
+                list_.append(text_)
+            # print(list_)
+            context['book_info_contents'] = list_
+            
+            if int(len(contents_list_index)) == int(contents_page):
+                context['book_info_contents_page'] = list_[contents_list_index[int(contents_page)-1]-1:]
+            elif int(contents_page) == 1:
+                context['book_info_contents_page'] = list_[contents_list_index[int(contents_page)-1]:contents_list_index[int(contents_page)]-1]
+            else:
+                context['book_info_contents_page'] = list_[contents_list_index[int(contents_page)-1]-1:contents_list_index[int(contents_page)]-1]
+            # print(context['book_info_contents_page'])
+            for contents_subtitle_first_list in context['book_info_contents_page']:
+                if contents_subtitle_first_list[0] == "subtitle":
+                    contents_subtitle_first = contents_subtitle_first_list[3]
+                    context['contents_subtitle_first'] = contents_subtitle_first
+                    break
 
 
-    if context["url_sub"] == "書籍一覧":
-        item = context['book_info']
-    elif context["url_sub"] == "その他 記事":
-        item = context['other_info']
+            context["contents_page"] = contents_page
+            context['contents_pages_max'] = str(count_title)
+            context['contents_list_index'] = contents_list_index[2]
+            context['count_index'] = "0"
+            # print("contents_list_indexcontents_list_index", list_[contents_list_index[contents_page]:contents_list_index[contents_page+1]-1])
+            # print("contents_list_indexcontents_list_index", list_[1:2])
+            # print("contents_page",contents_list_index[int(contents_page)])
+            # print("contents_list_indexcontents_list_index", list_[contents_list_index[int(contents_page)-1]:contents_list_index[int(contents_page)+1]])
+            count = 0
+            count_subtitle = 0
+            for text_ in list_:
+                count += 1
+                if text_[0] == "subtitle":
+                    count_subtitle += 1
+                    if count_subtitle == 3:
+                        break
+        except:pass
+            # context['count_subtitle'] = count
+
+#---------------------------------------
+
+#---- contents page select ----
+
+    # contents_page = request.path.split("/")[-2]
+    # for item in context['book_info_contents']:
 
         
-    try:
-        context['contents_text'] = item.contents
-        list_ = []
-        count = 0
-        for text_ in context['contents_text'].split('<')[1:]:
-            count += 1
-            text_ = text_.split(">")
-            # text_[0]
-            contents_split = text_[1].splitlines()
-            if text_[0] == "blockquote":
-                contents_ = "<a>" + contents_split[0] + "<br>" + "</a>"
-                for text_el in contents_split[1:]:
-                    if text_el == "":
-                        continue
-                    contents_ = contents_ + "<a>"+ text_el +"<br>" + "</a>"
-                    # print("contents_split", contents_split)
-            else:
-                contents_ = contents_split[0]
-                for text_el in contents_split[1:]:
-                    if text_el == "":
-                        continue
-                    contents_ = contents_ + text_el
-                    # print("contents_split", contents_split)
-
-            text_[1] = contents_
-            if len(text_) == 3:
-                text_[2] = text_[2].splitlines()[0]
-            list_.append(text_)
-        context['book_info_contents'] = list_
-        count = 0
-        count_subtitle = 0
-        for text_ in list_:
-            count += 1
-            if text_[0] == "subtitle":
-                count_subtitle += 1
-                if count_subtitle == 3:
-                    break
-        # context['count_subtitle'] = count
-    except:
-        pass
-
-
-    
 
 
 
 
-        '''
+    '''
 
-        context['contents_text'] = context['book_info'].contents
-        list_ = []
-        count = 0
-        for text_ in context['contents_text'].split('<')[1:]:
-            count += 1
-            text_ = text_.split(">")
-            # text_[0]
-            contents_split = text_[1].splitlines()
-            if text_[0] == "blockquote":
-                contents_ = "<a>" + contents_split[0] + "<br>" + "</a>"
-                for text_el in contents_split[1:]:
-                    if text_el == "":
-                        continue
-                    contents_ = contents_ + "<a>"+ text_el +"<br>" + "</a>"
-                    # print("contents_split", contents_split)
-            else:
-                contents_ = contents_split[0]
-                for text_el in contents_split[1:]:
-                    if text_el == "":
-                        continue
-                    contents_ = contents_ + text_el
-                    # print("contents_split", contents_split)
+    context['contents_text'] = context['book_info'].contents
+    list_ = []
+    count = 0
+    for text_ in context['contents_text'].split('<')[1:]:
+        count += 1
+        text_ = text_.split(">")
+        # text_[0]
+        contents_split = text_[1].splitlines()
+        if text_[0] == "blockquote":
+            contents_ = "<a>" + contents_split[0] + "<br>" + "</a>"
+            for text_el in contents_split[1:]:
+                if text_el == "":
+                    continue
+                contents_ = contents_ + "<a>"+ text_el +"<br>" + "</a>"
+                # print("contents_split", contents_split)
+        else:
+            contents_ = contents_split[0]
+            for text_el in contents_split[1:]:
+                if text_el == "":
+                    continue
+                contents_ = contents_ + text_el
+                # print("contents_split", contents_split)
 
-            text_[1] = contents_
-            if len(text_) == 3:
-                text_[2] = text_[2].splitlines()[0]
-            list_.append(text_)
-        context['book_info_contents'] = list_
-        count = 0
-        count_subtitle = 0
-        for text_ in list_:
-            count += 1
-            if text_[0] == "subtitle":
-                count_subtitle += 1
-                if count_subtitle == 3:
-                    break
-        context['count_subtitle'] = count
+        text_[1] = contents_
+        if len(text_) == 3:
+            text_[2] = text_[2].splitlines()[0]
+        list_.append(text_)
+    context['book_info_contents'] = list_
+    count = 0
+    count_subtitle = 0
+    for text_ in list_:
+        count += 1
+        if text_[0] == "subtitle":
+            count_subtitle += 1
+            if count_subtitle == 3:
+                break
+    context['count_subtitle'] = count
     except:
         pass
 
 
 
-        '''
+    '''
 
 
     # --------------------------------------------------------------------------------

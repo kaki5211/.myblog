@@ -1,0 +1,144 @@
+
+{% comment %}  
+<div class="text-center pt-5 my-bg-color">
+
+  <div class="text-center my-text-color my-pagenation my-bg-color rounded-lg">
+      <v-pagination
+        v-model="page2"
+        :length="length2"
+        color="#1aa179"
+        dark
+        circle="true"
+        @input = "pageChange2"
+        class="my-text-color my-bg-color"
+        href
+      ></v-pagination>
+    </div>
+</div>
+
+
+{% endcomment %}
+
+
+
+
+<template>
+  <div id="my-pagenation-top" class="text-center">
+
+    
+
+    {% if contents_page != "1" %}
+    <v-btn
+      class="ma-1 text-center my-text-color my-pagenation my-bg-color"
+      depressed
+      outlined
+      fab
+      color="black"
+      small
+      href="{% url 'book:book_info_content' data_info=book_info.post_day data_info_page=contents_page|add:"-1" %}#my-pagenation-top"
+    >
+
+      <v-icon>mdi-chevron-left</v-icon>
+    </v-btn>
+    {% endif %}
+
+
+    <v-btn
+      v-for="item in book_pagenation_top"
+      v-if="item.text != {{ contents_page }}"
+      class="ma-1 text-center my-text-color my-pagenation my-bg-color"
+      depressed
+      outlined
+      fab
+      color="black"
+      x-small
+      :href=[[item.url]]+"#my-pagenation-top"
+    >
+      <a class="text-decoration-none text-center my-text-color my-bg-color text-h7 my-font-weight-title">[[ item.text ]]</a>
+    </v-btn>
+    
+
+    <v-btn
+      v-else
+      class="ma-1 text-center my-text-color my-pagenation my-bg-color-glay"
+      depressed
+      fab
+      color="black"
+      x-small
+      plain
+      :href=[[item.url]]+"#my-pagenation-top"
+    >
+      <a class="text-decoration-none text-center my-text-color-light-glay my-bg-color-glay text-h7 my-font-weight-title">[[ item.text ]]</a>
+    </v-btn>
+
+
+    {% if contents_page != contents_pages_max %}
+    <v-btn
+      class="ma-1 text-center my-text-color my-pagenation my-bg-color"
+      depressed
+      outlined
+      fab
+      color="black"
+      small
+      href="{% url 'book:book_info_content' data_info=book_info.post_day data_info_page=contents_page|add:"1" %}#my-pagenation-top"
+      >
+
+      <v-icon>mdi-chevron-right</v-icon>
+    </v-btn>
+    {% endif %}
+
+
+  </div>
+</template>
+
+
+{% comment %} 
+
+
+
+
+
+       <v-breadcrumbs :items="breadcrumb_items" large class="my-text-color-light-glay py-2 pl-0">
+            <template v-slot:item="{ item }" class="my-text-color-light-glay">
+              <v-breadcrumbs-item
+                :href="item.href"
+                :disabled="item.disabled"
+                class="my-text-color-light-glay-breadcrumb"
+            >
+            <v-icon size="22px" class="my-text-color-light-glay">[[ item.icon]]</v-icon>
+                [[ item.text.toUpperCase() ]]
+              </v-breadcrumbs-item>
+            </template>
+            <template v-slot:divider class="my-text-color-light-glay">
+                <v-icon class="my-text-color-light-glay">mdi-chevron-right</v-icon>
+            </template>
+          </v-breadcrumbs>
+
+
+
+
+
+
+
+
+
+
+
+{% endcomment %}
+
+
+
+
+
+
+
+
+{% comment %} 
+        page="1"
+        v-model="page"
+        total-visible="7"
+        value="4"
+        color="#1aa179"
+        length="5"
+        @input = "getNumber"
+{% endcomment %}

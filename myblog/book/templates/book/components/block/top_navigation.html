@@ -1,0 +1,39 @@
+<template>
+    <v-bottom-navigation
+      :value="value"
+      {% comment %} color="primary" {% endcomment %}
+      class="my-bg-color-glay rounded-lg my-5"
+      {% comment %} active-class="my-text-color-light-glay" {% endcomment %}
+      color="#f5f8f5"
+      grow
+>      
+
+      {%if item_prev != "" %}
+    
+      <v-btn style="display: inline; text-align: center;" href="{% url url_ data_info=item_prev.post_day %}" class="px-2 mx-auto">
+        <v-text class="my-text-color-light-glay" style="overflow: hidden; width: 100%; text-overflow: ellipsis;">({{ item_prev.title }})</v-text>
+        <span class="my-text-color-light-glay">前の記事</span>
+        <v-icon class="my-text-color-light-glay">mdi-arrow-left-thick</v-icon>
+      </v-btn>
+      {% endif %}
+
+      <v-btn class="px-2 mx-auto" href="{% url url_2 %}">
+        <span class="my-text-color-light-glay">{{ sub_text }}</a></span>
+
+        <v-icon class="my-text-color-light-glay">{{ mdi_bottom_navigation }}</v-icon>
+      </v-btn>
+  
+      {%if item_next != "" %}
+
+      <v-btn style="display: inline; text-align: center;" href="{% url url_ data_info=item_next.post_day %}" class="px-2 mx-auto">
+          <v-text class="my-text-color-light-glay" style="overflow: hidden; width: 100%; text-overflow: ellipsis;">({{ item_next.title }})</v-text>
+          <span class="my-text-color-light-glay my-w-100">次の記事</span>  
+          <v-icon class="my-text-color-light-glay my-w-100">mdi-arrow-right-thick</v-icon>
+      </v-btn>
+
+      
+      {% endif %}
+
+
+    </v-bottom-navigation>
+  </template>

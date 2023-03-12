@@ -13,8 +13,8 @@
       align-self="center"
       class="mx-auto pb-0"
     >
-  <p class="text-center text-h2 my-text-color-title text-h5 text-md-h4 pb-10" style="letter-spacing:3px;">
-    <v-icon size="36" >mdi-crown</v-icon>
+  <p class="text-h2 my-text-color-title text-h5 text-md-h4" style="letter-spacing:3px;">
+    <v-icon size="40" >mdi-crown</v-icon>
 
     ランキング（週間）</p>
 </v-col>
@@ -36,11 +36,11 @@
   >
   <div class="ma-auto d-flex my-h-100 my-auto">
 
-    {% comment %} <carousel-3d class="my-auto" :controls-visible="true" :border="3" :space="100" :clickable="true" :autoplay="false" :autoplayHoverPause="true" :autoplay="true" :width="100" :height="141"> {% endcomment %}
+  {% comment %} <carousel-3d class="my-auto" :controls-visible="true" :border="3" :space="100" :clickable="true" :autoplay="false" :autoplayHoverPause="true" :autoplay="true" :width="100" :height="141"> {% endcomment %}
     {% comment %} <carousel-3d class="my-auto" :controls-visible="true" :border="3" :space="100" :clickable="true" :autoplay="false" :autoplayHoverPause="true" :autoplay="true" :width="130" :height="177"> {% endcomment %}
-      <carousel-3d class="my-auto my-border-color my-h-300" :controls-visible="true" :border="2" :space="100" :clickable="true" :autoplay="true" :autoplayHoverPause="true" :width="130" :height="201">
-    {% comment %} <carousel-3d class="my-auto" :controls-visible="true" :border="3" :space="100" :clickable="true" :autoplay="false" :autoplayHoverPause="true" :autoplay="true" :width="150" :height="212"> {% endcomment %}
-    {% comment %} <carousel-3d class="my-auto" :controls-visible="true" :border="3" :space="100" :clickable="true" :autoplay="false" :autoplayHoverPause="true" :autoplay="true" :width="200" :height="282"> {% endcomment %}
+      <carousel-3d class="my-auto my-border-color my-h-300" :controls-visible="true" :border="2" :space="100" :clickable="true" :autoplay="true" :autoplayHoverPause="true" :autoplay="true" :width="130" :height="201">
+        {% comment %} <carousel-3d class="my-auto" :controls-visible="true" :border="3" :space="100" :clickable="true" :autoplay="false" :autoplayHoverPause="true" :autoplay="true" :width="150" :height="212"> {% endcomment %}
+        {% comment %} <carousel-3d class="my-auto" :controls-visible="true" :border="3" :space="100" :clickable="true" :autoplay="false" :autoplayHoverPause="true" :autoplay="true" :width="200" :height="282"> {% endcomment %}
     
     <slide class="my-border-color rounded-lg" v-for="(slide, i) in slides" :index="i" >
       <div class="d-flex my-bg-color-glay my-border-bottom">
@@ -93,7 +93,9 @@
           </template>
           
           
-          <span v-html="slide.amazon_url"><span>
+          <!-- amazon_url -->          <!-- amazon_url -->          <!-- amazon_url -->
+          {% comment %} <div v-html="slide.amazon_url"><div> {% endcomment %}
+                    <!-- amazon_url -->          <!-- amazon_url -->          <!-- amazon_url -->
           
           
           </v-img>
