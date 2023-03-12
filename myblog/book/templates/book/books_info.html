@@ -255,11 +255,22 @@
                 <v-divider class="pb-0 mb-0"></v-divider>
                 {% endif %}
                 {% if contents_.3 in contents_subtitle_index %}
-                <v-row no-gutters class="py-5">
-                  <v-col col="12" col-md="10" col-lg="8">
+                <v-row
+                no-gutters
+                style="min-width: 250px; max-width:100%;"
+                class="pt-10 pb-8"
+              >
+                <v-col
+                cols="12"
+                align-self="center"
+                style="min-width: 250px;"
+                class="mx-auto my-auto"
+                >
                     {% include 'google/adsense_display.html' %}
-                  </v-col>
-                </v-row>
+                </v-col>
+              </v-row>
+
+
               {% endif %}
 
                 {% include 'book_info/contents_subtitle.html' with text=contents_.1  ty=forloop.counter %}
