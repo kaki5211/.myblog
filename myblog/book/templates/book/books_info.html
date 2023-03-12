@@ -256,7 +256,7 @@
                 {% endif %}
                 {% if contents_subtitle_first == contents_.3 %}
                   <div class="py-5"></div>
-                    {% include 'google/adsense_article.html' %}
+                    {% include 'google/adsense_display.html' %}
                   <div class="py-5"></div>
                 {% endif %}
 
@@ -307,11 +307,11 @@
     <!-- pages -->
 
 
-    {% if contents_subtitle_first == contents_.3 %}
+    {% comment %} {% if contents_subtitle_first == contents_.3 %}
     <div class="py-5"></div>
       {% include 'google/adsense_article.html' %}
     <div class="py-5"></div>
-  {% endif %}
+  {% endif %} {% endcomment %}
 
 
 
