@@ -285,11 +285,14 @@ def common(request):
             else:
                 context['book_info_contents_page'] = list_[contents_list_index[int(contents_page)-1]-1:contents_list_index[int(contents_page)]-1]
             # print(context['book_info_contents_page'])
-            for contents_subtitle_first_list in context['book_info_contents_page']:
-                if contents_subtitle_first_list[0] == "subtitle":
-                    contents_subtitle_first = contents_subtitle_first_list[3]
-                    context['contents_subtitle_first'] = contents_subtitle_first
-                    break
+            count_subtitle = 0
+            contents_subtitle_index = []
+            for item in context['book_info_contents_page']:
+                if item[0] == "subtitle":
+                    count_subtitle += 1
+                    if count_subtitle%2 == 1: 
+                        contents_subtitle_index.append(item[3])
+                context['contents_subtitle_index'] = contents_subtitle_index
 
 
             context["contents_page"] = contents_page
