@@ -276,9 +276,22 @@ class BookView(ListView):
     
 
 class BookrView(RedirectView):
-
     def get_redirect_url(self, *args, **kwargs):
-        return reverse_lazy('book:book_info_content',kwargs={"data_info":"2023-02-25", "data_info_page":"1"})
+        url_path=self.request.path
+        url_split = url_path.split('/')
+        datetime_info = datetime.datetime.strptime(url_split[2], '%Y-%m-%d')
+        try:
+            date_info = datetime.date(int(datetime_info.year), int(datetime_info.month), int(datetime_info.day))
+            book_info_ = Book.objects.get(post_day=date_info)
+            print("book_info_", book_info_)
+
+            if book_info_:
+                template_name = 'book/books_info.html'
+                # self.my_redirect()
+            print("template_name", template_name)
+            return reverse_lazy('book:book_info_content',kwargs={"data_info":book_info_.post_day, "data_info_page":"1"})
+        except:
+            reverse_lazy('book:book_info_content',kwargs={"data_info":datetime_info, "data_info_page":"1"})
         
 
 
