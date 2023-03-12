@@ -255,10 +255,12 @@
                 <v-divider class="pb-0 mb-0"></v-divider>
                 {% endif %}
                 {% if contents_.3 in contents_subtitle_index %}
-                  <div class="py-5"></div>
+                <v-row no-gutters class="py-5">
+                  <v-col col="12" col-md="10" col-lg="8">
                     {% include 'google/adsense_display.html' %}
-                  <div class="py-5"></div>
-                {% endif %}
+                  </v-col>
+                </v-row>
+              {% endif %}
 
                 {% include 'book_info/contents_subtitle.html' with text=contents_.1  ty=forloop.counter %}
 
