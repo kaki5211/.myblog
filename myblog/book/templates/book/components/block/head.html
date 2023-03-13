@@ -36,7 +36,7 @@
         {% with breadcrumb|length as el_ %}
             {% if el_ == 1 %}BOOK I.C. ～本の感想を創造するブログ～
             {% elif el_ == 2 %}{{breadcrumb.1.title_info}} | BOOK I.C.
-            {% elif el_ == 3 %}【感想ブログ】 {{breadcrumb.2.title_info}} | BOOK I.C.
+            {% elif el_ == 3 %}【本感想 ブログ】 {{breadcrumb.2.title_info}} | BOOK I.C.
             {% endif %}
         {% endwith %}
     </title>
@@ -78,12 +78,6 @@
 
 
 
-    
-    
-
-
-
-
     <meta name="keywords" content="book-ic,本,本感想,感想,書評,書店,小説,文庫,ブログ,個人ブログ,読書,書籍,記録,ネタバレ読書,読書記録">
 
 
@@ -109,7 +103,21 @@
 
     <!-- 正規化 -->
     {% comment %} <link rel="canonical" href={{ request.build_absolute_uri }} /> {% endcomment %}
-    <link rel="canonical" href={{ request.scheme }}://{{ request.get_host }}{{ request.path }} />
+    {% with breadcrumb|length as el_ %}
+        {% if el_ == 1 %}<link rel="canonical" href="{{ breadcrumb.0.url_path_ }}" />
+        {% elif el_ == 2 %}<link rel="canonical" href="{{ breadcrumb.1.url_path_ }}" />
+        {% elif el_ == 3 %}
+            {% if breadcrumb.1.title_info == "書籍一覧" %}
+                <link rel="canonical" href="{{ breadcrumb.2.url_path_ }}1/" />
+            {% else %}
+                <link rel="canonical" href="{{ breadcrumb.2.url_path_ }}" />
+            {% endif %}
+            
+        {% endif %}
+    {% endwith %}
+        
+
+
 
     <!-- adsense 広告-->
     {% if  DEBUG == False %}
@@ -125,7 +133,6 @@
 
 
 
-
 <!-- og 設定 -->
 <!-- １．page type -->
 {% if breadcrumb|length == 1 %}<meta property="og:type" content="website" />
@@ -135,7 +142,7 @@
 {% with breadcrumb|length as el_ %}
     {% if el_ == 1 %}<meta property="og:title" content="BOOK I.C. ～本の感想を創造するブログ～"/>
     {% elif el_ == 2 %}<meta property="og:title" content="{{breadcrumb.1.title_info}} | BOOK I.C."/>
-    {% elif el_ == 3 %}<meta property="og:title" content="【本 感想ブログ】 {{breadcrumb.2.title_info}} | BOOK I.C."/>
+    {% elif el_ == 3 %}<meta property="og:title" content="【本感想 ブログ】 {{breadcrumb.2.title_info}} | BOOK I.C."/>
     {% endif %}
 {% endwith %}
 <!-- ３．ページ説明文 -->

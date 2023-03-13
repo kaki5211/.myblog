@@ -32,7 +32,7 @@ class PostSitemap_Book(Sitemap):
     def location(self, obj):
         data_info=(obj.post_day).strftime("%Y-%m-%d")
         # data_info= obj.post_day
-        return resolve_url('book:book_info', data_info=data_info)
+        return resolve_url('book:book_info', data_info=data_info)+"1/"
 
     def lastmod(self, obj):
         return obj.post_day
