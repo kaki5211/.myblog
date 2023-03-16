@@ -239,10 +239,15 @@
             </v-col>
             {% endif %}
 
-          <v-col cols="12" class="mx-auto px-0 py-10">
 
+
+          <v-col cols="12" class="mx-auto px-0 py-10">
+          
             {% for contents_ in book_info_contents_page %}
               {% if contents_.0 != "title" and contents_.0 != "title" and contents_.0 != "blockquote" %}
+
+
+
                 <div class="px-1">
               {% endif %} 
 
@@ -250,6 +255,14 @@
 
                 {% include 'book_info/contents_title.html' with text=contents_.1 ty=forloop.counter ty_title=contents_.2 %}
                 
+                  {% if contents_page > "1" %}
+                    {% with book_info.post_day|safe as post_ %}
+                    {% include 'book_info/contents_img.html' with img_url="/media/media/"|add:post_|add:"/"|add:contents_page|add:".jpg" %}
+                    {% endwith %}
+                  {% endif %}
+
+
+
               {% elif contents_.0 == "subtitle" %}
                 {%if forloop.counter > 2  %}
                 <v-divider class="pb-0 mb-0"></v-divider>
@@ -282,8 +295,7 @@
                 {% include 'book_info/contents_text.html' with text=contents_.1 %}
               {% elif contents_.0 == "blockquote"%}
                 {% include 'book_info/contents_blockquote.html' with text=contents_.1 page=contents_.2 %}
-              {% endif %} 
-
+                {% endif %} 
               {% if contents_.0 != "title" and contents_.0 != "title" and contents_.0 != "blockquote"%}
                 </div>
               {% endif %}      

@@ -316,6 +316,9 @@ def common(request):
 
 #---------------------------------------
 
+
+
+
 #---- contents page select ----
 
     # contents_page = request.path.split("/")[-2]
