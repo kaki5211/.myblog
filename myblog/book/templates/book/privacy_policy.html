@@ -1,6 +1,7 @@
 
 {% extends 'book/_block_static.html' %}
 
+{% load static %}
 {% block contents %}
 
   <!-- BOOK DB -->
@@ -18,6 +19,17 @@
 
 
   {% include 'book_info/contents_title.html' with text="プライバシーポリシー" %}
+  <v-col cols="12" sm="11" md="9" lg="6" class="mt-0 mt-lg-10 mx-auto px-0">
+    
+    <v-img
+    src="{% static 'static/privacypolicy.jpg' %}"
+    {% comment %} aspect-ratio="1" {% endcomment %}
+    class="lighten-2 mb-3 mt-3"
+    transition="scale-transition"
+    >
+
+    </v-img>
+  </v-col>   
   {% include 'book_info/contents_subtitle.html' with text="1.収集する情報及び利用目的" ty=1 %}
   {% include 'book_info/contents_text.html' with text="　(1)BOOK I.C.（以下「当サイト」という）では、サイトの利用情報を分析するためにGoogle Analyticsを利用しています。Google Analyticsは、クッキーを利用してユーザー情報を収集します。(2)当サイトの「問い合わせ」では、当サイトの管理者とのやり取りに必要な、ユーザーの名前（ニックネーム）、年齢、性別、メールアドレス情報を取得します。" %}
 
@@ -36,7 +48,7 @@
 
 
 
-
+  
 
 
 

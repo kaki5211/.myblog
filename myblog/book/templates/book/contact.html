@@ -1,6 +1,7 @@
 
 {% extends 'book/_block_static.html' %}
 
+{% load static %}
 {% block contents %}
 
   <!-- BOOK DB -->
@@ -20,7 +21,17 @@
 
 
 
+  <v-col cols="12" sm="11" md="9" lg="6" class="mt-0 mt-lg-10 mx-auto px-0">
+    
+    <v-img
+    src="{% static 'static/contact.jpg' %}"
+    {% comment %} aspect-ratio="1" {% endcomment %}
+    class="lighten-2 mb-3 mt-3"
+    transition="scale-transition"
+    >
 
+    </v-img>
+  </v-col> 
 
 
 
