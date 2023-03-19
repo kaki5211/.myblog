@@ -49,19 +49,12 @@
         <!-- google広告_multiplex -->
         {% comment %} {% if request.path != %} {% endcomment %}
           {% if breadcrumb.2.title_info == None and breadcrumb.1.title_info is not "書籍一覧" %}
-        <v-row
-          no-gutters
-          style="min-width: 250px; max-width: 650px;"
-          class="pt-10 pb-8 mx-auto my-auto"
-          align-self="center"
-          >
+        <v-row no-gutters>
           <v-col
             cols="12"
             sm="12"
             lg="11"
-            class="py-10 px-2 mx-auto my-auto"
-            align-self="center"
-            style="min-width: 250px;"
+            class="py-10 px-2"
           >
           {% include 'google/adsense_multiplex.html' %}
           </v-col>
