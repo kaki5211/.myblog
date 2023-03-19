@@ -244,7 +244,7 @@
           <v-col cols="12" class="mx-auto px-0 py-10">
           
             {% for contents_ in book_info_contents_page %}
-              {% if contents_.0 != "title" and contents_.0 != "title" and contents_.0 != "blockquote" %}
+              {% if contents_.0 != "title" and contents_.0 != "subtitle" and contents_.0 != "blockquote" %}
 
 
 
@@ -267,6 +267,9 @@
                 {%if forloop.counter > 2  %}
                 <v-divider class="pb-0 mb-0"></v-divider>
                 {% endif %}
+                
+                {% include 'book_info/contents_subtitle.html' with text=contents_.1  ty=forloop.counter %}
+                
                 {% if contents_.3 in contents_subtitle_index %}
                 <v-row
                 no-gutters
@@ -282,11 +285,8 @@
                     {% include 'google/adsense_display.html' %}
                 </v-col>
               </v-row>
-
-
               {% endif %}
 
-                {% include 'book_info/contents_subtitle.html' with text=contents_.1  ty=forloop.counter %}
 
 
 
@@ -296,7 +296,7 @@
               {% elif contents_.0 == "blockquote"%}
                 {% include 'book_info/contents_blockquote.html' with text=contents_.1 page=contents_.2 %}
                 {% endif %} 
-              {% if contents_.0 != "title" and contents_.0 != "title" and contents_.0 != "blockquote"%}
+              {% if contents_.0 != "title" and contents_.0 != "subtitle" and contents_.0 != "blockquote"%}
                 </div>
               {% endif %}      
       
